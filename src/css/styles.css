@@ -1,0 +1,422 @@
+
+@tailwind base;
+
+@tailwind components;
+
+@import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap');
+
+
+    body, html, #root{
+      font-family: 'Exo 2', sans-serif;
+      @apply h-screen max-w-full;
+      overflow-X:hidden;
+      overflow-Y: auto
+    }
+    body{
+      /* background-image: url('/dist/img/bg-image-2.jpg'); */
+      @apply bg-fixed
+    }
+    h2{
+      @apply leading-tight font-bold text-xl
+    }
+    .h3-override-ml-nil{
+      @apply ml-0;
+    }
+    h3{
+      @apply leading-tight font-semibold text-lg m-3;
+    }
+    p {
+      @apply leading-tight text-lg;
+    }
+    .p-tag-override{
+      @apply text-lg;
+    }
+/*
+*******************************main-profile*****************************
+*/
+/* .main-profile{
+  width:75%;
+} */
+
+
+@screen xs {
+  .main-page-structure{
+    @apply block p-4 flex-col w-full  mt-4;
+  }
+}
+@screen s {
+  .main-page-structure{
+    @apply block p-4 flex-col w-full  mt-4;
+  }
+}
+@screen mstart{
+
+  .main-page-structure{
+    @apply block p-4 flex-col w-full mt-4;
+  }
+
+}
+@screen sm{
+  .main-page-structure{
+    @apply w-1/2 p-4 ml-200 flex flex-1 flex-wrap;
+    word-wrap:  normal;
+  }
+}
+
+
+/*
+*******************************Load smooth*****************************
+*/
+
+.smooth-loader{
+  opacity:0;
+  transition: all 0.1s ease;
+}
+
+@keyframes genomskinlig{
+0%   {opacity: 0;}
+25%  {opacity: 0.25;}
+50%  {opacity: 0.50;}
+75%  {opacity: 0.75;}
+100% {opacity: 1;}
+}
+.smooth-loaded{
+  animation: genomskinlig 0.5s 1;
+}
+
+/*
+*******************************main-introduction*****************************
+*/
+
+
+.main-image{
+  @apply w-1/2;
+}
+/*
+*******************************Language-box*****************************
+*/
+.language-box-carrier{
+  @apply w-600;
+}
+.language-box{
+  @apply border border-1 border-solid border-greenlight rounded-lg border-1 relative bg-greenlight text-white;
+  @apply max-w-xl min-w-25;
+  word-wrap: break-word;
+}
+.language-box:hover{
+
+
+}
+/*
+*******************************GENERAL*****************************
+*/
+    @responsive {
+      .text-shadow {
+        text-shadow: 0 2px 4px rgba(0,0,0,0.10);
+      }
+
+      .text-shadow-md {
+        text-shadow: 0 4px 8px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08);
+      }
+
+      .text-shadow-lg {
+        text-shadow: 0 15px 30px rgba(0,0,0,0.11), 0 5px 15px rgba(0,0,0,0.08);
+      }
+
+      .text-shadow-none {
+        text-shadow: none;
+      }
+ }
+/*
+************************Responsive TEXT-SIZE**************************
+*/
+  @screen xs {
+    .responsive-text {
+      @apply text-xs;
+    }
+  }
+  @screen s {
+    .responsive-text {
+      @apply text-sm;
+    }
+  }
+  @screen sm {
+    .responsive-text {
+      @apply text-base;
+    }
+  }
+  @screen md {
+    .responsive-text {
+      @apply text-lg;
+    }
+  }
+  @screen lg {
+    .responsive-text {
+      @apply text-xl;
+    }
+  }
+  @screen xl {
+    .responsive-text {
+      @apply text-2xl;
+    }
+  }
+  /* RESPONSIVE TEXT PÅ NAVEN */
+  @screen xs {
+    .responsive-nav-text {
+      @apply text-lg;
+    }
+  }
+  @screen s {
+    .responsive-nav-text {
+      @apply text-xl;
+    }
+  }
+  @screen sm {
+    .responsive-nav-text {
+      @apply text-2xl;
+    }
+  }
+  @screen md {
+    .responsive-nav-text {
+      @apply text-2xl;
+    }
+  }
+  @screen lg {
+    .responsive-nav-text {
+      @apply text-2xl;
+    }
+  }
+  @screen xl {
+    .responsive-nav-text {
+      @apply text-3xl;
+    }
+  }
+/* RESPONSIVE TEXT PÅ Språk-lådor */
+
+@screen lg {
+  .responsive-lbox-text {
+    @apply text-xs;
+  }
+}
+@screen xl {
+  .responsive-lbox-text {
+    @apply text-lg;
+  }
+}
+  /*
+  *******************************Images*****************************************
+  */
+  .greyscale {
+    filter: grayscale(100%);
+  }
+  .nogrey{
+    filter: grayscale(0%);
+  }
+/*
+************************Main Profile**************************
+*/
+
+/* .card {
+  @apply absolute object-center;
+} */
+@screen md {
+  .card {
+    @apply w-nav-md;
+    @apply block;
+  }
+}
+@screen lg {
+  .card {
+    @apply w-nav-lg;
+  }
+}
+@screen xl {
+  .card {
+    @apply w-nav-xl;
+  }
+}
+/*
+************************Responsive NAV**************************
+*/
+#txtSize {
+    /* @apply p-8; */
+    background: url('/dist/img/abc.png');
+    background-size: 100% 100%;
+    width:25px;
+    height: 25px;
+    background-repeat: no-repeat;
+}​
+/* @screen sm {
+  .nav-bar {
+    @apply w-nav-sm;
+  }
+} */
+@screen md {
+  .responsive-nav {
+    @apply w-nav-md;
+  }
+}
+@screen lg {
+  .responsive-nav {
+    @apply w-nav-lg;
+  }
+}
+@screen xl {
+  .responsive-nav {
+    @apply w-nav-xl;
+  }
+}
+/*
+*******************************A-link (NAVBAR)*******************************************
+*/
+@keyframes rotation {
+  0% {
+    transform: rotate3d(0, 1, 0, 0deg);
+  }
+  50% {
+    transform: rotate3d(0, 1, 0, 180deg);
+  }
+  100% {
+    transform: rotate3d(0, 1, 0, 360deg);
+  }
+}
+  .a-link {
+      @apply no-underline text-white;
+  }
+  .a-link:after{
+    content: "";
+    background-image:url('/dist/img/arrow-64.png');
+    background-size: 100% 100%;
+    display: none;
+
+    height: 20px;
+    width:20px;
+
+    position:relative;
+    top:5px;
+
+    transition: all 0.4s ease;
+  }
+  @screen iconbreak{
+    .a-link:hover:after{
+      display:none;
+    }
+  }
+  @screen iconnobreak{
+
+    .a-link:hover:after{
+      display:inline-block;
+      animation-name: rotation;
+      animation-iteration-count: infinite;
+      animation-timing-function: linear;
+      animation-duration: 2.5s;
+    }
+  }
+
+
+  a:visited{
+    color: ;
+  }
+/*
+*********************************Nav-bar GENERAL(with tailwind)************************************
+*/
+.hamburger-menu{
+  @apply relative;
+}
+.hamburger-dropper{
+  @apply hidden ;
+}
+@screen xs{
+  .hamburger-menu  {
+      @apply block;
+  }
+  .hamburger-menu:hover .hamburger-dropper{
+    @apply absolute block z-10 flex-col;
+  }
+}
+@screen s{
+  .hamburger-menu  {
+      @apply block;
+  }
+  .hamburger-menu:hover .hamburger-dropper{
+    @apply absolute block z-10;
+  }
+}
+@screen mstart{
+  .hamburger-menu  {
+      @apply block;
+  }
+  .hamburger-menu:hover .hamburger-dropper{
+    @apply absolute left-15 top-50 block z-10;
+  }
+}
+@screen sm{
+  .hamburger-menu  {
+      @apply hidden;
+  }
+  .hamburger-menu:hover .hamburger-dropper{
+    @apply absolute left-15 top-50 block z-10;
+  }
+}
+@screen md{
+    .hamburger-menu  {
+        @apply hidden;
+    }
+    .hamburger-menu:hover .hamburger-dropper{
+      @apply absolute left-15 top-50 block z-10;
+    }
+}
+
+@screen xs{
+  .nav-bar{
+    @apply hidden;
+  }
+}
+@screen s{
+  .nav-bar{
+    @apply hidden;
+  }
+}
+@screen mstart{
+  .nav-bar{
+    @apply hidden;
+  }
+}
+@screen sm{
+  .nav-bar{
+    @apply m-4 min-w-200 max-w-250 fixed top-0 left-0 inline-block;
+  }
+}
+/*
+*********************************Main GENERAL(with tailwind)************************************
+*/
+
+/*
+*********************************GENERAL CSS(with tailwind)************************************
+*/
+    @responsive {
+      .text-shadow {
+        text-shadow: rgba(0,0,0,0.2) 0px 2px 3px, inset rgba(0,0,0,0.2) 0px -1px 2px;
+      }
+      .text-shadow-md {
+        text-shadow: 0 4px 8px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08);
+      }
+
+      .text-shadow-lg {
+        text-shadow: rgba(0,0,0,0.2) 0px 2px 3px, inset rgba(0,0,0,0.2) 0px -1px 2px;;
+      }
+
+      .text-shadow-none {
+        text-shadow: none;
+      }
+    }
+/*
+***********************************COLORS!*********************************************************
+*/
+  @responsive {
+    .bg-gradient-rainy-ashville {
+      background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+    }
+  }
+@tailwind utilities;
+@tailwind screens;
