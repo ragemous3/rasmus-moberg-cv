@@ -240,7 +240,7 @@
 */
 #txtSize {
     /* @apply p-8; */
-    background: url('/dist/img/abc.png');
+    background: url('./../img/abc.png');
     background-size: 100% 100%;
     width:25px;
     height: 25px;
@@ -285,7 +285,7 @@
   }
   .a-link:after{
     content: "";
-    background-image:url('/dist/img/arrow-64.png');
+    background-image: url('./../img/arrow-64.png');
     background-size: 100% 100%;
     display: none;
 

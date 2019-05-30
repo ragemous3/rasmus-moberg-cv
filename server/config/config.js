@@ -2,6 +2,8 @@
 var webpack = require('webpack');
 const middleware = require('webpack-dev-middleware');
 const wpHOT = require('webpack-hot-middleware');
+const webpackServerMiddleware = require('webpack-server-middleware');
+
 var history = require('connect-history-api-fallback');
 
 var path = require('path')
@@ -19,17 +21,16 @@ module.exports = (app) => {
 
     if(environment === "development"){
         var devConf = require(`../../webpack.dev.js`);
-        //publicPath: webpackConf.output.publicPath
         const compiler = webpack(devConf);
-        console.log(compiler)
         app.use(history());
         app.use(middleware(compiler, {
           // quiet: true,
           public: devServerConfig.public(),
           // publicPath: ,
-          contentBase: path.resolve(__dirname, '../../public/dist'),
+          contentBase: path.resolve(__dirname, '../../public/build'),
           host: devServerConfig.host(),
           port: devServerConfig.port(),
+          index: path.resolve(__dirname, './../public/index.html'),
           https: !!parseInt(devServerConfig.https()),
           hot: true, //tillåter hot-module
           hotOnly: true,
@@ -41,14 +42,26 @@ module.exports = (app) => {
             'Access-Control-Allow-Origin': '*'
           },
         }));
-        // app.use(wpHOT(compiler, {
-        //     log: console.log
-        // }))
 
     }else if(environment === "production"){
-      var devConf = require(`../../webpack.prod.js`);
-      app.use(middleware(), {
-          //Ytterliggare options att tillföra
-      })
+      var prodConf = require(`../../webpack.prod.js`);
+      const compiler = webpack(prodConf);
+
+        app.use(middleware(compiler, {
+          // quiet: true,
+          public: devServerConfig.public(),
+          // publicPath: ,
+          contentBase: path.resolve(__dirname, '../../public/build'),
+          host: devServerConfig.host(),
+          port: devServerConfig.port(),
+          https: !!parseInt(devServerConfig.https()),
+          hot: true, //tillåter hot-module Inte aktivireat dock.
+          hotOnly: true,
+          historyApiFallback: true,
+          overlay: true,
+          headers: {
+            'Access-Control-Allow-Origin': '*'
+          },
+        }));
     }
 }

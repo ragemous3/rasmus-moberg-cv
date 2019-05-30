@@ -53,7 +53,7 @@ class Card extends React.Component{
           <article className="main-profile border-box text-shadow">
             <div>
               <div className="inline-block ">
-                <img src="/dist/img/profilbild.jpg" className={`main-image rounded ${color}`} alt="..." />
+                <img src="../../img/profilbild.jpg" className={`main-image rounded ${color}`} alt="..." />
               </div>
               <div className="responsive-text">
                 <h4 className=""><b>Rasmus Moberg</b></h4>

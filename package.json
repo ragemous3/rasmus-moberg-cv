@@ -4,12 +4,13 @@
   "description": "wp,express, and react-middleware",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "cross-env NODE_ENV=development node server/server.js"
+    "dev": "cross-env NODE_ENV=development node server/server.js",
+    "buildInMemory": "cross-env NODE_ENV=production node server/server.js",
+    "build": "webpack -p --config ./webpack.prod.js",
+    "liveprod": ""
   },
   "author": "RM",
   "license": "MIT",
-  
   "browserslist": {
     "production": [
       "> 1%",
@@ -40,6 +41,7 @@
     "@babel/register": "^7.4.4",
     "animate.css": "^3.7.0",
     "express": "^4.16.4",
+    "glob-all": "^3.1.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0"
@@ -51,7 +53,9 @@
     "@babel/preset-env": "^7.4.4",
     "@babel/runtime": "^7.4.4",
     "@fortawesome/fontawesome-free": "^5.8.2",
+    "@gfx/zopfli": "^1.0.13",
     "babel-loader": "^8.0.5",
+    "babel-plugin-transform-react-jsx-img-import": "^0.1.4",
     "babel-plugin-transform-regenerator": "^6.26.0",
     "babel-polyfill": "^6.26.0",
     "clean-webpack-plugin": "^2.0.2",
@@ -64,9 +68,15 @@
     "dotenv": "^8.0.0",
     "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^3.0.1",
+    "glob": "^7.1.4",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
+    "imagemin-gifsicle": "^6.0.1",
+    "imagemin-mozjpeg": "^8.0.0",
+    "imagemin-optipng": "^7.0.0",
+    "imagemin-svgo": "^7.0.0",
     "mini-css-extract-plugin": "^0.6.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss": "^7.0.16",
     "postcss-assets": "^5.0.0",
     "postcss-import": "^12.0.1",
@@ -87,6 +97,7 @@
     "webpack-hot-middleware": "^2.25.0",
     "webpack-manifest-plugin": "^2.0.4",
     "webpack-merge": "^4.2.1",
-    "webpack-notifier": "^1.7.0"
+    "webpack-notifier": "^1.7.0",
+    "webpack-server-middleware": "^0.1.0"
   }
 }

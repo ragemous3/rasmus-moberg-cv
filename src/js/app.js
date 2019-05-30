@@ -75,7 +75,7 @@ function Hamburger(){
     }
   return(
     <figure className="hamburger-menu" >
-      <img src="/dist/img/hamburger.png" />
+      <img src="./../img/hamburger.png" />
       <Dropper />
     </figure>
   )

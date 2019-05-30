@@ -1,15 +1,8 @@
-
-// const tailwindcss = require('tailwindcss');
-//Postcss är ett verktyg för att transformera
+//Postcss är ett verktyg som tillåter att bygga ett system av plugins för att transformera
 //css till JS och tebaka! The one css-loader bro.
-module.exports = {
 
+module.exports = {
     plugins: [
-        // require('postcss-import')({
-        //     plugins: [
-        //         require('stylelint')
-        //     ]
-        // }),
         require('tailwindcss')('./tailwind.config.js'),
         // require('postcss-import'),
         require('postcss-preset-env')({

@@ -5,7 +5,7 @@ function Projects(){
 
   return (
     <section >
-      <img src="/dist/img/under-con.gif"/>
+      <img src="../../img/under-con.gif"/>
       <a  target="_blank" href="https://elektropartner.nu/">Elektropartner</a>
     </section>
   )
