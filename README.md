@@ -2,9 +2,13 @@
 
 Testa applikationen med "npm run dev"
 
+Applikationen är mobilanpassad till ungefär 300 pixlar vid.
+
 I app.js finns kort förklaring på hur jag lagt upp strukturen.
 Jag har också lagt in lite kommentarer här och var där Strukturen
 är av intresse att förklara
+
+Hur har jag löst uppgiften?
 
 ● Skriv i ES6
   Jag har skrivit i både ES6 och ES5 beroende på när det varit nödvändigt
