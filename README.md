@@ -12,6 +12,7 @@ Jag har också lagt in lite kommentarer här och var där Strukturen
 
 ○ Använd React Komponenter
   - Både skrivit funktion- och klasskomponenter
+
 ● Använda minst en eventhanterare
 
   - En knapp finns för att ändra text använder sig av både,
@@ -33,7 +34,7 @@ Jag har också lagt in lite kommentarer här och var där Strukturen
 ● Använda minst en React Component utöver index.js och App.js som du själv
 skapat
 
-  Jag badar i komponents.
+  Jag badar i komponents :D :) :D
 
 ○ Använd props (Skicka med till den nya komponenten)
 
