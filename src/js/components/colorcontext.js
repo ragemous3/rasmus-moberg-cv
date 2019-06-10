@@ -1,6 +1,6 @@
 import React from 'react';
 
-//Kontext skapas med tomma värden
+//Initiala kontexten skapas
 const ColorContext = React.createContext({
   color: '',
   tsize: 'responsive-lbox-text',
@@ -15,7 +15,7 @@ const ColorContext = React.createContext({
    Vid varje rendering av komponent i "app.js" använder man alltså
    klassen "ColorProvider" för att wrappa allt man vill ska få tillgång
    till kontexten och Consumer(förmågan att prenumerera)
-   
+
 */
 class ColorProvider extends React.Component{
   constructor(props){
@@ -29,7 +29,6 @@ class ColorProvider extends React.Component{
   updateTextSize() {
       this.setState((prev) => {
           if(this.state.tsize === 'responsive-lbox-text'){
-            console.log('yes')
             return {tsize: 'responsive-text'};
           }else{
             return {tsize: 'responsive-lbox-text'};
@@ -44,11 +43,13 @@ class ColorProvider extends React.Component{
     );
   }
 }
+
 /*
   Exporterar "Consumer" vilket är en react-komponent som
   ger andra FUNKTION-komponenter makten att prenumerera på kontextens
   förändringar.
 */
+
 const ColorConsumer = ColorContext.Consumer;
 
 export   { ColorConsumer, ColorProvider, ColorContext }
