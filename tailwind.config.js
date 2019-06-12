@@ -3,11 +3,17 @@ module.exports = {
   important: false,
   separator: ':',
   theme: {
+  gradients: theme => ({
+      'blue-green': [theme('colors.blue.500'), theme('colors.green.500')],
+      'purple-blue': [theme('colors.purple.500'), theme('colors.blue.500')],
+      'bgcol': ['#fbc2eb 0%', '#a6c1ee 100%'],
+    }),
     screens: {
-      xs: '0px',
+      '0': '0px',
+      xs: '225px',
       s: '340px',
-      iconbreak: '373px',
-      iconnobreak: '374px',
+      iconbreak: '450px',
+      iconnobreak: '451px',
       mstart: '479px',
       sm: '640px',
       md: '768px',
@@ -19,9 +25,7 @@ module.exports = {
       greenlight: '#68d391',
       black: '#000',
       white: '#fff',
-      gradients: {
-        '': 'linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);'
-      },
+
       gray: {
         100: '#f7fafc',
         200: '#edf2f7',
@@ -153,6 +157,7 @@ module.exports = {
       '48': '12rem',
       '56': '14rem',
       '64': '16rem',
+      '100pr': '100%'
     },
     backgroundColor: theme => theme('colors'),
     backgroundPosition: {
@@ -259,7 +264,9 @@ module.exports = {
       ],
     },
     fontSize: {
-      xs: '0.75rem',
+      '100':'100%',
+      xs: '0.50rem',
+      s: '0.75rem',
       sm: '0.875rem',
       base: '1rem',
       lg: '1.125rem',
@@ -293,6 +300,8 @@ module.exports = {
       '60pex': '60px',
       '15': '15%',
       '50':'50%',
+      '85':'85%',
+      '100': '100%',
       auto: 'auto',
     },
     letterSpacing: {
@@ -319,8 +328,10 @@ module.exports = {
 
     margin: (theme, { negative }) => ({
       auto: 'auto',
+      '0':'0%',
       '600': '600px',
-      '200': '250px',
+      '250': '250px',
+      '100pr':'100%',
       '3': '3rem',
       '025':'.25em 0',
       ...theme('spacing'),
@@ -331,6 +342,9 @@ module.exports = {
       screen: '100vh',
     },
     maxWidth: {
+      '100': '100px',
+      '150': '150px',
+      '200': '200px',
       '250': '250px',
       xs: '20rem',
       sm: '24rem',
@@ -510,7 +524,13 @@ module.exports = {
     width: ['responsive'],
     wordBreak: ['responsive'],
     zIndex: ['responsive'],
+    gradients: ['responsive'],
+
   },
-  corePlugins: {},
-  plugins: [],
+  corePlugins: {
+    objectPosition:true
+  },
+  plugins: [
+    require('./tw-plugins/gradients')
+  ],
 }

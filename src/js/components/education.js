@@ -13,7 +13,7 @@ class Edu extends React.Component{
     return (
       <ColorConsumer>
         {({ tsize }) => (
-      <section className="w-5/6">
+      <section className="w-5/6 text-shadow">
         <h2>Education</h2>
         <article>
           <div>

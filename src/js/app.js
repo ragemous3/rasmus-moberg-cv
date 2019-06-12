@@ -5,6 +5,7 @@
 */
   import React, { useState, useContext } from 'react';
   import ReactDOM from 'react-dom';
+  import('hint.css')
   import { ColorProvider, ColorConsumer} from './components/colorcontext.js';
   import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
   import  {Help} from './helpers.js'
@@ -18,9 +19,15 @@
       super(props)
       this.state = {
         comp: [],
+        aside:
+          [<div>
+            <Contact />
+          </div>],
+        bool:true,
         lacy: 'smooth-loader'
       }
       this.middle = [];
+      this.aside = [];
     }
     componentDidMount(){
       this.setState((prev) => {
@@ -30,73 +37,91 @@
       })
     }
     componentWillMount(){
-
       if(this.props.url){
+        //Syntax supporter by babels '@babel/plugin-syntax-dynamic-import'
         import(/*webpackChunkName: "[request]"*/ /* webpackMode: "lazy" */ `${this.props.url}`).then(({Part}) => {
           this.middle.push(<Part />);
-          this.setState((prev) => {
-            return{
-              comp: this.middle
-            }
-          })
-          }).catch((e) => {
-              console.log(`Error With dynamic import! Error: ${e}`);
-          })
+            this.setState((prev) => {
+              return{
+                comp: this.middle
+              }
+            })
+            }).catch((e) => {
+                console.log(`Error With dynamic import! Error: ${e}`);
+            })
+        return true
       }else{
-        return null;
+        return false;
       }
     }
     render(){
+      console.log(this.props)
       return(
-
-            <section className={this.props.whatClass || ''}>
-                {this.state.comp.map((Element, i) => {
-                  return <div className={`z-0 ${this.state.lazy}`}key={i}>{Element}</div>;
-                })}
-            </section>
+          <section id="renderhere" className="main-page-structure border-box">
+              <section id="main-box" className={`align-top border-box inline-block p-3` }>
+                  {
+                    this.state.comp.map((Element, i) => {
+                    return <div className={`z-0  ${this.state.lazy}`} key={i}>{Element}</div>;
+                  })
+                 }
+              </section>
+              <aside className={`${this.props.chunkname === 'aboutme' && this.state.lazy} w-1/2 border-box m-0 inline-block p-3`} id="aside-contact">
+                {
+                this.state.aside.map((Aside, i ) => {
+                  console.log('rerendered')
+                  return <div key={`asidecontact${i}`}>{Aside}</div>
+                })
+                }
+            </aside>
+          </section>
       )
   }
 }
+/*
+<aside className={`${this.state.lazy} w-1/2 border-box m-0 inline-block p-3`} id="aside-contact">
 
+</aside>
+*/
+// {
+//     this.state.aside.map((Aside, i ) => {
+//       console.log('rerendered')
+//       return <div key={`asidecontact${i}`}>{Aside}</div>
+//     })
+// }
 /*
 ***********************************************************************************************
 *****************************NAV-BAR MED TILLHÖRANDE KOMPONENTER*******************************
 ***********************************************************************************************
 */
 
-function Hamburger(){
+function ZmallMenu(){
 
-    const Dropper = () =>{
-      return(
-        <div className='hamburger-dropper'>
-          <NavLinkz cls={'flex flex-1 flex-row'} cls2={'p-3 text-black mb-3'} />
-        </div>
-      )
-    }
+
   return(
-    <figure className="hamburger-menu" >
-      <img src="./../img/hamburger.png" />
-      <Dropper />
+    <figure className="hamburger-menu mb-3 mt-3" >
+        <NavLinkz cls={'responsive-nav-text text-shadow hamburgers-relatives'} cls2={'p-3'} />
     </figure>
   )
 }
 
-function NavLinkz(props){
+  function NavLinkz(props){
   return(
+    <>
     <div className={props.cls}>
-      <div className="top-left">
-        <NavLink className={`mt-20 border-box a-link ${props.cls2 || ''}`} to="/">Contact</NavLink>
+      <div className={`nav-link-buttons top-left ${props.cls3 || ''}`}>
+        <NavLink className={`mt-20 border-box a-link ${props.cls2 || ''}`} to="/">About Me</NavLink>
       </div>
-      <div className="top-right">
-        <NavLink className={`mt-20 border-box a-link ${props.cls2 || ''}`} to="/experience">Experience</NavLink>
+      <div className={`nav-link-buttons top-right ${props.cls3 || ''}`}>
+        <NavLink className={`nav-link-buttons mt-20 border-box a-link ${props.cls2 || ''}`} to="/experience">Experience</NavLink>
       </div>
-      <div className="bot-left">
+      <div className={`nav-link-buttons bot-left ${props.cls3 || ''}`}>
         <NavLink className={`mt-20 border-box a-link ${props.cls2 || ''}`} to="/education">Education</NavLink>
       </div>
-      <div className="bot-right">
+      <div className={`nav-link-buttons bot-right ${props.cls3 || ''}`}>
         <NavLink className={`mt-20 border-box a-link ${props.cls2 || ''}`} to="/projects">Projects</NavLink>
       </div>
     </div>
+    </>
   )
 }
 class Nav extends React.Component{
@@ -110,20 +135,20 @@ class Nav extends React.Component{
     return (
       <ColorConsumer>
         {({ tsize,  updateTextSize }) => (
-          <section>
-            <Hamburger />
-              <nav className="nav-bar responsive-nav-text responsive-nav border-box text-shadow">
+          <>
+            <ZmallMenu />
+              <nav className="nav-bar z-10 fixed responsive-nav-text responsive-nav border-box text-shadow">
                   <section className="wrap border-box">
                       <article className="">
-                      <NavLinkz cls={'nav-figure'}/>
+                      <NavLinkz className="nav-figure" />
                       </article>
                   </section>
-                  <button id="txtSize" onClick={(e) => {
+                  <button id="txtSize" className="hint--right" aria-label="Change text size" onClick={(e) => {
                       updateTextSize()
                     }}>
                   </button>
               </nav>
-          </section>
+          </>
         )}
       </ColorConsumer>
     )
@@ -147,42 +172,69 @@ class Nav extends React.Component{
   <LoadAsync chunkname="main" whatClass="main-page-structure border-box" url="./components/main.js" />
 
 */
+import { Part } from './components/contact.js'
 
-function Homepage(){
-      return (
-      <>
-          {<LoadAsync chunkname="main" whatClass="main-page-structure border-box" url="./components/main.js" />}
-      </>
-      )
+function Contact(props){
+  //   { <LoadAsync chunkname="contact" whatClass={props.cls ? props.cls : 'border-box'} url="./components/contact.js" />}
+  return (
+    <>
+     <Part />
+    </>
+  )
+}
+function AboutMe(props){
+  return (
+  <>
+   {<LoadAsync chunkname="aboutme" url="./components/aboutme.js" />}
+  </>
+  )
 }
 function Knowledge(){
   return (
     <>
-    <LoadAsync chunkname="experience" whatClass="main-page-structure border-box" url="./components/experience.js" />
+      <LoadAsync chunkname="experience" url="./components/experience.js" />
     </>
   )
 }
 function Education(){
   return (
     <>
-      <LoadAsync chunkname="education" whatClass="main-page-structure" url="./components/education.js" />
+      <LoadAsync chunkname="education" url="./components/education.js" />
     </>
   )
 }
 function Projects(){
   return (
     <>
-      <LoadAsync chunkname="Projects" whatClass="main-page-structure" url="./components/projects.js" />
+      <LoadAsync chunkname="Projects" url="./components/projects.js" />
     </>
   )
 }
+/*
+***********************************************************************************************
+***************************************Footer**************************************************
+***********************************************************************************************
+*/
+function Aside(){
+  return(
+    <aside className={`smooth-loaded w-1/2 border-box m-0 inline-block p-3`} id="aside-contact">
+      <Contact />
+    </aside>
+  )
+}
+
+/*
+***********************************************************************************************
+*****************************Routing med react-router******************************************
+***********************************************************************************************
+*/
 
 const routes = (
   <ColorProvider>
     <BrowserRouter>
         <Nav />
         <Switch>
-          <Route path="/" exact={true} component={Homepage} />
+          <Route path="/" exact={true} component={AboutMe} />
           <Route exact path="/experience" component={Knowledge}/>
           <Route exact path="/education" component={Education}/>
           <Route exact path="/projects" component={Projects}/>
@@ -193,88 +245,3 @@ const routes = (
 )
 
 ReactDOM.render(routes, document.getElementById('root'));
-
-
-/*
-  Inlämningsuppgift - Hur jag löst uppgiften
-
-  Först kort om varför jag har gjort som jag gjort:
-
-      Varför jag inte gjort någon index.js är för jag anser
-      att det blir onödigt mycket lager på lager för en sådan liten
-      applikation.
-
-
-      Strukturen på sidan är
-      konstruerad runt navigering med dynamisk kodsplittning som returnerar promises.
-
-      Varför jag har gjort det på det viset är för att jag inte vill skicka
-      över för mycket data till browsern varje gång en url-förändring görs.
-      Varför det är asynkroniskt är för att jag vill förhindra att data krockar
-      med annan data eller att ordningen blir fel.
-
-      Jag har därför delat upp all JSX i komponenter som renderas genom LoadAsync
-      varje gång en url-förändring görs.
-
-      Allting som genereras på sidan går via LoadAsync-komponenten.
-      Förutom Nav-baren då.
-
-      Min webpack-config för devservern ligger i "server/config-mappen"
-      Det här är för att jag vill kunna använda mina egna serverlösningar
-      för att skicka filer. T.ex. pdf-filen. Bara för att hålla backendprogrammeringen
-      färsk egentligen.
-
-  ● Skriv i ES6
-   - Jag har skrivit i Es06 där jag känt att det varit nödvändigt.
-
-  ○ Använd React Komponenter
-    - Både skrivit funktions- och klasskomponenter
-  ● Använda minst en eventhanterare
-    - En knapp finns för att ändra text använder sig av både,
-    state, events och context.
-
-  ● Använda minst en livscykel metod utöver render() och constructor() dvs
-
-    ComponentDidMount och componentWillMount används för att applicera klass
-    och för lena övergångar i ASYNC-komponenten. Den komponenten i sig finns
-    där för att skapa asynkroniskt kodsplitta utan att skriva in manuellt
-    i webpack-filen.
-
-  ● Använda minst en context (Frivilligt vad denna ska göra men det ska kunna
-  ändras genom tex. ett knapptryck)
-
-    context används för att ändra text på sidan. Kolla in colorcontext.js.
-    Svingo kod.
-
-  ● Använda minst en React Component utöver index.js och App.js som du själv
-  skapat
-
-    Jag badar i komponents.
-
-  ○ Använd props (Skicka med till den nya komponenten)
-
-    props används när jag ska skicka över klassnamn till Navigeringslänkarna.
-
-  ● Använda minst ett React element som du själv skapat.
-
-    Inte skrivit i koden men jag kan ge ett exempel här:
-
-      const Element = React.createElement(
-        'button', <--- type
-        {id: 'txtSize',
-        onClick: (e) => {     <---------attributer
-            updateTextSize()
-        }},
-        'barn-nod',
-        React.createElement('p') <-- annat barn
-      );
-
-  ● En webpack fil (Se Webpack)
-
-    Jupp.
-
-  ● En babelfil (Se Babel)
-
-    skriver babelconfigen i webpack-config istället.
-
-*/

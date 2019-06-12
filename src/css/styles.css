@@ -10,7 +10,28 @@
       font-family: 'Exo 2', sans-serif;
       @apply h-screen max-w-full;
       overflow-X:hidden;
-      overflow-Y: auto
+      overflow-Y: auto;
+      scroll-behavior: smooth;
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    * {
+       cursor: default;
+    }
+/*
+***********************************************************************
+***********************Cursor Button Mechanics*************************
+***********************************************************************
+*/
+    .nav-link-buttons{
+      cursor: url('./../img/mushroom-cloud.png') 30 30 , crosshair;
+    }
+    button, a{
+      cursor: url('./../img/mushroom-cloud.png') 30 30 , crosshair;
+    }
+    * {
+      cursor: url('./../img/atomic.png') 30 30 , crosshair;
     }
     body{
       /* background-image: url('/dist/img/bg-image-2.jpg'); */
@@ -28,41 +49,105 @@
     p {
       @apply leading-tight text-lg;
     }
-    .p-tag-override{
-      @apply text-lg;
-    }
 /*
 *******************************main-profile*****************************
 */
 /* .main-profile{
   width:75%;
 } */
-
+.main-page-structure{
+  @apply m-0 w-full p-4;
+  word-wrap:  normal;
+}
 
 @screen xs {
   .main-page-structure{
-    @apply block p-4 flex-col w-full  mt-4;
+    @apply block mx-auto;
+  }
+  #aside-contact{
+    @apply block
+  }
+  #main-box{
+    @apply w-full
+  }
+}
+@screen iconbreak{
+  .main-page-structure{
+    @apply block mx-auto;
+  }
+  #aside-contact{
+    @apply block
+  }
+  #main-box{
+    @apply w-full
   }
 }
 @screen s {
   .main-page-structure{
-    @apply block p-4 flex-col w-full  mt-4;
+    @apply block mx-auto;
+  }
+  #aside-contact{
+    @apply block
+  }
+  #main-box{
+    @apply w-full
   }
 }
+
 @screen mstart{
 
   .main-page-structure{
-    @apply block p-4 flex-col w-full mt-4;
+    @apply block ml-0 mx-auto;
   }
-
+  #aside-contact{
+    @apply block
+  }
+  #main-box{
+    @apply w-full
+  }
 }
 @screen sm{
   .main-page-structure{
-    @apply w-1/2 p-4 ml-200 flex flex-1 flex-wrap;
+    @apply ml-250;
     word-wrap:  normal;
   }
+  #aside-contact{
+    @apply block
+  }
+  #main-box{
+    @apply w-1/2
+  }
 }
-
+@screen md{
+  .main-page-structure{
+    @apply ml-250;
+    word-wrap:  normal;
+  }
+  #aside-contact{
+    @apply inline-block
+  }
+  #main-box{
+    @apply w-1/2
+  }
+}
+@screen lg{
+  .main-page-structure{
+    @apply ml-250;
+    word-wrap:  normal;
+  }
+  #main-box{
+    @apply w-1/2
+  }
+}
+@screen xl{
+  .main-page-structure{
+    @appl ml-250;
+    word-wrap: normal;
+  }
+  #main-box{
+    @apply w-1/2
+  }
+}
 
 /*
 *******************************Load smooth*****************************
@@ -87,10 +172,8 @@
 /*
 *******************************main-introduction*****************************
 */
-
-
 .main-image{
-  @apply w-1/2;
+  @apply w-48;
 }
 /*
 *******************************Language-box*****************************
@@ -99,17 +182,23 @@
   @apply w-600;
 }
 .language-box{
-  @apply border border-1 border-solid border-greenlight rounded-lg border-1 relative bg-greenlight text-white;
+  @apply border border-solid border-greenlight rounded-lg border-1 relative bg-greenlight text-white w-1/4 p-2 text-center m-1;
   @apply max-w-xl min-w-25;
   word-wrap: break-word;
 }
-.language-box:hover{
-
-
+.hidden-info-box{
+  display:none;
 }
+
+  /* .responsive-lbox-text {
+    @apply text-lg;
+  } */
 /*
 *******************************GENERAL*****************************
 */
+  .contact-info{
+    @apply text-xs;
+  }
     @responsive {
       .text-shadow {
         text-shadow: 0 2px 4px rgba(0,0,0,0.10);
@@ -132,10 +221,15 @@
 */
   @screen xs {
     .responsive-text {
-      @apply text-xs;
+      @apply text-s;
     }
   }
   @screen s {
+    .responsive-text {
+      @apply text-s;
+    }
+  }
+  @screen mstart {
     .responsive-text {
       @apply text-sm;
     }
@@ -161,14 +255,24 @@
     }
   }
   /* RESPONSIVE TEXT PÅ NAVEN */
+  @screen 0 {
+    .responsive-nav-text {
+      @apply text-2xl;
+    }
+  }
   @screen xs {
     .responsive-nav-text {
-      @apply text-lg;
+      @apply text-2xl;
     }
   }
   @screen s {
     .responsive-nav-text {
-      @apply text-xl;
+      @apply text-2xl;
+    }
+  }
+  @screen mstart{
+    .responsive-nav-text {
+      @apply text-2xl;
     }
   }
   @screen sm {
@@ -191,18 +295,7 @@
       @apply text-3xl;
     }
   }
-/* RESPONSIVE TEXT PÅ Språk-lådor */
 
-@screen lg {
-  .responsive-lbox-text {
-    @apply text-xs;
-  }
-}
-@screen xl {
-  .responsive-lbox-text {
-    @apply text-lg;
-  }
-}
   /*
   *******************************Images*****************************************
   */
@@ -242,8 +335,8 @@
     /* @apply p-8; */
     background: url('./../img/abc.png');
     background-size: 100% 100%;
-    width:25px;
-    height: 25px;
+    width:30px;
+    height: 30px;
     background-repeat: no-repeat;
 }​
 /* @screen sm {
@@ -289,8 +382,8 @@
     background-size: 100% 100%;
     display: none;
 
-    height: 20px;
-    width:20px;
+    height: 28px;
+    width:28px;
 
     position:relative;
     top:5px;
@@ -323,50 +416,66 @@
 .hamburger-menu{
   @apply relative;
 }
-.hamburger-dropper{
-  @apply hidden ;
+@screen 0{
+  .hamburger-menu  {
+      @apply block ;
+  }
+  .hamburgers-relatives{
+      @apply flex flex-1 items-center justify-center flex-wrap;
+  }
 }
 @screen xs{
   .hamburger-menu  {
+      @apply block ;
+  }
+  .hamburgers-relatives{
+      @apply flex flex-1 items-center justify-center flex-wrap;
+  }
+}
+@screen iconbreak{
+  .hamburger-menu  {
       @apply block;
   }
-  .hamburger-menu:hover .hamburger-dropper{
-    @apply absolute block z-10 flex-col;
+  .hamburgers-relatives{
+      @apply flex flex-1 items-center justify-center flex-wrap;
   }
 }
 @screen s{
   .hamburger-menu  {
       @apply block;
   }
-  .hamburger-menu:hover .hamburger-dropper{
-    @apply absolute block z-10;
+  .hamburgers-relatives{
+      @apply flex flex-1 items-center justify-center
   }
 }
 @screen mstart{
   .hamburger-menu  {
       @apply block;
   }
-  .hamburger-menu:hover .hamburger-dropper{
-    @apply absolute left-15 top-50 block z-10;
+  .hamburgers-relatives{
+      @apply flex flex-1 items-center justify-center
   }
 }
 @screen sm{
   .hamburger-menu  {
       @apply hidden;
   }
-  .hamburger-menu:hover .hamburger-dropper{
-    @apply absolute left-15 top-50 block z-10;
-  }
+
 }
 @screen md{
     .hamburger-menu  {
         @apply hidden;
     }
-    .hamburger-menu:hover .hamburger-dropper{
-      @apply absolute left-15 top-50 block z-10;
-    }
 }
 
+.nav-bar{
+  @apply inline-block
+}
+@screen 0{
+  .nav-bar{
+    @apply hidden;
+  }
+}
 @screen xs{
   .nav-bar{
     @apply hidden;
@@ -384,7 +493,7 @@
 }
 @screen sm{
   .nav-bar{
-    @apply m-4 min-w-200 max-w-250 fixed top-0 left-0 inline-block;
+    @apply m-4 min-w-200 max-w-250 relative top-0 left-0 inline-block;
   }
 }
 /*
@@ -415,7 +524,8 @@
 */
   @responsive {
     .bg-gradient-rainy-ashville {
-      background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+      @apply bg-grad-bgcol;
+      /* background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%); */
     }
   }
 @tailwind utilities;

@@ -2,55 +2,90 @@ import React from 'react'
 import { ColorConsumer } from './colorcontext.js';
 
 
+class Accomplishments extends React.Component{
+  constructor(props){
+    super(props)
+    this.state = {
+      languages: [
+        'javaScript',
+        'React',
+        'C#',
+        'TypeScript',
+        'Craft3 CMS',
+        'Node.js',
+        'Webpack',
+        'PHP',
+        'Mysql',
+        'MongoDB',
+        'CSS3',
+        'HTML5',
+        'Twig',
+    ],
+    text: [
+      '⚡⚡⚡⚡⚡',
+      '⚡⚡⚡⚡',
+      '⚡',
+      '⚡⚡',
+      '⚡⚡',
+      '⚡⚡⚡⚡',
+      '⚡⚡⚡',
+      '⚡⚡',
+      '⚡⚡',
+      '⚡⚡⚡',
+      '⚡⚡⚡',
+      '⚡⚡⚡⚡⚡',
+      '⚡⚡⚡',
+    ],
+    tooltips: [
+      'hint--left',
+      'hint--bottom',
+      'hint--right',
+      'hint--left',
+      'hint--top',
+      'hint--right',
+      'hint--left',
+      'hint--bottom',
+      'hint--right',
+      'hint--left',
+      'hint--top',
+      'hint--right',
+      'hint--left',
+    ],
+  }
+    this.clicker = this.clicker.bind(this)
+  }
+  clicker(e){
+    let target = e.target
+    console.log(target.textContent)
 
-function Accomplishments(){
+  }
+  render(){
     return(
       <ColorConsumer>
         {({ tsize }) => (
-       <section className="responsive-lbox-text ">
+       <section className="text-shadow">
         <article>
           <h2>Languages, frameworks, environments and libraries</h2>
-          <section className="flex flex-1 flex-wrap content-around mt-3">
-            <div className="w-1/4 p-2 text-center m-1 language-box text-shadow">
-              React
-            </div>
-            <div className="w-1/4 p-2 text-center m-1 language-box text-shadow">
-              HTML5
-            </div>
-            <div className="w-1/4 p-2 text-center m-1 language-box text-shadow">
-              CSS3
-            </div>
-            <div className="w-1/4 p-2 text-center m-1 language-box text-shadow">
-              Node
-            </div>
-            <div className="w-1/4 p-2 text-center m-1 language-box text-shadow">
-              PHP
-            </div>
-            <div className="w-1/4 p-2 text-center m-1 language-box text-shadow">
-            javaScript
-            </div>
-            <div className="w-1/4 p-2 text-center m-1 language-box text-shadow">
-              Craft 3 CMS
-            </div>
-            <div className="w-1/4 p-2 text-center m-1 language-box text-shadow">
-              Mysql
-            </div>
-            <div className="w-1/4 p-2 text-center m-1 language-box">
-              MongoDB
-            </div>
-            <div className="w-1/4 p-2 text-center m-1 language-box">
-              TypeScript
-            </div>
-            <div className="w-1/4 p-2 text-center m-1 language-box">
-              Twig
-            </div>
-            <div className="w-1/4 p-2 text-center m-1 language-box">
-              Webpack
-            </div>
-            <div className="w-1/4 p-2 text-center m-1 language-box">
-              c#
-            </div>
+          <span>Hoovra lådorna för att se min färdighet</span>
+          <section className="flex flex-1 flex-wrap content-around mt-3 responsive-text">
+            {
+              Array.from({length: 13}, (_, i) =>
+                  <div key={`box${i}`}
+                     className={`${this.state.tooltips[i]} language-box text-shadow`}
+                     aria-label={this.state.text[i]}
+                     onClick={(e) => this.clicker(e)}
+                   >
+                   {this.state.languages[i]}
+                  </div>
+                )
+            }
           </section>
+          <article className="hidden-info-box">
+
+            <i url=""></i>
+              <div id="info-box-content">
+              </div>
+          </article>
         </article>
         <article className="mt-3">
           <h2>Relevant work experience</h2>
@@ -81,7 +116,7 @@ function Accomplishments(){
               </p>
             </div>
             <div className="w-2/4 p-2 text-shadow">
-              <h3 className="h3-override-ml-nil">preschool teacher - 2017-2018</h3>
+              <h3 className="h3-override-ml-nil">Preschool teacher - 2017-2018</h3>
                 <p className={`${tsize}`}>
                 The work as a preschool teacher has given me
                 leadership skills and trained my ability
@@ -102,6 +137,8 @@ function Accomplishments(){
      )}
    </ ColorConsumer>
     )
+  }
 }
+
 
 export {Accomplishments as Part}

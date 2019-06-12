@@ -10,6 +10,6 @@ module.exports = {
             features: {
                 'nesting-rules': true
             }
-        })
+        }),
     ]
 };

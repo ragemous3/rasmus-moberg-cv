@@ -219,6 +219,7 @@ const configurePurgeCss = () => {
 
 var appjs =  path.resolve(__dirname + `/src/js/app.js`);
 var styles =  path.resolve(__dirname + `/src/css/styles.css`);
+
 // Production module exports
 module.exports = {
 
@@ -246,10 +247,9 @@ module.exports = {
                 new MiniCssExtractPlugin({
                     publicPath: '/css/',
                     template: '/css/styles.css',
-                    filename: 'styles.css',
                     chunkFilename:'[id].styles.css' ,
                     // path: path.resolve(__dirname, './public/build/css'),
-                    filename: '[name].[chunkhash].css',
+                    filename: 'css/[name].[chunkhash].css', //ändring gjord här! Måste tanka js extractplug
                     //path.join('./css'),
                 }),
                 new PurgecssPlugin(

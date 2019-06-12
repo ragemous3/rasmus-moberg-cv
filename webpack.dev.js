@@ -1,6 +1,6 @@
 const path = require('path')
 var fs = require('fs');
-
+const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -20,7 +20,7 @@ module.exports = {
     //publicPath: '/', //till för cdn men kan också användas för att skapa builds
     // filename: 'my-first-webpack.bundle.[hash].js',
     // chunkFilename: '[chunkhash].js'
-    filename: 'bundle.js',
+    filename: '[name].js',
     chunkFilename: '[name].[chunkhash].js'
   },
   mode: "development",
@@ -113,7 +113,6 @@ module.exports = {
       template: './public/index.html',
       filename: 'index.html'
     }),
-    // new webpack.HotModuleReplacementPlugin(),
 
     new MiniCssExtractPlugin({
       //  "[name].css" || '[name].[hash].css'

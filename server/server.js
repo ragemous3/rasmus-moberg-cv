@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/getcv', (req,res) => {
-  var pth = path.resolve(__dirname, './../public/dist/files/rasmusmcv.pdf');
+  var pth = path.resolve(__dirname, './../src/files/rasmusmcv.pdf');
   res.download(pth, (err) => {
     if(err){
       res.end();
