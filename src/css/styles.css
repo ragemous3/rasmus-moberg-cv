@@ -4,37 +4,62 @@
 @tailwind components;
 
 @import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap');
-
-
-    body, html, #root{
+/*
+overflow-X:hidden;
+overflow-Y: auto;
+*/
+    body, html, main{
+      @apply min-h-full min-w-full;
       font-family: 'Exo 2', sans-serif;
       @apply h-screen max-w-full;
-      overflow-X:hidden;
-      overflow-Y: auto;
+
       scroll-behavior: smooth;
+    }
+    main{
+      @apply p-6 min-w-full;
     }
     ::-webkit-scrollbar {
       display: none;
     }
-    * {
-       cursor: default;
-    }
+
 /*
 ***********************************************************************
 ***********************Cursor Button Mechanics*************************
 ***********************************************************************
 */
-    .nav-link-buttons{
-      cursor: url('./../img/mushroom-cloud.png') 30 30 , crosshair;
+  @keyframes cursorEff{
+     0%{
+      filter: grayscale(0%);
+      transform: translate3d(-1px, 0, 0);
     }
-    button, a{
-      cursor: url('./../img/mushroom-cloud.png') 30 30 , crosshair;
+    100%{
+      filter: grayscale(100%);
+      transform: translate3d(4px, 0, 0);
     }
-    * {
-      cursor: url('./../img/atomic.png') 30 30 , crosshair;
+  }
+
+    button:hover, a:hover{
+      opacity: 0.5;
+      animation: cursorEff 2s;
+      animation-fill-mode: forwards;
+      cursor: pointer;
     }
+
+    .floatAsideClick:hover{
+      opacity: 0.5;
+      animation: cursorEff 2s;
+      animation-fill-mode: forwards;
+      cursor: pointer;
+    }
+    .PointerCursor:hover{
+      cursor: pointer;
+    }
+
+    /* * {
+      cursor: url('./../img/cursors/handcursor.svg') 30 30 , crosshair;
+      cursor: auto;
+    } */
     body{
-      /* background-image: url('/dist/img/bg-image-2.jpg'); */
       @apply bg-fixed
     }
     h2{
@@ -52,101 +77,130 @@
 /*
 *******************************main-profile*****************************
 */
-/* .main-profile{
-  width:75%;
-} */
-.main-page-structure{
-  @apply m-0 w-full p-4;
-  word-wrap:  normal;
+.main-profile{
+  @apply pt-0 ;
+  max-width:270px;
+  width:270px;
 }
 
+
+.contact-profile-text{
+  font-weight: 700;
+  box-sizing: border-box;
+  overflow: visible;
+}
+.contact-text-box{
+  @apply pt-1 text-sm;
+}
+.i-linkedin{
+  background: url('./../img/linkedin.svg');
+  background-size: 100% 100%;
+  width: 30px;
+  height: 30px;
+  background-repeat: no-repeat;
+}
+.i-gmail{
+  background: url('./../img/gmail.svg');
+  background-size: 100% 100%;
+  width: 30px;
+  height: 30px;
+  background-repeat: no-repeat;
+}
+.i-cv{
+  background: url('./../img/exportpdf.png');
+  background-size: 100% 100%;
+  width: 30px;
+  height: 30px;
+  background-repeat: no-repeat;
+}
+/*
+*******************************Contact-profile-animation*****************************
+*/
+.profile-flash {
+  background: #fff;
+	opacity: 1;
+	-webkit-animation: flash 1.5s;
+	animation: flash 1.5s;
+}
+@-webkit-keyframes flash {
+	0% {
+		opacity: .4;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@keyframes flash {
+	0% {
+		opacity: .4;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+/*
+*******************************main-page-structure*****************************
+*/
+.main-page-structure{
+  @apply overflow-visible;
+  text-overflow:auto;
+}
+#main-box{
+  @apply h-full
+}
+@screen 0{
+  .main-page-structure{
+    @apply block w-full;
+  }
+
+}
 @screen xs {
   .main-page-structure{
-    @apply block mx-auto;
+    @apply block w-full;
   }
   #aside-contact{
     @apply block
-  }
-  #main-box{
-    @apply w-full
   }
 }
 @screen iconbreak{
   .main-page-structure{
-    @apply block mx-auto;
+    @apply block w-full;
   }
   #aside-contact{
     @apply block
-  }
-  #main-box{
-    @apply w-full
   }
 }
 @screen s {
   .main-page-structure{
-    @apply block mx-auto;
+    @apply block w-full;
   }
   #aside-contact{
     @apply block
   }
-  #main-box{
-    @apply w-full
-  }
 }
 
-@screen mstart{
-
-  .main-page-structure{
-    @apply block ml-0 mx-auto;
-  }
-  #aside-contact{
-    @apply block
-  }
-  #main-box{
-    @apply w-full
-  }
-}
 @screen sm{
   .main-page-structure{
-    @apply ml-250;
-    word-wrap:  normal;
+    @apply w-3/4 ml-0 inline-block;
   }
   #aside-contact{
     @apply block
-  }
-  #main-box{
-    @apply w-1/2
   }
 }
 @screen md{
   .main-page-structure{
-    @apply ml-250;
-    word-wrap:  normal;
+    @apply w-1/2 inline-block
   }
   #aside-contact{
     @apply inline-block
   }
-  #main-box{
-    @apply w-1/2
-  }
 }
-@screen lg{
-  .main-page-structure{
-    @apply ml-250;
-    word-wrap:  normal;
-  }
-  #main-box{
-    @apply w-1/2
-  }
-}
+
 @screen xl{
   .main-page-structure{
-    @appl ml-250;
-    word-wrap: normal;
   }
-  #main-box{
-    @apply w-1/2
-  }
+
 }
 
 /*
@@ -172,9 +226,7 @@
 /*
 *******************************main-introduction*****************************
 */
-.main-image{
-  @apply w-48;
-}
+
 /*
 *******************************Language-box*****************************
 */
@@ -255,46 +307,7 @@
     }
   }
   /* RESPONSIVE TEXT PÅ NAVEN */
-  @screen 0 {
-    .responsive-nav-text {
-      @apply text-2xl;
-    }
-  }
-  @screen xs {
-    .responsive-nav-text {
-      @apply text-2xl;
-    }
-  }
-  @screen s {
-    .responsive-nav-text {
-      @apply text-2xl;
-    }
-  }
-  @screen mstart{
-    .responsive-nav-text {
-      @apply text-2xl;
-    }
-  }
-  @screen sm {
-    .responsive-nav-text {
-      @apply text-2xl;
-    }
-  }
-  @screen md {
-    .responsive-nav-text {
-      @apply text-2xl;
-    }
-  }
-  @screen lg {
-    .responsive-nav-text {
-      @apply text-2xl;
-    }
-  }
-  @screen xl {
-    .responsive-nav-text {
-      @apply text-3xl;
-    }
-  }
+
 
   /*
   *******************************Images*****************************************
@@ -309,9 +322,6 @@
 ************************Main Profile**************************
 */
 
-/* .card {
-  @apply absolute object-center;
-} */
 @screen md {
   .card {
     @apply w-nav-md;
@@ -329,6 +339,13 @@
   }
 }
 /*
+************************Cursors**************************
+*/
+
+.default{
+  cursor:default;
+}
+/*
 ************************Responsive NAV**************************
 */
 #txtSize {
@@ -338,27 +355,8 @@
     width:30px;
     height: 30px;
     background-repeat: no-repeat;
-}​
-/* @screen sm {
-  .nav-bar {
-    @apply w-nav-sm;
-  }
-} */
-@screen md {
-  .responsive-nav {
-    @apply w-nav-md;
-  }
 }
-@screen lg {
-  .responsive-nav {
-    @apply w-nav-lg;
-  }
-}
-@screen xl {
-  .responsive-nav {
-    @apply w-nav-xl;
-  }
-}
+
 /*
 *******************************A-link (NAVBAR)*******************************************
 */
@@ -378,7 +376,7 @@
   }
   .a-link:after{
     content: "";
-    background-image: url('./../img/arrow-64.png');
+    background: url('./../img/arrow-64.png');
     background-size: 100% 100%;
     display: none;
 
@@ -390,22 +388,19 @@
 
     transition: all 0.4s ease;
   }
-  @screen iconbreak{
-    .a-link:hover:after{
-      display:none;
-    }
+  .a-link:hover:after{
+    display:inline-block;
+    animation-name: rotation;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    animation-duration: 2.5s;
   }
-  @screen iconnobreak{
-
-    .a-link:hover:after{
-      display:inline-block;
-      animation-name: rotation;
-      animation-iteration-count: infinite;
-      animation-timing-function: linear;
-      animation-duration: 2.5s;
-    }
+  .rotate{
+    animation-name: rotation;
+    animation-iteration-count: finite;
+    animation-timing-function: linear;
+    animation-duration: 2.5s;
   }
-
 
   a:visited{
     color: ;
@@ -413,92 +408,106 @@
 /*
 *********************************Nav-bar GENERAL(with tailwind)************************************
 */
-.hamburger-menu{
-  @apply relative;
-}
+
 @screen 0{
-  .hamburger-menu  {
-      @apply block ;
+  .nav-bar{
+    @apply text-2xl w-full block fixed bottom-0 left-0 z-10 bg-grad-bgcol;
   }
-  .hamburgers-relatives{
-      @apply flex flex-1 items-center justify-center flex-wrap;
+  .bg-ham{
+    @apply fixed right-10 bottom-10 block rounded;
+    background-image: url('./../img/hamburger.png');
+    background-color: rebeccapurple;
+    background-size: 100% 100%;
+    width: 60px;
+    height: 60px;
+    background-repeat: no-repeat;
   }
+  .nav-linkz{
+    @apply flex flex-initial flex-row items-start flex-wrap justify-center h-80pex pr-16 pl-0;
+  }
+  .small-icons{
+    @apply hidden;
+  }
+  .nav-link-buttons{
+    @apply ;
+  }
+  .a-link:hover:after{
+    @apply hidden;
+  }
+  .nav-text{
+    @apply text-lg;
+  }
+  .main-card{
+    @apply w-full flex pt-4 ml-0 h-1333 mb-20 ;
+    /* w-3/4 flex relative p-0 pt-4 ml-1/4 h-1333; */
+  }
+  .main-image{
+    @apply static w-image-w flex-shrink-0;
+  }
+  .main-card-text{
+    @apply mt-4 mt-0 ml-6 static flex-grow-2;
+  }
+  .nav-link-box{
+    @apply pr-3;
+  }
+
 }
-@screen xs{
-  .hamburger-menu  {
-      @apply block ;
-  }
-  .hamburgers-relatives{
-      @apply flex flex-1 items-center justify-center flex-wrap;
-  }
-}
+
 @screen iconbreak{
-  .hamburger-menu  {
-      @apply block;
+  .small-icons{
+    @apply hidden;
   }
-  .hamburgers-relatives{
-      @apply flex flex-1 items-center justify-center flex-wrap;
-  }
-}
-@screen s{
-  .hamburger-menu  {
-      @apply block;
-  }
-  .hamburgers-relatives{
-      @apply flex flex-1 items-center justify-center
+  .a-link:hover:after{
+    @apply hidden;
   }
 }
-@screen mstart{
-  .hamburger-menu  {
-      @apply block;
+@screen iconnobreak{
+  .small-icons{
+    @apply hidden;
   }
-  .hamburgers-relatives{
-      @apply flex flex-1 items-center justify-center
+  .a-link:hover:after{
+    @apply inline-block;
   }
 }
 @screen sm{
-  .hamburger-menu  {
-      @apply hidden;
+  .nav-text{
+    @apply text-2xl;
   }
-
+  .bg-ham{
+    @apply hidden;
+  }
+  .nav-bar{
+    @apply h-full w-1/4 align-top relative inline-block;
+    background-image:  none;
+  }
+  .nav-linkz{
+    @apply flex-none relative inline-block w-full p-0 fixed;
+  }
+  .small-icons{
+    @apply inline-block;
+  }
+  .main-card{
+    @apply w-3/4 flex relative p-0 pt-4 ml-1/4 h-1333;
+  }
 }
+
 @screen md{
-    .hamburger-menu  {
-        @apply hidden;
-    }
+  .main-card{
+    @apply w-1/4 inline-block fixed p-6 pt-0 ml-0;
+  }
+  .main-image{
+    @apply inline-block w-auto relative;
+  }
+  .main-card-text{
+    @apply mt-0 mt-0 ml-0 static;
+  }
 }
 
-.nav-bar{
-  @apply inline-block
-}
-@screen 0{
+@screen xl{
   .nav-bar{
-    @apply hidden;
+    @apply text-3xl;
   }
 }
-@screen xs{
-  .nav-bar{
-    @apply hidden;
-  }
-}
-@screen s{
-  .nav-bar{
-    @apply hidden;
-  }
-}
-@screen mstart{
-  .nav-bar{
-    @apply hidden;
-  }
-}
-@screen sm{
-  .nav-bar{
-    @apply m-4 min-w-200 max-w-250 relative top-0 left-0 inline-block;
-  }
-}
-/*
-*********************************Main GENERAL(with tailwind)************************************
-*/
 
 /*
 *********************************GENERAL CSS(with tailwind)************************************
@@ -520,12 +529,57 @@
       }
     }
 /*
+***********************************************************************
+***********************Css Typewrite-effects***************************
+***********************************************************************
+*/
+
+@keyframes typing {
+    0% {
+        width: 0%
+    }
+    10%{
+      width: 10%
+    }
+    20%{
+      width: 20%
+    }
+    30%{
+      width: 30%
+    }
+    40%{
+      width: 40%
+    }
+    50%{
+      width: 50%
+    }
+    60%{
+      width: 60%
+    }
+    70%{
+      width: 70%
+    }
+    80%{
+      width: 80%
+    }
+    90%{
+      width: 90%
+    }
+    100%{
+      width: 100%;
+    }
+}
+.typewriter-text{
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 0.5s steps(25, end);
+}
+/*
 ***********************************COLORS!*********************************************************
 */
   @responsive {
     .bg-gradient-rainy-ashville {
       @apply bg-grad-bgcol;
-      /* background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%); */
     }
   }
 @tailwind utilities;

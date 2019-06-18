@@ -9,6 +9,7 @@
   import { ColorProvider, ColorConsumer} from './components/colorcontext.js';
   import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
   import  {Help} from './helpers.js'
+  import { Part } from './components/contact.js'
   /*
   ***********************************************************************************************
   ****************Asynkroniskt laddning med dynamisk kodsplittning*******************************
@@ -19,24 +20,60 @@
       super(props)
       this.state = {
         comp: [],
-        aside:
-          [<div>
-            <Contact />
-          </div>],
-        bool:true,
         lacy: 'smooth-loader'
       }
       this.middle = [];
       this.aside = [];
+      this.mobileResizer = this.mobileResizer.bind(this);
     }
     componentDidMount(){
+      window.addEventListener('resize', this.mobileResizer);
       this.setState((prev) => {
         return {
           lazy: 'smooth-loaded'
         }
       })
     }
+    mobileResizer(e){
+
+      if(window.screen.width >= 614 && document.defaultView.innerWidth >= 614){
+        document.getElementById('nav-linkz').classList.remove('hidden');
+      }else{
+        document.getElementById('nav-linkz').classList.add('hidden');
+      }
+      var main = document.getElementById('main-page-structure');
+
+
+
+        if(document.defaultView.innerWidth <= 767 || window.screen.width <= 767){
+          if(document.getElementById('contact-section')){
+            var contact = document.getElementById('contact-section');
+            contact.style.display = "flex";
+            try{
+              console.log(this.props.chunkname)
+              if(!this.props.chunkname){
+                if(this.props.chunkname === "projects"){
+                  main.classList.add('h-full')
+
+                }else if(this.props.chunkname === "experience"){
+                  main.classList.remove('h-full');
+
+                }else{
+                  main.classList.remove('h-full');
+                }
+              }
+            }catch(e){
+              console.log(e)
+            }
+          }
+        }else if(document.getElementById('contact-section')){
+          var contact = document.getElementById('contact-section');
+          contact.style.display = 'inline-block';
+        }
+
+    }
     componentWillMount(){
+
       if(this.props.url){
         //Syntax supporter by babels '@babel/plugin-syntax-dynamic-import'
         import(/*webpackChunkName: "[request]"*/ /* webpackMode: "lazy" */ `${this.props.url}`).then(({Part}) => {
@@ -55,99 +92,97 @@
       }
     }
     render(){
-      console.log(this.props)
       return(
-          <section id="renderhere" className="main-page-structure border-box">
-              <section id="main-box" className={`align-top border-box inline-block p-3` }>
-                  {
-                    this.state.comp.map((Element, i) => {
-                    return <div className={`z-0  ${this.state.lazy}`} key={i}>{Element}</div>;
-                  })
-                 }
-              </section>
-              <aside className={`${this.props.chunkname === 'aboutme' && this.state.lazy} w-1/2 border-box m-0 inline-block p-3`} id="aside-contact">
-                {
-                this.state.aside.map((Aside, i ) => {
-                  console.log('rerendered')
-                  return <div key={`asidecontact${i}`}>{Aside}</div>
-                })
-                }
-            </aside>
-          </section>
+        <section id="main-box" className={`border-box inline-block ${this.state.lazy}` }>
+          {
+            this.state.comp.map((Element, i) => {
+              return <div key={i}>{Element}</div>
+            })
+          }
+        </section>
       )
   }
 }
-/*
-<aside className={`${this.state.lazy} w-1/2 border-box m-0 inline-block p-3`} id="aside-contact">
 
-</aside>
-*/
-// {
-//     this.state.aside.map((Aside, i ) => {
-//       console.log('rerendered')
-//       return <div key={`asidecontact${i}`}>{Aside}</div>
-//     })
-// }
 /*
 ***********************************************************************************************
 *****************************NAV-BAR MED TILLHÖRANDE KOMPONENTER*******************************
 ***********************************************************************************************
 */
 
-function ZmallMenu(){
-
-
-  return(
-    <figure className="hamburger-menu mb-3 mt-3" >
-        <NavLinkz cls={'responsive-nav-text text-shadow hamburgers-relatives'} cls2={'p-3'} />
-    </figure>
-  )
-}
-
-  function NavLinkz(props){
-  return(
-    <>
-    <div className={props.cls}>
-      <div className={`nav-link-buttons top-left ${props.cls3 || ''}`}>
-        <NavLink className={`mt-20 border-box a-link ${props.cls2 || ''}`} to="/">About Me</NavLink>
-      </div>
-      <div className={`nav-link-buttons top-right ${props.cls3 || ''}`}>
-        <NavLink className={`nav-link-buttons mt-20 border-box a-link ${props.cls2 || ''}`} to="/experience">Experience</NavLink>
-      </div>
-      <div className={`nav-link-buttons bot-left ${props.cls3 || ''}`}>
-        <NavLink className={`mt-20 border-box a-link ${props.cls2 || ''}`} to="/education">Education</NavLink>
-      </div>
-      <div className={`nav-link-buttons bot-right ${props.cls3 || ''}`}>
-        <NavLink className={`mt-20 border-box a-link ${props.cls2 || ''}`} to="/projects">Projects</NavLink>
-      </div>
-    </div>
-    </>
-  )
-}
 class Nav extends React.Component{
   constructor(props){
     super(props)
+    this.contactScroll = this.contactScroll.bind(this);
+    this.showNav = this.showNav.bind(this);
+  }
+  showNav(e){
+      var nav = document.getElementById('nav-linkz');
+      e.stopPropagation();
+      if(nav.classList.contains('hidden')){
+        nav.classList.remove('hidden');
+      }else{
+        nav.classList.add('hidden');
+      }
 
   }
-
+  contactScroll(e){
+    var image = document.getElementById('profile-pic');
+    image.classList.remove('profile-flash');
+    if(document.getElementById('contact-section') && e.target.id === 'contact'){
+      var id = document.getElementById('contact-section').getBoundingClientRect();
+      console.log(id)
+      if(id.y > 297){
+        window.scrollTo({
+          top: document.body.scrollHeight,
+          behavior: 'smooth'
+        });
+      }else{
+        image.classList.add('profile-flash');
+      }
+    }else{
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  }
   render(){
-
+    //z-10 fixed
     return (
       <ColorConsumer>
         {({ tsize,  updateTextSize }) => (
           <>
-            <ZmallMenu />
-              <nav className="nav-bar z-10 fixed responsive-nav-text responsive-nav border-box text-shadow">
-                  <section className="wrap border-box">
-                      <article className="">
-                      <NavLinkz className="nav-figure" />
-                      </article>
-                  </section>
-                  <button id="txtSize" className="hint--right" aria-label="Change text size" onClick={(e) => {
-                      updateTextSize()
-                    }}>
-                  </button>
-              </nav>
+            <nav className="nav-bar border-box text-shadow">
+              <section id="nav-linkz" className="border-box nav-linkz smooth-loaded nav-text hidden">
+                <div className={`nav-link-box`}>
+                  <NavLink className={`nav-link-buttons border-box a-link`} to="/" onClick={(e) => {this.contactScroll(e)}}>About Me</NavLink>
+                </div>
+                <div className={`nav-link-box`}>
+                  <NavLink className={`nav-link-buttons border-box a-link`} to="/projects" onClick={(e) => {this.contactScroll(e)}}>Projects</NavLink>
+                </div>
+                <div className={`nav-link-box`}>
+                  <button id="contact" className={`nav-link-buttons border-box a-link text-shadow`} onClick={(e) => {this.contactScroll(e)}}>Contact</button>
+                </div>
+                <div className={`nav-link-box-adjustment nav-link-box`}>
+                  <NavLink className={`nav-link-buttons border-box a-link`} to="/education" onClick={(e) => {this.contactScroll(e)}}>Education</NavLink>
+                </div>
+                <div className={`nav-link-box-adjustment nav-link-box`}>
+                  <NavLink className={`nav-link-buttons border-box a-link`} to="/experience" onClick={(e) => {this.contactScroll(e)}}>Experience</NavLink>
+                </div>
+                <article className="small-icons wrap border-box p-3">
+                    <div className="flex flex-1 flex-auto">
+                      <button id="txtSize" className="hint--right" aria-label="Change text size" onClick={(e) => {
+                        updateTextSize()
+                      }}>
+                      </button>
+                  </div>
+                </article>
+              </section>
+              <section className="bg-ham" onClick={(e) => {this.showNav(e)}}>
+                &nbsp;
+              </section>
+            </nav>
           </>
         )}
       </ColorConsumer>
@@ -172,8 +207,7 @@ class Nav extends React.Component{
   <LoadAsync chunkname="main" whatClass="main-page-structure border-box" url="./components/main.js" />
 
 */
-import { Part } from './components/contact.js'
-
+//typewriter-text
 function Contact(props){
   //   { <LoadAsync chunkname="contact" whatClass={props.cls ? props.cls : 'border-box'} url="./components/contact.js" />}
   return (
@@ -206,7 +240,7 @@ function Education(){
 function Projects(){
   return (
     <>
-      <LoadAsync chunkname="Projects" url="./components/projects.js" />
+      <LoadAsync chunkname="projects" url="./components/projects.js" />
     </>
   )
 }
@@ -215,11 +249,25 @@ function Projects(){
 ***************************************Footer**************************************************
 ***********************************************************************************************
 */
+function Footer(){
+  return(
+    <footer className="footer">
+        <div id="footer-content">
+          &nbsp;
+        </div>
+    </footer>
+  )
+}
+/*
+***********************************************************************************************
+***************************************Contact-info********************************************
+***********************************************************************************************
+*/
 function Aside(){
   return(
-    <aside className={`smooth-loaded w-1/2 border-box m-0 inline-block p-3`} id="aside-contact">
-      <Contact />
-    </aside>
+    <>
+      <LoadAsync chunkname="Contacts" url="./components/contact.js" clsname="align-top inline-block" />
+    </>
   )
 }
 
@@ -229,19 +277,22 @@ function Aside(){
 ***********************************************************************************************
 */
 
-const routes = (
+const Routes = (
   <ColorProvider>
     <BrowserRouter>
-        <Nav />
-        <Switch>
-          <Route path="/" exact={true} component={AboutMe} />
-          <Route exact path="/experience" component={Knowledge}/>
-          <Route exact path="/education" component={Education}/>
-          <Route exact path="/projects" component={Projects}/>
-          <Route render={() => {return <LoadAsync chunkname="error" url={'./components/404.js'} />}} />
-        </Switch>
+      <Nav />
+        <section id="main-page-structure" className="main-page-structure pb-1333 border-box align-top">
+          <Switch>
+            <Route path="/" exact={true} component={AboutMe} />
+            <Route exact path="/experience" component={Knowledge}/>
+            <Route exact path="/education" component={Education}/>
+            <Route exact path="/projects" component={Projects}/>
+            <Route render={() => {return <LoadAsync chunkname="error" url={'./components/404.js'} />}} />
+          </Switch>
+        </section>
+      <Contact />
     </BrowserRouter>
   </ColorProvider>
 )
 
-ReactDOM.render(routes, document.getElementById('root'));
+ReactDOM.render(Routes, document.getElementById('root'));

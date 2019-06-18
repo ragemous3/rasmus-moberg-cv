@@ -12,3 +12,4 @@ module.exports = function({ addUtilities, e, theme, variants }) {
 
   addUtilities(utilities, gradientVariants)
 }
+//linear-gradient(to top, #e2a6d1 0%, #7fa6e6 100%);

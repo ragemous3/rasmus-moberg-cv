@@ -20,6 +20,7 @@ class Accomplishments extends React.Component{
         'CSS3',
         'HTML5',
         'Twig',
+        'bankID',
     ],
     text: [
       '⚡⚡⚡⚡⚡',
@@ -35,21 +36,23 @@ class Accomplishments extends React.Component{
       '⚡⚡⚡',
       '⚡⚡⚡⚡⚡',
       '⚡⚡⚡',
+      '⚡⚡⚡',
     ],
     tooltips: [
-      'hint--left',
       'hint--bottom',
-      'hint--right',
-      'hint--left',
-      'hint--top',
-      'hint--right',
-      'hint--left',
       'hint--bottom',
-      'hint--right',
-      'hint--left',
-      'hint--top',
-      'hint--right',
-      'hint--left',
+      'hint--bottom',
+      'hint--bottom',
+      'hint--bottom',
+      'hint--bottom',
+      'hint--bottom',
+      'hint--bottom',
+      'hint--bottom',
+      'hint--bottom',
+      'hint--bottom',
+      'hint--bottom',
+      'hint--bottom',
+      'hint--bottom',
     ],
   }
     this.clicker = this.clicker.bind(this)
@@ -69,7 +72,7 @@ class Accomplishments extends React.Component{
           <span>Hoovra lådorna för att se min färdighet</span>
           <section className="flex flex-1 flex-wrap content-around mt-3 responsive-text">
             {
-              Array.from({length: 13}, (_, i) =>
+              Array.from({length: this.state.languages.length}, (_, i) =>
                   <div key={`box${i}`}
                      className={`${this.state.tooltips[i]} language-box text-shadow`}
                      aria-label={this.state.text[i]}
@@ -89,12 +92,12 @@ class Accomplishments extends React.Component{
         </article>
         <article className="mt-3">
           <h2>Relevant work experience</h2>
-          <section className="w-5/6">
-            <div className="w-2/4 p-2 text-shadow">
+          <section className="">
+            <div className=" p-2 text-shadow">
                 <h3 className="h3-override-ml-nil">Freelance company - 2019</h3>
                 <p className={` ${tsize}`}>Founded 2019</p>
             </div>
-            <div className="w-2/4 p-2">
+            <div className=" p-2">
               <h3 className="h3-override-ml-nil">Konsult hos Regnet AB - 2019</h3>
               <p className={` ${tsize}`}>
                 I am consulted for programmatic bugs, hands on work with
@@ -107,15 +110,15 @@ class Accomplishments extends React.Component{
         </article>
         <article className="mt-3">
           <h2>Other work experience</h2>
-          <section className="w-5/6">
-            <div className="w-2/4 p-2">
+          <section className="">
+            <div className=" p-2">
               <h3 className="h3-override-ml-nil">Personal assistent - 2018</h3>
                 <p className={`${tsize}`}>
                 As a personal assistent I learned
                 the value of building strong relationships
               </p>
             </div>
-            <div className="w-2/4 p-2 text-shadow">
+            <div className=" p-2 text-shadow">
               <h3 className="h3-override-ml-nil">Preschool teacher - 2017-2018</h3>
                 <p className={`${tsize}`}>
                 The work as a preschool teacher has given me
@@ -123,7 +126,7 @@ class Accomplishments extends React.Component{
                 to lead and plan under pressure.
               </p>
             </div>
-            <div className="w-2/4 p-2 text-shadow">
+            <div className=" p-2 text-shadow">
               <h3 className={`h3-override-ml-nil`}>Caretaker - 2015 och 2016</h3>
               <p className={` ${tsize}`}>
                 As a caretaker, I learned to

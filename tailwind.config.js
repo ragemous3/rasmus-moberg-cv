@@ -12,10 +12,10 @@ module.exports = {
       '0': '0px',
       xs: '225px',
       s: '340px',
-      iconbreak: '450px',
-      iconnobreak: '451px',
       mstart: '479px',
-      sm: '640px',
+      sm: '614px',
+      iconbreak: '701px',
+      iconnobreak: '702px',
       md: '768px',
       lg: '1024px',
       xl: '1280px',
@@ -146,9 +146,13 @@ module.exports = {
       '4': '1rem',
       '5': '1.25rem',
       '6': '1.5rem',
+      '20pex': '20px',
+      '80pex': '80px',
       '8': '2rem',
       '10': '2.5rem',
       '12': '3rem',
+      '14': '3.5rem',
+      '1333': '13.33rem',
       '16': '4rem',
       '20': '5rem',
       '24': '6rem',
@@ -157,7 +161,7 @@ module.exports = {
       '48': '12rem',
       '56': '14rem',
       '64': '16rem',
-      '100pr': '100%'
+      'full': '100%'
     },
     backgroundColor: theme => theme('colors'),
     backgroundPosition: {
@@ -226,6 +230,7 @@ module.exports = {
     },
     flexGrow: {
       '0': '0',
+      '2': '2',
       default: '1',
     },
     flexShrink: {
@@ -291,11 +296,16 @@ module.exports = {
     height: theme => ({
       auto: 'auto',
       ...theme('spacing'),
+      '50': '50px',
+      '1300': '1300px',
+      '1333': '13.33rem',
       full: '100%',
       screen: '100vh',
     }),
     inset: {
       '0': '0',
+      '5': '5px',
+      '10': '10px',
       '20pex': '20px',
       '60pex': '60px',
       '15': '15%',
@@ -329,6 +339,9 @@ module.exports = {
     margin: (theme, { negative }) => ({
       auto: 'auto',
       '0':'0%',
+      'full': '100%',
+      '1/4':'25%',
+      '1/2':'50%',
       '600': '600px',
       '250': '250px',
       '100pr':'100%',
@@ -343,6 +356,7 @@ module.exports = {
     },
     maxWidth: {
       '100': '100px',
+      '100pr': '100%',
       '150': '150px',
       '200': '200px',
       '250': '250px',
@@ -360,6 +374,7 @@ module.exports = {
     },
     minHeight: {
       '0': '0',
+      '50': '50px',
       full: '100%',
       screen: '100vh',
     },
@@ -367,8 +382,10 @@ module.exports = {
       '0': '0',
       '1': '20%',
       '25': '25px',
+      '50': '50px',
       '200':'200px',
       'full': '100%',
+      'screen': '100vh'
     },
     objectPosition: {
       bottom: 'bottom',
@@ -446,6 +463,7 @@ module.exports = {
       'nav-md': '300px',
       'nav-lg': '400px',
       'nav-xl': '500px',
+      'image-w': '177.25px',
       full: '100%',
       screen: '100vw',
     }),
