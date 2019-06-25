@@ -25,36 +25,48 @@
       this.middle = [];
       this.aside = [];
       this.mobileResizer = this.mobileResizer.bind(this);
+      this.calculateFooter = this.calculateFooter.bind(this);
+      this.calculateNavHeight = this.calculateNavHeight.bind(this);
+      this.content = React.createRef();
     }
     componentDidMount(){
       window.addEventListener('resize', this.mobileResizer);
+
+
       this.setState((prev) => {
         return {
           lazy: 'smooth-loaded'
         }
       })
+
+
     }
     mobileResizer(e){
+      //  window.screen.width  //true width of device
 
-      if(window.screen.width >= 614 && document.defaultView.innerWidth >= 614){
-        document.getElementById('nav-linkz').classList.remove('hidden');
-      }else{
-        document.getElementById('nav-linkz').classList.add('hidden');
-      }
-      var main = document.getElementById('main-page-structure');
-
-
-
+      var innerwidth = document.body.clientWidth;
+        if(innerwidth >= 614){
+          let navbar = document.getElementById('nav-linkz')
+          navbar.classList.remove('hidden');
+        }else if(innerwidth <= 613 || window.screen.width <= 613){ //resize
+          let navbar = document.getElementById('nav-linkz')
+          navbar.classList.add('hidden');
+          navbar.style.height = '';
+        }
         if(document.defaultView.innerWidth <= 767 || window.screen.width <= 767){
+
+          //kalkulera navbaren
+          this.calculateNavHeight();
+          //kalkulera footer
+          this.calculateFooter();
+
           if(document.getElementById('contact-section')){
             var contact = document.getElementById('contact-section');
             contact.style.display = "flex";
             try{
-              console.log(this.props.chunkname)
               if(!this.props.chunkname){
                 if(this.props.chunkname === "projects"){
                   main.classList.add('h-full')
-
                 }else if(this.props.chunkname === "experience"){
                   main.classList.remove('h-full');
 
@@ -69,11 +81,45 @@
         }else if(document.getElementById('contact-section')){
           var contact = document.getElementById('contact-section');
           contact.style.display = 'inline-block';
+
+            if(document.getElementById('navbar')){
+              this.calculateNavHeight();
+            }
         }
 
     }
-    componentWillMount(){
+    componentDidUpdate(){
+      this.calculateFooter();
+    }
+    calculateNavHeight(){
+      if(document.defaultView.innerWidth <= 767 || window.screen.width <= 767){
+        var navbar = document.getElementById('nav-linkz');
+        navbar.classList.remove('flex', 'flex-col', 'flex-1', 'flex-wrap', 'items-start', 'justify-between', 'p-6', 'pt-0');
+      }else{
+        var navbar = document.getElementById('nav-linkz');
+        var contactSection = document.getElementById('contact-section').clientHeight;
+        navbar.style.height = contactSection + 'px';
+        navbar.classList.add('flex', 'flex-col', 'flex-1', 'flex-wrap', 'items-start', 'justify-between', 'p-6', 'pt-0');
+      }
+    }
+    calculateFooter(){
+      if(this.content.current){
+        var contact = document.getElementById('contact-section').style;
+        if(document.defaultView.innerWidth <= 767 || window.screen.width <= 767){
+          var main = document.getElementById('main-page-structure');
+          main.style.height = this.content.current.clientHeight + 'px';
 
+          // this.content.current.clientHeight + 'px';
+          // contact.top = this.content.current.clientHeight + 'px';
+        }else{
+          contact.top = "";
+          if(document.getElementById('navbar')){
+            this.calculateNavHeight();
+          }
+        }
+    }
+    }
+    componentWillMount(){
       if(this.props.url){
         //Syntax supporter by babels '@babel/plugin-syntax-dynamic-import'
         import(/*webpackChunkName: "[request]"*/ /* webpackMode: "lazy" */ `${this.props.url}`).then(({Part}) => {
@@ -93,11 +139,12 @@
     }
     render(){
       return(
-        <section id="main-box" className={`border-box inline-block ${this.state.lazy}` }>
+        <section id="main-box" className={` responsive-text border-box inline-block ${this.state.lazy}` }>
           {
             this.state.comp.map((Element, i) => {
-              return <div key={i}>{Element}</div>
+              return <article ref={this.content}   className="main-text-box text-shadow pb-1333 " key={this.props.chunkname}>{Element}</article>
             })
+
           }
         </section>
       )
@@ -130,15 +177,20 @@ class Nav extends React.Component{
     var image = document.getElementById('profile-pic');
     image.classList.remove('profile-flash');
     if(document.getElementById('contact-section') && e.target.id === 'contact'){
-      var id = document.getElementById('contact-section').getBoundingClientRect();
-      console.log(id)
-      if(id.y > 297){
+      var id = document.getElementById('contact-section');
+
+      if(id.getBoundingClientRect().y > 297){
         window.scrollTo({
           top: document.body.scrollHeight,
           behavior: 'smooth'
         });
+
+      }else if(id.getBoundingClientRect().top > 297){
+        var main = Array(document.getElementById('main-page-structure'));
+        id.scrollIntoView();
       }else{
         image.classList.add('profile-flash');
+
       }
     }else{
       window.scrollTo({
@@ -147,37 +199,37 @@ class Nav extends React.Component{
       });
     }
   }
+  componentDidMount(){
+    if(document.body.clientWidth >= 614){
+        document.getElementById('nav-linkz').classList.remove('hidden');
+    }else{
+        document.getElementById('nav-linkz').classList.add('hidden');
+    }
+
+  }
   render(){
     //z-10 fixed
     return (
       <ColorConsumer>
         {({ tsize,  updateTextSize }) => (
           <>
-            <nav className="nav-bar border-box text-shadow">
-              <section id="nav-linkz" className="border-box nav-linkz smooth-loaded nav-text hidden">
-                <div className={`nav-link-box`}>
+            <nav id="navbar" className="nav-bar border-box">
+              <section id="nav-linkz" className="border-box nav-linkz smooth-loaded nav-text ">
+                <div className={`nav-link-box-first `}>
                   <NavLink className={`nav-link-buttons border-box a-link`} to="/" onClick={(e) => {this.contactScroll(e)}}>About Me</NavLink>
                 </div>
-                <div className={`nav-link-box`}>
+                <div className={`nav-link-box `}>
                   <NavLink className={`nav-link-buttons border-box a-link`} to="/projects" onClick={(e) => {this.contactScroll(e)}}>Projects</NavLink>
                 </div>
-                <div className={`nav-link-box`}>
-                  <button id="contact" className={`nav-link-buttons border-box a-link text-shadow`} onClick={(e) => {this.contactScroll(e)}}>Contact</button>
+                <div className={`nav-link-box `}>
+                  <button id="contact" className={`nav-link-buttons border-box a-link `} onClick={(e) => {this.contactScroll(e)}}>Contact</button>
                 </div>
-                <div className={`nav-link-box-adjustment nav-link-box`}>
+                <div className={`nav-link-box `}>
                   <NavLink className={`nav-link-buttons border-box a-link`} to="/education" onClick={(e) => {this.contactScroll(e)}}>Education</NavLink>
                 </div>
-                <div className={`nav-link-box-adjustment nav-link-box`}>
+                <div className={`nav-link-box `}>
                   <NavLink className={`nav-link-buttons border-box a-link`} to="/experience" onClick={(e) => {this.contactScroll(e)}}>Experience</NavLink>
                 </div>
-                <article className="small-icons wrap border-box p-3">
-                    <div className="flex flex-1 flex-auto">
-                      <button id="txtSize" className="hint--right" aria-label="Change text size" onClick={(e) => {
-                        updateTextSize()
-                      }}>
-                      </button>
-                  </div>
-                </article>
               </section>
               <section className="bg-ham" onClick={(e) => {this.showNav(e)}}>
                 &nbsp;
@@ -194,27 +246,19 @@ class Nav extends React.Component{
 ***********************************************************************************************
 ************************************"MELLANKOMPONENTER"****************************************
 ***********************************************************************************************
-
-  I den här sektionen så görs större css-förändringar.
-  "whatClass"-attributen bestämmer vad utseendet på wrappern ska ha för varje
-  enskild komponent förutom nav-bar ska ha för klass och därmed bestämmer den utseende av sidan.
-
-  "chunkname" är vad komponenten ska heta när den laddas in i browsern.
-  Hjälpsamt vid debugging för att veta att man får rätt komponent till
-  rätt URL.
-
-  Alla komponenter här syftar egentligen bara till att rendera detta:
-  <LoadAsync chunkname="main" whatClass="main-page-structure border-box" url="./components/main.js" />
-
 */
-//typewriter-text
+
 function Contact(props){
-  //   { <LoadAsync chunkname="contact" whatClass={props.cls ? props.cls : 'border-box'} url="./components/contact.js" />}
-  return (
-    <>
-     <Part />
-    </>
-  )
+    //Syntax supporter by babels '@babel/plugin-syntax-dynamic-import'
+  import(/*webpackChunkName: "[request]"*/ /* webpackMode: "lazy" */ './components/contact.js').then(({Part}) => {
+      return (
+        <>
+        <Part />
+        </>
+      )
+        }).catch((e) => {
+            console.log(`Error With dynamic import! Error: ${e}`);
+      })
 }
 function AboutMe(props){
   return (
@@ -244,55 +288,52 @@ function Projects(){
     </>
   )
 }
+
 /*
 ***********************************************************************************************
-***************************************Footer**************************************************
+*****************************Routing with react-router******************************************
 ***********************************************************************************************
 */
-function Footer(){
-  return(
-    <footer className="footer">
-        <div id="footer-content">
-          &nbsp;
-        </div>
-    </footer>
-  )
+class Routes extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      contact: []
+    }
+  }
+  componentWillMount(){
+    import(/*webpackChunkName: "[request]"*/ /* webpackMode: "lazy" */ './components/contact.js').then(({Part}) => {
+      this.setState((prev) => {
+        return{
+          contact: [<Part />]
+        }
+      })
+          }).catch((e) => {
+              console.log(`Error With dynamic import! Error: ${e}`);
+        })
+  }
+  render(){
+    return(
+      <ColorProvider>
+        <BrowserRouter>
+          <Nav />
+            <section id="main-page-structure" className="p-6 pt-0 pl-0 main-page-structure border-box align-top">
+              <Switch>
+                <Route path="/" exact={true} component={AboutMe} />
+                <Route exact path="/experience" component={Knowledge}/>
+                <Route exact path="/education" component={Education}/>
+                <Route exact path="/projects" component={Projects}/>
+                <Route render={() => {return <LoadAsync chunkname="error" url={'./components/404.js'} />}} />
+              </Switch>
+            </section>
+            {
+              this.state.contact.map((Element, i) => {
+                  return (<div className="inline-block align-top main-card-wrapper" key={`Contact${i}`}>{Element}</div>);
+              })
+            }
+        </BrowserRouter>
+      </ColorProvider>
+    )
+  }
 }
-/*
-***********************************************************************************************
-***************************************Contact-info********************************************
-***********************************************************************************************
-*/
-function Aside(){
-  return(
-    <>
-      <LoadAsync chunkname="Contacts" url="./components/contact.js" clsname="align-top inline-block" />
-    </>
-  )
-}
-
-/*
-***********************************************************************************************
-*****************************Routing med react-router******************************************
-***********************************************************************************************
-*/
-
-const Routes = (
-  <ColorProvider>
-    <BrowserRouter>
-      <Nav />
-        <section id="main-page-structure" className="main-page-structure pb-1333 border-box align-top">
-          <Switch>
-            <Route path="/" exact={true} component={AboutMe} />
-            <Route exact path="/experience" component={Knowledge}/>
-            <Route exact path="/education" component={Education}/>
-            <Route exact path="/projects" component={Projects}/>
-            <Route render={() => {return <LoadAsync chunkname="error" url={'./components/404.js'} />}} />
-          </Switch>
-        </section>
-      <Contact />
-    </BrowserRouter>
-  </ColorProvider>
-)
-
-ReactDOM.render(Routes, document.getElementById('root'));
+ReactDOM.render(<Routes />, document.getElementById('root'));

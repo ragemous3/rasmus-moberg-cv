@@ -20,7 +20,7 @@ class Accomplishments extends React.Component{
         'CSS3',
         'HTML5',
         'Twig',
-        'bankID',
+        'bankID'
     ],
     text: [
       '⚡⚡⚡⚡⚡',
@@ -66,11 +66,10 @@ class Accomplishments extends React.Component{
     return(
       <ColorConsumer>
         {({ tsize }) => (
-       <section className="text-shadow">
+        <>
         <article>
           <h2>Languages, frameworks, environments and libraries</h2>
-          <span>Hoovra lådorna för att se min färdighet</span>
-          <section className="flex flex-1 flex-wrap content-around mt-3 responsive-text">
+          <section className="flex flex-1 flex-wrap content-around mt-3">
             {
               Array.from({length: this.state.languages.length}, (_, i) =>
                   <div key={`box${i}`}
@@ -92,12 +91,11 @@ class Accomplishments extends React.Component{
         </article>
         <article className="mt-3">
           <h2>Relevant work experience</h2>
-          <section className="">
-            <div className=" p-2 text-shadow">
+            <div className="  text-shadow">
                 <h3 className="h3-override-ml-nil">Freelance company - 2019</h3>
                 <p className={` ${tsize}`}>Founded 2019</p>
             </div>
-            <div className=" p-2">
+            <div className=" ">
               <h3 className="h3-override-ml-nil">Konsult hos Regnet AB - 2019</h3>
               <p className={` ${tsize}`}>
                 I am consulted for programmatic bugs, hands on work with
@@ -106,19 +104,17 @@ class Accomplishments extends React.Component{
                 applicable to javaScript and webpack.
               </p>
             </div>
-          </section>
         </article>
         <article className="mt-3">
           <h2>Other work experience</h2>
-          <section className="">
-            <div className=" p-2">
+            <div className=" ">
               <h3 className="h3-override-ml-nil">Personal assistent - 2018</h3>
                 <p className={`${tsize}`}>
                 As a personal assistent I learned
                 the value of building strong relationships
               </p>
             </div>
-            <div className=" p-2 text-shadow">
+            <div className="  text-shadow">
               <h3 className="h3-override-ml-nil">Preschool teacher - 2017-2018</h3>
                 <p className={`${tsize}`}>
                 The work as a preschool teacher has given me
@@ -126,7 +122,7 @@ class Accomplishments extends React.Component{
                 to lead and plan under pressure.
               </p>
             </div>
-            <div className=" p-2 text-shadow">
+            <div className="  text-shadow">
               <h3 className={`h3-override-ml-nil`}>Caretaker - 2015 och 2016</h3>
               <p className={` ${tsize}`}>
                 As a caretaker, I learned to
@@ -134,9 +130,8 @@ class Accomplishments extends React.Component{
                 housing and the execution of such work.
               </p>
             </div>
-          </section>
         </article>
-       </section>
+       </>
      )}
    </ ColorConsumer>
     )

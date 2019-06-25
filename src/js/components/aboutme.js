@@ -18,24 +18,23 @@ class AboutText extends React.Component{
     return(
       <ColorConsumer>
         {({ tsize }) => (
-          <article className="border-box text-shadow ">
+          <>
             <div className="responsive-text">
               <h2 className="mb-4">About me</h2>
                 <article>
                     <p className={`leading-snug text-shadow ${ tsize }`}>
-                        Hello! My name is Rasmus Moberg. I started studying programming
-                        last year at 25 years old still figuring out what I wanted todo with
-                        my life. After a bit of research i found programming goes
-                        hand in hand with my personality. Basically I really enjoy the dopamine
-                        rushes i get from solving problems, finding smart solutions and learning new things!
-                        <br></br>
-                        <br></br>
-                        I have so far gotten highest grades (VG in swedish) in every test i've done in
-                        programming so do not hesitate to contact me.
+                      Hi!
+                      My name is Rasmus Moberg and got into programming last year and has pretty much coded since.
+                      Programming goes pretty much hand in hand with my personality and whatever language you want me to learn i will learn it to complete the task at hand as i've done before. Im most skilled at javaScript but I will take a leap into more strict programming given the chance.
+                      <br>
+                      </br>
+                      <br>
+                      </br>
+                      This page was created with react, some vanilla js, node(with express) as a server, slimified with webpack and styled with tailwind.js. It works and mobile and can be checket out <a href="http://www.responsinator.com" className="underline">here</a>. You can check out the code for this website <a href="https://github.com/ragemous3/rasmus-moberg-cv" className="underline"> here</a>.
                     </p>
                 </article>
               </div>
-          </article>
+          </>
         )}
       </ColorConsumer>
 

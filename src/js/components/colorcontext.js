@@ -23,17 +23,17 @@
       super(props)
         this.state = {
           color: 'greyscale',
-          tsize: 'responsive-lbox-text',
+          tsize: 'responsive-text',
           updateTextSize: this.updateTextSize.bind(this),
           onHover: this.onHover.bind(this)
         }
     }
     updateTextSize() {
         this.setState((prev) => {
-            if(this.state.tsize === 'responsive-lbox-text'){
+            if(this.state.tsize === 'text-2xl'){
               return {tsize: 'responsive-text'};
             }else{
-              return {tsize: 'responsive-lbox-text'};
+              return {tsize: 'text-2xl'};
             }
         });
     }

@@ -4,22 +4,37 @@
 @tailwind components;
 
 @import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap');
-/*
-overflow-X:hidden;
-overflow-Y: auto;
-*/
+
     body, html, main{
       @apply min-h-full min-w-full;
       font-family: 'Exo 2', sans-serif;
       @apply h-screen max-w-full;
-
       scroll-behavior: smooth;
+      -ms-overflow-style: none;
+      overflow: -moz-scrollbars-none;
+      /* Prevent native touch events on Windows */
+      -ms-touch-action: none;
+      /* Prevent the callout on tap-hold and text selection */
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      /* Prevent text resize on orientation change, useful for web-apps */
+      -webkit-text-size-adjust: none;
+      -moz-text-size-adjust: none;
+      -ms-text-size-adjust: none;
+      -o-text-size-adjust: none;
+      text-size-adjust: none;
+    }
+    * {
+      scrollbar-width: none;
     }
     main{
       @apply p-6 min-w-full;
     }
     ::-webkit-scrollbar {
-      display: none;
+      display:none;
     }
 
 /*
@@ -62,15 +77,11 @@ overflow-Y: auto;
     body{
       @apply bg-fixed
     }
-    h2{
-      @apply leading-tight font-bold text-xl
-    }
+
     .h3-override-ml-nil{
       @apply ml-0;
     }
-    h3{
-      @apply leading-tight font-semibold text-lg m-3;
-    }
+
     p {
       @apply leading-tight text-lg;
     }
@@ -78,11 +89,10 @@ overflow-Y: auto;
 *******************************main-profile*****************************
 */
 .main-profile{
-  @apply pt-0 ;
+  @apply pt-0;
   max-width:270px;
   width:270px;
 }
-
 
 .contact-profile-text{
   font-weight: 700;
@@ -142,16 +152,14 @@ overflow-Y: auto;
 /*
 *******************************main-page-structure*****************************
 */
-.main-page-structure{
-  @apply overflow-visible;
-  text-overflow:auto;
-}
+
 #main-box{
   @apply h-full
 }
 @screen 0{
   .main-page-structure{
-    @apply block w-full;
+    @apply block w-full h-full;
+    /*  overflow-scroll */
   }
 
 }
@@ -230,27 +238,19 @@ overflow-Y: auto;
 /*
 *******************************Language-box*****************************
 */
-.language-box-carrier{
-  @apply w-600;
-}
+
 .language-box{
   @apply border border-solid border-greenlight rounded-lg border-1 relative bg-greenlight text-white w-1/4 p-2 text-center m-1;
   @apply max-w-xl min-w-25;
-  word-wrap: break-word;
 }
 .hidden-info-box{
   display:none;
 }
 
-  /* .responsive-lbox-text {
-    @apply text-lg;
-  } */
 /*
 *******************************GENERAL*****************************
 */
-  .contact-info{
-    @apply text-xs;
-  }
+
     @responsive {
       .text-shadow {
         text-shadow: 0 2px 4px rgba(0,0,0,0.10);
@@ -268,44 +268,7 @@ overflow-Y: auto;
         text-shadow: none;
       }
  }
-/*
-************************Responsive TEXT-SIZE**************************
-*/
-  @screen xs {
-    .responsive-text {
-      @apply text-s;
-    }
-  }
-  @screen s {
-    .responsive-text {
-      @apply text-s;
-    }
-  }
-  @screen mstart {
-    .responsive-text {
-      @apply text-sm;
-    }
-  }
-  @screen sm {
-    .responsive-text {
-      @apply text-base;
-    }
-  }
-  @screen md {
-    .responsive-text {
-      @apply text-lg;
-    }
-  }
-  @screen lg {
-    .responsive-text {
-      @apply text-xl;
-    }
-  }
-  @screen xl {
-    .responsive-text {
-      @apply text-2xl;
-    }
-  }
+
   /* RESPONSIVE TEXT PÅ NAVEN */
 
 
@@ -373,6 +336,7 @@ overflow-Y: auto;
 }
   .a-link {
       @apply no-underline text-white;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   }
   .a-link:after{
     content: "";
@@ -380,8 +344,8 @@ overflow-Y: auto;
     background-size: 100% 100%;
     display: none;
 
-    height: 28px;
-    width:28px;
+    height: 24px;
+    width:24px;
 
     position:relative;
     top:5px;
@@ -406,24 +370,61 @@ overflow-Y: auto;
     color: ;
   }
 /*
-*********************************Nav-bar GENERAL(with tailwind)************************************
+*********************************Nav-bar and Contact Screen************************************
 */
 
 @screen 0{
-  .nav-bar{
-    @apply text-2xl w-full block fixed bottom-0 left-0 z-10 bg-grad-bgcol;
+
+  /*
+  *****************************CONTACT PRofile********************************
+  */
+  .main-card-wrapper{
+    @apply ml-0;
+  }
+   .main-card{
+     @apply w-full relative ml-0 align-bottom;
+   }
+   .inner-card{
+     @apply h-1333 mb-20 flex;
+   }
+   .main-card-down{
+     @apply absolute left-0;
+     background-image: url('./../img/downdown.png');
+     background-size: 100% 100%;
+     width: 30px;
+     height: 30px;
+     background-repeat: no-repeat;
+   }
+   .main-image{
+     @apply static w-image-w flex-shrink-0;
+   }
+   .main-card-text{
+     @apply mt-4 mt-0 ml-6 static flex-grow-2;
+   }
+  .contact-info{
+    @apply text-xs;
+  }
+  .main-text-box{
+    @apply w-full;
   }
   .bg-ham{
-    @apply fixed right-10 bottom-10 block rounded;
+    @apply fixed right-10 bottom-10 block rounded-full;
     background-image: url('./../img/hamburger.png');
-    background-color: rebeccapurple;
+    background-color: #d1ccd7;
     background-size: 100% 100%;
     width: 60px;
     height: 60px;
     background-repeat: no-repeat;
   }
+  /*
+  *****************************NAV********************************
+  */
+  .nav-bar{
+    @apply text-2xl w-full block fixed bottom-0 left-0 z-10 bg-grad-navcol;
+    box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+  }
   .nav-linkz{
-    @apply flex flex-initial flex-row items-start flex-wrap justify-center h-80pex pr-16 pl-0;
+    @apply flex flex-initial flex-row items-center flex-wrap justify-center h-80pex pr-80pex pl-80pex;
   }
   .small-icons{
     @apply hidden;
@@ -435,22 +436,14 @@ overflow-Y: auto;
     @apply hidden;
   }
   .nav-text{
-    @apply text-lg;
-  }
-  .main-card{
-    @apply w-full flex pt-4 ml-0 h-1333 mb-20 ;
-    /* w-3/4 flex relative p-0 pt-4 ml-1/4 h-1333; */
-  }
-  .main-image{
-    @apply static w-image-w flex-shrink-0;
-  }
-  .main-card-text{
-    @apply mt-4 mt-0 ml-6 static flex-grow-2;
+    @apply text-base;
   }
   .nav-link-box{
-    @apply pr-3;
+    @apply pr-3 m-0;
   }
-
+  .nav-link-box-first{
+    @apply pr-3
+  }
 }
 
 @screen iconbreak{
@@ -469,7 +462,18 @@ overflow-Y: auto;
     @apply inline-block;
   }
 }
+@screen navbreak{
+  .nav-linkz{
+    @apply pr-80pex pl-80pex;
+  }
+}
 @screen sm{
+  .nav-link-box-first{
+    @apply p-0;
+  }
+  .nav-link-box{
+    @apply p-0;
+  }
   .nav-text{
     @apply text-2xl;
   }
@@ -477,23 +481,42 @@ overflow-Y: auto;
     @apply hidden;
   }
   .nav-bar{
-    @apply h-full w-1/4 align-top relative inline-block;
+    @apply w-1/4 align-top relative inline-block z-0;
     background-image:  none;
+    box-shadow: none;
   }
   .nav-linkz{
-    @apply flex-none relative inline-block w-full p-0 fixed;
+    @apply flex-none relative inline-block w-full p-0 fixed pl-2 w-1/4;
   }
   .small-icons{
     @apply inline-block;
   }
   .main-card{
-    @apply w-3/4 flex relative p-0 pt-4 ml-1/4 h-1333;
+    @apply top-noll align-top;
   }
-}
+  .main-card-wrapper{
+    @apply ml-1/4;
+  }
+  .inner-card{
+    @apply  flex relative p-0 pt-4 h-1333;
+  }
+  .main-card-down{
+    @apply hidden;
+  }
 
+}
 @screen md{
+  /* .nav-linkz{
+    @apply flex flex-col flex-1 flex-wrap items-start justify-between p-6 pt-0;
+  } */
+  .main-card-wrapper{
+    @apply ml-0;
+  }
   .main-card{
     @apply w-1/4 inline-block fixed p-6 pt-0 ml-0;
+  }
+  .inner-card{
+    @apply inline-block m-0 p-0;
   }
   .main-image{
     @apply inline-block w-auto relative;
@@ -501,13 +524,57 @@ overflow-Y: auto;
   .main-card-text{
     @apply mt-0 mt-0 ml-0 static;
   }
+  /* .nav-link-box{
+    @apply mt-5;
+  } */
 }
-
-@screen xl{
-  .nav-bar{
-    @apply text-3xl;
+/* @screen lg{
+  .nav-link-box{
+    @apply mt-8;
   }
 }
+@screen xl{
+  .nav-link-box{
+    @apply mt-16;
+  }
+}
+@screen xl2{
+  .nav-link-box{
+    @apply mt-24;
+  }
+} */
+
+/*
+************************Header-tag Screen Sizes***********************
+*/
+/*
+************************Responsive TEXT-SIZE Main-page-structure*******************
+*/
+  @screen 0 {
+    .responsive-text {
+      @apply text-sm;
+    }
+    h3{
+       @apply leading-snug font-semibold text-base m-3;
+    }
+    h2{
+      @apply font-bold text-lg ;
+    }
+  }
+
+  @screen sm {
+    .responsive-text {
+      @apply text-base;
+    }
+    h3{
+      @apply text-lg;
+
+    }
+    h2{
+      @apply text-xl;
+    }
+  }
+
 
 /*
 *********************************GENERAL CSS(with tailwind)************************************
@@ -519,7 +586,6 @@ overflow-Y: auto;
       .text-shadow-md {
         text-shadow: 0 4px 8px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08);
       }
-
       .text-shadow-lg {
         text-shadow: rgba(0,0,0,0.2) 0px 2px 3px, inset rgba(0,0,0,0.2) 0px -1px 2px;;
       }

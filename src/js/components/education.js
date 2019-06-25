@@ -13,7 +13,7 @@ class Edu extends React.Component{
     return (
       <ColorConsumer>
         {({ tsize }) => (
-      <section className="text-shadow">
+      <>
         <h2>Education</h2>
         <article>
           <div>
@@ -31,13 +31,14 @@ class Edu extends React.Component{
               education itself gave me the ability
               to explain concepts thoroughly.
             </p>
-            <h3 className="h3-override-ml-nil">Andra bemärkelser</h3>
+            <h3 className="h3-override-ml-nil">Bachelor</h3>
             <ul>
-              <li className={` ${tsize}`}>Bachelor's degree: Grade A</li>
+              <li className={` ${tsize}`}>Bachelor's degree in didactics </li>
+              <li>Grade: A</li>
             </ul>
           </div>
         </article>
-      </section>
+      </>
     )}
   </ColorConsumer>
 
