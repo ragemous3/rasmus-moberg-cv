@@ -3,10 +3,12 @@ import * as React from 'react';
 
 
 const NotFound = () => {
+  console.log('triggad error')
   return(
       <div>
-        <p>page was not found </p>
+        <p>404 - Page was not found</p>
       </div>
       )
-}
-export default NotFound
+};
+
+export {NotFound as Part};

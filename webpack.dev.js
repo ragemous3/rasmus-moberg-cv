@@ -11,6 +11,8 @@ var appjs =  path.resolve(__dirname + `/src/js/app.js`);
 var styles =  path.resolve(__dirname + `/src/css/styles.css`);
 // var index =  path.resolve(__dirname + `/public/index.html`);
 
+
+
 module.exports = {
   //entrys. Vart någonstans webpack ska börja bygga
   entry:  [appjs, styles],
@@ -25,7 +27,9 @@ module.exports = {
   },
   mode: "development",
   node: {
-    __dirname: false
+    __dirname: false,
+    console: true,
+
   },
   module: {
     rules: [
@@ -82,15 +86,6 @@ module.exports = {
           },
         }
 
-      },
-      {
-        test: /\.html$/,
-        use: [
-            {
-                loader: "html-loader",
-                options: { minimize: true }
-            }
-        ]
       },
       {
         test: /\.(png|jpe?g|gif|svg|webp)$/i,

@@ -2,11 +2,17 @@ import React from 'react'
 // Göra om till "about this site"
 
 function Projects(){
-
+  const listStyle = {
+    "listStyleType": "circle",
+    "listStylePosition": "outside",
+  };
   return (
     <section >
-      <img src="../../img/under-con.gif"/>
-      <a  target="_blank" href="https://elektropartner.nu/">Elektropartner</a>
+      <h1>Projects</h1>
+      <h3 className="h3-override-ml-nil"><a  target="_blank" href="https://elektropartner.nu/">Elektropartner</a></h3>
+      <ul className="pl-6" style={listStyle}>
+        <li><p className="responsive-text">Consultant job for regnet Co. Creation of a subpage system with Craft 3 CMS</p></li>
+      </ul>
     </section>
   )
 

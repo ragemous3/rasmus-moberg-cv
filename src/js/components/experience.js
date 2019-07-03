@@ -67,13 +67,14 @@ class Accomplishments extends React.Component{
       <ColorConsumer>
         {({ tsize }) => (
         <>
+        <h1>Experience</h1>
         <article>
           <h2>Languages, frameworks, environments and libraries</h2>
           <section className="flex flex-1 flex-wrap content-around mt-3">
             {
               Array.from({length: this.state.languages.length}, (_, i) =>
                   <div key={`box${i}`}
-                     className={`${this.state.tooltips[i]} language-box text-shadow`}
+                     className={`${this.state.tooltips[i]} border-box language-box word-wrap responsive-text text-shadow`}
                      aria-label={this.state.text[i]}
                      onClick={(e) => this.clicker(e)}
                    >
@@ -89,23 +90,22 @@ class Accomplishments extends React.Component{
               </div>
           </article>
         </article>
-        <article className="mt-3">
+        <article className="pb-4 pt-4">
           <h2>Relevant work experience</h2>
             <div className="  text-shadow">
                 <h3 className="h3-override-ml-nil">Freelance company - 2019</h3>
                 <p className={` ${tsize}`}>Founded 2019</p>
             </div>
             <div className=" ">
-              <h3 className="h3-override-ml-nil">Konsult hos Regnet AB - 2019</h3>
+              <h3 className="h3-override-ml-nil">Consultant at Regnet Co - 2019</h3>
               <p className={` ${tsize}`}>
-                I am consulted for programmatic bugs, hands on work with
+                I am concurrently consulted for programmatic bugs, hands on work with
                 implementing new features to websites
-                and other programmatic expertise. Mainly around problems
-                applicable to javaScript and webpack.
+                and other programmatic expertise.
               </p>
             </div>
         </article>
-        <article className="mt-3">
+        <article className="pb-4 pt-4">
           <h2>Other work experience</h2>
             <div className=" ">
               <h3 className="h3-override-ml-nil">Personal assistent - 2018</h3>

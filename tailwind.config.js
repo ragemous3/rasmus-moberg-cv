@@ -14,8 +14,8 @@ module.exports = {
       xs: '225px',
       s: '340px',
       navbreak: '418px',
-      mstart: '479px',
       sm: '614px',
+      smallmstart: '360px',
       iconbreak: '701px',
       iconnobreak: '702px',
       md: '768px',
@@ -439,6 +439,7 @@ module.exports = {
     textColor: theme => theme('colors'),
     width: theme => ({
       auto: 'auto',
+      'noll': '""',
       ...theme('spacing'),
       '1': '0.25rem',
       '2': '0.5rem',

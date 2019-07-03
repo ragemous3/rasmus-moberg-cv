@@ -3,18 +3,35 @@
 ****************Import/export***********
 ****************************************
 */
+  //Instead of babel-polyfill
+  //core-js is the engine that uses preset-env to polyfill code. It uses babels "targets"
+  //to import correct polyfills so that written code works as expected
+  import "core-js/stable";
+  import "regenerator-runtime/runtime" ;
   import React, { useState, useContext } from 'react';
   import ReactDOM from 'react-dom';
-  import('hint.css')
   import { ColorProvider, ColorConsumer} from './components/colorcontext.js';
-  import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
-  import  {Help} from './helpers.js'
-  import { Part } from './components/contact.js'
-  /*
-  ***********************************************************************************************
-  ****************Asynkroniskt laddning med dynamisk kodsplittning*******************************
-  ***********************************************************************************************
-  */
+  import {BrowserRouter, Route, Link, Switch, NavLink} from "react-router-dom";
+  import 'hint.css'
+
+
+  // const BrowserRouter = require("react-router-dom").BrowserRouter;
+  // const Route = require("react-router-dom").Route;
+  // const Link = require("react-router-dom").Link;
+  // const Switch = require("react-router-dom").Switch;
+  // const NavLink = require("react-router-dom").NavLink;
+
+  // import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
+
+  import  {Help} from './helpers.js';
+  import { Part } from './components/contact.js';
+
+
+/*
+***********************************************************************************************
+****************Asynkroniskt laddning med dynamisk kodsplittning*******************************
+***********************************************************************************************
+*/
   class LoadAsync extends React.Component{
     constructor(props){
       super(props)
@@ -248,18 +265,6 @@ class Nav extends React.Component{
 ***********************************************************************************************
 */
 
-function Contact(props){
-    //Syntax supporter by babels '@babel/plugin-syntax-dynamic-import'
-  import(/*webpackChunkName: "[request]"*/ /* webpackMode: "lazy" */ './components/contact.js').then(({Part}) => {
-      return (
-        <>
-        <Part />
-        </>
-      )
-        }).catch((e) => {
-            console.log(`Error With dynamic import! Error: ${e}`);
-      })
-}
 function AboutMe(props){
   return (
   <>
@@ -317,7 +322,7 @@ class Routes extends React.Component{
       <ColorProvider>
         <BrowserRouter>
           <Nav />
-            <section id="main-page-structure" className="p-6 pt-0 pl-0 main-page-structure border-box align-top">
+            <section id="main-page-structure" className="main-page-structure border-box align-top">
               <Switch>
                 <Route path="/" exact={true} component={AboutMe} />
                 <Route exact path="/experience" component={Knowledge}/>
@@ -328,7 +333,7 @@ class Routes extends React.Component{
             </section>
             {
               this.state.contact.map((Element, i) => {
-                  return (<div className="inline-block align-top main-card-wrapper" key={`Contact${i}`}>{Element}</div>);
+                  return (<div id="card-wrap" className="inline-block align-top main-card-wrapper" key={`Contact${i}`}>{Element}</div>);
               })
             }
         </BrowserRouter>

@@ -34,11 +34,12 @@ class Card extends React.Component{
       <ColorConsumer>
         {({ color }) => (
           <aside id="contact-section" className={`main-card border-box smooth-loaded`}>
-            <div onClick={(e) => {this.scrollUp()}}  className="main-card-down">
 
-            </div>
             <article id="contact-inner" className="inner-card">
-              <div className="block main-image object-center">
+              <div className="relative block main-image object-center">
+                <div onClick={(e) => {this.scrollUp()}}  className="main-card-down">
+
+                </div>
                 <figure id="profile-carrier">
                   <img id="profile-pic" src="../../img/profilbild.jpg" className={`img rounded  border-box `} alt="A picture of Rasmus" />
                 </figure>

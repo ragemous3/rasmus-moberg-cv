@@ -1,9 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap');
 
 @tailwind base;
 
 @tailwind components;
 
-@import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap');
 
     body, html, main{
       @apply min-h-full min-w-full;
@@ -35,6 +35,17 @@
     }
     ::-webkit-scrollbar {
       display:none;
+    }
+    body{
+      @apply bg-fixed
+    }
+
+    .h3-override-ml-nil{
+      @apply ml-0;
+    }
+
+    p {
+      @apply leading-tight text-lg;
     }
 
 /*
@@ -74,17 +85,6 @@
       cursor: url('./../img/cursors/handcursor.svg') 30 30 , crosshair;
       cursor: auto;
     } */
-    body{
-      @apply bg-fixed
-    }
-
-    .h3-override-ml-nil{
-      @apply ml-0;
-    }
-
-    p {
-      @apply leading-tight text-lg;
-    }
 /*
 *******************************main-profile*****************************
 */
@@ -152,65 +152,22 @@
 /*
 *******************************main-page-structure*****************************
 */
-
-#main-box{
-  @apply h-full
-}
 @screen 0{
   .main-page-structure{
-    @apply block w-full h-full;
+    @apply block w-full h-full p-0;
     /*  overflow-scroll */
   }
-
 }
-@screen xs {
-  .main-page-structure{
-    @apply block w-full;
-  }
-  #aside-contact{
-    @apply block
-  }
-}
-@screen iconbreak{
-  .main-page-structure{
-    @apply block w-full;
-  }
-  #aside-contact{
-    @apply block
-  }
-}
-@screen s {
-  .main-page-structure{
-    @apply block w-full;
-  }
-  #aside-contact{
-    @apply block
-  }
-}
-
 @screen sm{
   .main-page-structure{
-    @apply w-3/4 ml-0 inline-block;
-  }
-  #aside-contact{
-    @apply block
+    @apply w-3/4 ml-0 inline-block pl-6;
   }
 }
 @screen md{
   .main-page-structure{
-    @apply w-1/2 inline-block
-  }
-  #aside-contact{
-    @apply inline-block
+    @apply w-1/2 inline-block  p-6 pt-0 pl-0;
   }
 }
-
-@screen xl{
-  .main-page-structure{
-  }
-
-}
-
 /*
 *******************************Load smooth*****************************
 */
@@ -232,16 +189,12 @@
 }
 
 /*
-*******************************main-introduction*****************************
-*/
-
-/*
 *******************************Language-box*****************************
 */
 
 .language-box{
-  @apply border border-solid border-greenlight rounded-lg border-1 relative bg-greenlight text-white w-1/4 p-2 text-center m-1;
-  @apply max-w-xl min-w-25;
+  @apply border border-solid truncate border-greenlight rounded-lg border-1 relative bg-greenlight text-white w-1/4;
+  @apply p-3 text-center m-1;
 }
 .hidden-info-box{
   display:none;
@@ -378,17 +331,20 @@
   /*
   *****************************CONTACT PRofile********************************
   */
-  .main-card-wrapper{
-    @apply ml-0;
-  }
+    #card-wrap{
+      @apply w-full ;
+    }
+    .main-card-wrapper{
+      @apply ml-0 flex flex-1 flex-wrap;
+    }
    .main-card{
-     @apply w-full relative ml-0 align-bottom;
+     @apply w-full relative ml-0 align-bottom flex flex-1 items-center justify-center;
    }
    .inner-card{
-     @apply h-1333 mb-20 flex;
+     @apply h-1333 mb-20  inline-block;
    }
    .main-card-down{
-     @apply absolute left-0;
+     @apply absolute left-0 z-10;
      background-image: url('./../img/downdown.png');
      background-size: 100% 100%;
      width: 30px;
@@ -416,11 +372,12 @@
     height: 60px;
     background-repeat: no-repeat;
   }
+
   /*
   *****************************NAV********************************
   */
   .nav-bar{
-    @apply text-2xl w-full block fixed bottom-0 left-0 z-10 bg-grad-navcol;
+    @apply text-2xl w-full block fixed bottom-0 left-0 z-20 bg-grad-navcol;
     box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
   }
   .nav-linkz{
@@ -445,7 +402,12 @@
     @apply pr-3
   }
 }
+@screen smallmstart{
+  .inner-card{
+    @apply  flex relative p-0 pt-4 h-1333;
+  }
 
+}
 @screen iconbreak{
   .small-icons{
     @apply hidden;
@@ -468,6 +430,9 @@
   }
 }
 @screen sm{
+  #card-wrap{
+    @apply w-auto;
+  }
   .nav-link-box-first{
     @apply p-0;
   }
@@ -492,13 +457,10 @@
     @apply inline-block;
   }
   .main-card{
-    @apply top-noll align-top;
+    @apply top-noll align-top pl-6;
   }
   .main-card-wrapper{
     @apply ml-1/4;
-  }
-  .inner-card{
-    @apply  flex relative p-0 pt-4 h-1333;
   }
   .main-card-down{
     @apply hidden;
@@ -524,25 +486,7 @@
   .main-card-text{
     @apply mt-0 mt-0 ml-0 static;
   }
-  /* .nav-link-box{
-    @apply mt-5;
-  } */
 }
-/* @screen lg{
-  .nav-link-box{
-    @apply mt-8;
-  }
-}
-@screen xl{
-  .nav-link-box{
-    @apply mt-16;
-  }
-}
-@screen xl2{
-  .nav-link-box{
-    @apply mt-24;
-  }
-} */
 
 /*
 ************************Header-tag Screen Sizes***********************
@@ -558,7 +502,10 @@
        @apply leading-snug font-semibold text-base m-3;
     }
     h2{
-      @apply font-bold text-lg ;
+      @apply font-extrabold text-lg pb-4;
+    }
+    h1{
+      @apply font-bold text-2xl pb-4;
     }
   }
 
@@ -643,10 +590,10 @@
 /*
 ***********************************COLORS!*********************************************************
 */
-  @responsive {
-    .bg-gradient-rainy-ashville {
-      @apply bg-grad-bgcol;
-    }
+@responsive {
+  .bg-gradient-rainy-ashville {
+    @apply bg-grad-bgcol;
   }
+}
 @tailwind utilities;
 @tailwind screens;

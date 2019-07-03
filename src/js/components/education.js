@@ -14,7 +14,7 @@ class Edu extends React.Component{
       <ColorConsumer>
         {({ tsize }) => (
       <>
-        <h2>Education</h2>
+        <h1>Education</h1>
         <article>
           <div>
             <h3 className="h3-override-ml-nil">JavaScript education program 2018-2020</h3>
@@ -24,18 +24,19 @@ class Edu extends React.Component{
             </p>
           </div>
           <div>
-            <h3 className="h3-override-ml-nil">Preschool educations 2014-2017</h3>
+            <h3 className="h3-override-ml-nil">Preschool Teacher Education 2014-2017</h3>
             <p className={` ${tsize}`}>
               Three and a half year long education
               in didactics including a bachelor's degree. The
               education itself gave me the ability
-              to explain concepts thoroughly.
+              to explain concepts thoroughly. 
             </p>
-            <h3 className="h3-override-ml-nil">Bachelor</h3>
-            <ul>
-              <li className={` ${tsize}`}>Bachelor's degree in didactics </li>
-              <li>Grade: A</li>
-            </ul>
+          </div>
+          <div>
+            <h3 className="h3-override-ml-nil">Swedish armed forces 2013</h3>
+            <p className={` ${tsize}`}>
+              Passed every test.
+            </p>
           </div>
         </article>
       </>
