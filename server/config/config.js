@@ -6,16 +6,16 @@ var webpack = require('webpack');
 const middleware = require('webpack-dev-middleware');
 const wpHOT = require('webpack-hot-middleware');
 const webpackServerMiddleware = require('webpack-server-middleware');
-
 var history = require('connect-history-api-fallback');
 
-var path = require('path')
+var path = require('path');
+
 var devServerConfig = {
       public: () => process.env.DEVSERVER_PUBLIC || "http://localhost:3000/",
       host: () => process.env.DEVSERVER_HOST || "localhost",
       poll: () => process.env.DEVSERVER_POLL || false,
       port: () => process.env.DEVSERVER_PORT || 3000,
-      https: () => process.env.DEVSERVER_HTTPS || false,
+      https: () => process.env.DEVSERVER_HTTPS || true,
   }
 
 module.exports = (app, express) => {
@@ -35,7 +35,8 @@ module.exports = (app, express) => {
           host: devServerConfig.host(),
           port: devServerConfig.port(),
           index: path.resolve(__dirname, './../../public/index.html'),
-          https: !!parseInt(devServerConfig.https()),
+          https: true,
+          //https: !!parseInt(devServerConfig.https()),
           // hot: true, //tillåter hot-module
           // hotOnly: true,
           //historyApifallback är vad wp använder under the hood för att skicka filer till andra routes än /
