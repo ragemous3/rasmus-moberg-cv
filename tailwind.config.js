@@ -26,6 +26,7 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       greenlight: '#68d391',
+      mediumblue: '#364e84',
       black: '#000',
       white: '#fff',
 
@@ -194,6 +195,7 @@ module.exports = {
       sm: '0.125rem',
       default: '0.25rem',
       lg: '0.5rem',
+      xl: '1rem',
       full: '9999px',
     },
     borderWidth: {

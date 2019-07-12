@@ -1,7 +1,6 @@
 import React from 'react'
 import { ColorConsumer } from './colorcontext.js';
 
-
 class Accomplishments extends React.Component{
   constructor(props){
     super(props)
@@ -23,20 +22,20 @@ class Accomplishments extends React.Component{
         'bankID'
     ],
     text: [
-      '⚡⚡⚡⚡⚡',
-      '⚡⚡⚡⚡',
-      '⚡',
-      '⚡⚡',
-      '⚡⚡',
-      '⚡⚡⚡⚡',
-      '⚡⚡⚡',
-      '⚡⚡',
-      '⚡⚡',
-      '⚡⚡⚡',
-      '⚡⚡⚡',
-      '⚡⚡⚡⚡⚡',
-      '⚡⚡⚡',
-      '⚡⚡⚡',
+      'Javascript-skills: ⚡⚡⚡⚡⚡',
+      'React-skills: ⚡⚡⚡⚡',
+      'C#-skills: ⚡ (One book)',
+      'Typescript-skills: ⚡⚡⚡',
+      'Craft3-Skills: ⚡⚡⚡',
+      'Node-skills: ⚡⚡⚡⚡',
+      'Webpack-skills: ⚡⚡⚡⚡',
+      'PHP-skills: ⚡⚡',
+      'Mysql-skills: ⚡⚡',
+      'MongoDB-skills: ⚡⚡⚡',
+      'CSS3-skills: ⚡⚡⚡',
+      'HTML5-skills: ⚡⚡⚡⚡⚡',
+      'Twig-skills: ⚡⚡⚡',
+      'Bankid-skills: ⚡⚡⚡⚡⚡',
     ],
     tooltips: [
       'hint--bottom',
@@ -59,18 +58,17 @@ class Accomplishments extends React.Component{
   }
   clicker(e){
     let target = e.target
-    console.log(target.textContent)
+  }
+  componentWillUnmount(){
 
   }
   render(){
     return(
-      <ColorConsumer>
-        {({ tsize }) => (
         <>
         <h1>Experience</h1>
         <article>
           <h2>Languages, frameworks, environments and libraries</h2>
-          <section className="flex flex-1 flex-wrap content-around mt-3">
+          <section className="flex flex-1 flex-wrap mt-3">
             {
               Array.from({length: this.state.languages.length}, (_, i) =>
                   <div key={`box${i}`}
@@ -92,13 +90,13 @@ class Accomplishments extends React.Component{
         </article>
         <article className="pb-4 pt-4">
           <h2>Relevant work experience</h2>
-            <div className="  text-shadow">
+            <div className=" responsive-text text-shadow">
                 <h3 className="h3-override-ml-nil">Freelance company - 2019</h3>
-                <p className={` ${tsize}`}>Founded 2019</p>
+                <p className={"responsive-text"}>Founded 2019</p>
             </div>
-            <div className=" ">
+            <div className=" responsive-text">
               <h3 className="h3-override-ml-nil">Consultant at Regnet Co - 2019</h3>
-              <p className={` ${tsize}`}>
+              <p className={"responsive-text"}>
                 I am concurrently consulted for programmatic bugs, hands on work with
                 implementing new features to websites
                 and other programmatic expertise.
@@ -107,24 +105,24 @@ class Accomplishments extends React.Component{
         </article>
         <article className="pb-4 pt-4">
           <h2>Other work experience</h2>
-            <div className=" ">
+            <div>
               <h3 className="h3-override-ml-nil">Personal assistent - 2018</h3>
-                <p className={`${tsize}`}>
+                <p className={`responsive-text`}>
                 As a personal assistent I learned
                 the value of building strong relationships
               </p>
             </div>
-            <div className="  text-shadow">
+            <div className="responsive-text text-shadow">
               <h3 className="h3-override-ml-nil">Preschool teacher - 2017-2018</h3>
-                <p className={`${tsize}`}>
+                <p className={`responsive-text`}>
                 The work as a preschool teacher has given me
                 leadership skills and trained my ability
                 to lead and plan under pressure.
               </p>
             </div>
-            <div className="  text-shadow">
+            <div className=" responsive-text text-shadow">
               <h3 className={`h3-override-ml-nil`}>Caretaker - 2015 och 2016</h3>
-              <p className={` ${tsize}`}>
+              <p className={"responsive-text"}>
                 As a caretaker, I learned to
                 Understand the importance of maintaining
                 housing and the execution of such work.
@@ -132,8 +130,6 @@ class Accomplishments extends React.Component{
             </div>
         </article>
        </>
-     )}
-   </ ColorConsumer>
     )
   }
 }

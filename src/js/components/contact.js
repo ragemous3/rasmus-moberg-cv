@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { ColorConsumer } from './colorcontext.js';
+// import { ColorConsumer } from './colorcontext.js';
 
 
 function Main(){
@@ -31,8 +31,7 @@ class Card extends React.Component{
     //            <article className="main-profile border-box">
 
     return(
-      <ColorConsumer>
-        {({ color }) => (
+
           <aside id="contact-section" className={`main-card border-box smooth-loaded`}>
 
             <article id="contact-inner" className="inner-card">
@@ -56,15 +55,15 @@ class Card extends React.Component{
                       <p className="typewriter-text text-sm">Bandhagen</p>
                       <div className="leading-snug pt-3 flex flex-1 flex-row">
                         <a href="https://www.linkedin.com/in/rasmus-moberg-0aba88174/" target="_blank">
-                          <svg className="m-1 floatAsideClick  i-linkedin PointerCursor">
+                          <svg className="m-1 mb-0 floatAsideClick  i-linkedin PointerCursor">
                           </svg>
                         </a>
                         <a href="mailto:rasmus.krister.moberg@gmail.com"  className="hint--bottom" aria-label="rasmus.krister.moberg@gmail.com">
-                          <svg className="m-1 floatAsideClick  i-gmail PointerCursor">
+                          <svg className="m-1 mb-0 floatAsideClick  i-gmail PointerCursor">
                           </svg>
                         </a>
                         <a href="/getcv"  download>
-                          <svg className="m-1 floatAsideClick i-cv PointerCursor">
+                          <svg className="m-1 mb-0 floatAsideClick i-cv PointerCursor">
                           </svg>
                         </a>
                       </div>
@@ -72,8 +71,6 @@ class Card extends React.Component{
                 </div>
               </article>
           </aside>
-        )}
-      </ColorConsumer>
     )
     }
   }

@@ -16,6 +16,7 @@ const configurePurgeCss = () => {
         exclude: '/node_modules/',
         content: [
           './src/**/*.js',
+          './tw-plugins/gradients.js',
           './tailwind.js',
           './public/index.html'
         ],
@@ -42,9 +43,9 @@ module.exports = {
              ]
          }),
         require('tailwindcss')('./tailwind.config.js'),
-        purgecss(
-             configurePurgeCss()
-        ),
+        // purgecss(
+        //   configurePurgeCss()
+        // ),
         require('postcss-preset-env')({
             autoprefixer: { grid: true },
             features: {

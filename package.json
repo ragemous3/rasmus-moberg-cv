@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development node server/server.js",
     "buildInMemory": "cross-env NODE_ENV=production node server/server.js",
-    "build": "cross-env ./node_modules/.bin/webpack -p --config ./webpack.prod.legacy.js",
-    "liveprod": ""
+    "build": "cross-env ./node_modules/.bin/webpack -p --config ./webpack.prod.js",
+    "live": "cross-env NODE_ENV=live node server/server.js"
   },
   "author": "RM",
   "license": "MIT",

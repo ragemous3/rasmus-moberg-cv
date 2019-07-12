@@ -18,6 +18,21 @@
   //babel
 
   const pkg = require('./package.json');
+
+  const configureFontLoader = () => {
+      return {
+          test: /\.(ttf|eot|woff2?)$/i,
+          use: [
+              {
+                  loader: 'file-loader',
+                  options: {
+                      name: 'fonts/[name].[ext]'
+                  }
+              }
+          ]
+      };
+  };
+
   const configureBabelLoader = (browserlists) => {
       return {
         test: /\.(js|jsx)$/,
@@ -64,60 +79,11 @@
       };
   };
 
-
-  // Configure Postcss loader
-  const configurePostcssLoader = (buildType) => {
-
-      if (buildType === LEGACY_CONFIG) {
-          return {
-              test: /\.(scss|css)$/,
-              exclude: '/node_modules/',
-              // oneOf: [
-              //     {
-              //       resourceQuery: /inline/, // foo.css?inline
-              //       use: 'url-loader'
-              //     },
-              //     {
-              //       resourceQuery: /external/, // foo.css?external
-              //       use: 'file-loader'
-              //     }
-              //   ],
-              use: [
-              MiniCssExtractPlugin.loader,
-
-                // {
-                //     loader: 'css-loader',
-                // },
-                // {
-                //     loader: 'style-loader',
-                // },
-                // "resolve-url-loader",
-                // {
-                //     loader: 'postcss-loader',
-                //     options: {
-                //         sourceMap: true,
-                //         config: {
-                //           path: path.resolve(__dirname, './postcss.config.js')
-                //         },
-                //     }
-                // },
-
-              ]
-          };
-      }
-      // Don't generate CSS for the modern config in production
-      if (buildType === MODERN_CONFIG) {
-          return {
-              test: /\.(pcss|css)$/,
-              loader: 'ignore-loader'
-          };
-      }
-  };
   const legacyConfig = {
       module: {
           rules: [
-              // configurePostcssLoader(LEGACY_CONFIG),
               configureBabelLoader(Object.values(pkg.browserslist.legacyBrowsers)),
+              configureFontLoader(),
           ],
         }
   };
@@ -125,6 +91,7 @@
       module: {
           rules: [
               configureBabelLoader(Object.values(pkg.browserslist.modernBrowsers)),
+              configureFontLoader(),
           ],
       },
       // plugins: [
@@ -138,18 +105,22 @@
     var appjs =  path.resolve(__dirname + `/src/js/app.js`);
     var styles =  path.resolve(__dirname + `/src/css/styles.css`);
     var arr = [];
-    arr.push(appjs);
     arr.push(styles);
+    arr.push(appjs);
     return arr;
   }
 
   const baseConfig = {
     name: 'rasmusm-cv',
     entry: configureEntries(),
-    output: {
-        path: path.resolve(__dirname, 'public/dist'),
-        publicPath: () => process.env.PUBLIC_PATH || "/dist/",
+    stats: {
+    // Examine all modules
+    maxModules: Infinity,
+    // Display bailout reasons
+    optimizationBailout: true
     },
+    mode: 'production',
+    devtool: 'source-map',
     plugins:[
       new WebpackNotifierPlugin({title: 'Webpack', excludeWarnings: false, alwaysNotify: true}),
     ]

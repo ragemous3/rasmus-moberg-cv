@@ -55,21 +55,25 @@
 */
   @keyframes cursorEff{
      0%{
-      filter: grayscale(0%);
+      /* filter: grayscale(0%); */
       transform: translate3d(-1px, 0, 0);
     }
     100%{
-      filter: grayscale(100%);
+      /* filter: grayscale(100%); */
       transform: translate3d(4px, 0, 0);
     }
   }
 
     button:hover, a:hover{
-      opacity: 0.5;
+      opacity: 0.7;
       animation: cursorEff 2s;
+      outline: none;
+      border:none;
+      transform-style: preserve-3d;
       animation-fill-mode: forwards;
       cursor: pointer;
     }
+    button:focus {outline:0;}
 
     .floatAsideClick:hover{
       opacity: 0.5;
@@ -154,18 +158,18 @@
 */
 @screen 0{
   .main-page-structure{
-    @apply block w-full h-full p-0;
+    @apply block w-full h-full p-0 ;
     /*  overflow-scroll */
   }
 }
 @screen sm{
   .main-page-structure{
-    @apply w-3/4 ml-0 inline-block pl-6;
+    @apply w-3/4 ml-0 inline-block pl-6 pr-0;
   }
 }
 @screen md{
   .main-page-structure{
-    @apply w-1/2 inline-block  p-6 pt-0 pl-0;
+    @apply w-1/2 inline-block  pb-6 pr-6 pt-0;
   }
 }
 /*
@@ -188,17 +192,6 @@
   animation: genomskinlig 0.5s 1;
 }
 
-/*
-*******************************Language-box*****************************
-*/
-
-.language-box{
-  @apply border border-solid truncate border-greenlight rounded-lg border-1 relative bg-greenlight text-white w-1/4;
-  @apply p-3 text-center m-1;
-}
-.hidden-info-box{
-  display:none;
-}
 
 /*
 *******************************GENERAL*****************************
@@ -210,30 +203,17 @@
       }
 
       .text-shadow-md {
-        text-shadow: 0 4px 8px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08);
+        text-shadow: 0 4px 8px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.10);
       }
 
       .text-shadow-lg {
-        text-shadow: 0 15px 30px rgba(0,0,0,0.11), 0 5px 15px rgba(0,0,0,0.08);
+        text-shadow: 0 15px 30px rgba(0,0,0,0.11), 0 5px 15px rgba(0,0,0,0.10);
       }
 
       .text-shadow-none {
         text-shadow: none;
       }
  }
-
-  /* RESPONSIVE TEXT PÅ NAVEN */
-
-
-  /*
-  *******************************Images*****************************************
-  */
-  .greyscale {
-    filter: grayscale(100%);
-  }
-  .nogrey{
-    filter: grayscale(0%);
-  }
 /*
 ************************Main Profile**************************
 */
@@ -253,13 +233,6 @@
   .card {
     @apply w-nav-xl;
   }
-}
-/*
-************************Cursors**************************
-*/
-
-.default{
-  cursor:default;
 }
 /*
 ************************Responsive NAV**************************
@@ -289,14 +262,19 @@
 }
   .a-link {
       @apply no-underline text-white;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+      color: #281c2f;
+      text-shadow: 0 0px 20px rgba(119, 50, 210);
+      /* -webkit-text-fill-color: #fff;
+      -webkit-text-stroke-color: black;
+      -webkit-text-stroke-width: 1.5px; */
+      /* rgba(0, 0, 0, 1); */
   }
   .a-link:after{
     content: "";
     background: url('./../img/arrow-64.png');
     background-size: 100% 100%;
     display: none;
-
+    opacity: 1;
     height: 24px;
     width:24px;
 
@@ -305,7 +283,8 @@
 
     transition: all 0.4s ease;
   }
-  .a-link:hover:after{
+  .a-link:hover:after, .a-link:focus:after
+  {
     display:inline-block;
     animation-name: rotation;
     animation-iteration-count: infinite;
@@ -319,9 +298,7 @@
     animation-duration: 2.5s;
   }
 
-  a:visited{
-    color: ;
-  }
+
 /*
 *********************************Nav-bar and Contact Screen************************************
 */
@@ -353,6 +330,7 @@
    }
    .main-image{
      @apply static w-image-w flex-shrink-0;
+
    }
    .main-card-text{
      @apply mt-4 mt-0 ml-6 static flex-grow-2;
@@ -372,12 +350,25 @@
     height: 60px;
     background-repeat: no-repeat;
   }
+  /*
+  *******************************Language-box*****************************
+  */
+
+  .language-box{
+    @apply border border-solid border-transparent rounded-xl border-4 relative bg-mediumblue text-white w-1/2;
+    @apply p-3 text-center;
+    background-clip: padding-box;
+    /* m-1; */
+  }
+  .hidden-info-box{
+    display:none;
+  }
 
   /*
   *****************************NAV********************************
   */
   .nav-bar{
-    @apply text-2xl w-full block fixed bottom-0 left-0 z-20 bg-grad-navcol;
+    @apply text-2xl block fixed bottom-0 left-0 z-20 bg-grad-navcol;
     box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
   }
   .nav-linkz{
@@ -390,6 +381,9 @@
     @apply ;
   }
   .a-link:hover:after{
+    @apply hidden;
+  }
+  .a-link:focus:after{
     @apply hidden;
   }
   .nav-text{
@@ -415,12 +409,18 @@
   .a-link:hover:after{
     @apply hidden;
   }
+  .a-link:focus:after{
+    @apply hidden;
+  }
 }
 @screen iconnobreak{
   .small-icons{
     @apply hidden;
   }
   .a-link:hover:after{
+    @apply inline-block;
+  }
+  .a-link:focus:after{
     @apply inline-block;
   }
 }
@@ -430,6 +430,16 @@
   }
 }
 @screen sm{
+/*
+*****LANGUAGE BOX*****
+*/
+  .language-box{
+    @apply break-normal;
+    @apply w-1/3;
+  }
+/*
+  *****LANGUAGE BOX*****
+*/
   #card-wrap{
     @apply w-auto;
   }
@@ -451,6 +461,9 @@
     box-shadow: none;
   }
   .nav-linkz{
+    /*
+    Denna bastard jobbar ihop med javascripten jag skrivit. Orkante göra om det!
+     */
     @apply flex-none relative inline-block w-full p-0 fixed pl-2 w-1/4;
   }
   .small-icons{
@@ -485,6 +498,12 @@
   }
   .main-card-text{
     @apply mt-0 mt-0 ml-0 static;
+  }
+
+}
+@screen lg{
+  .language-box{
+    @apply w-1/4;
   }
 }
 

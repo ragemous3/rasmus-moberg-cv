@@ -8,24 +8,12 @@
   //to import correct polyfills so that written code works as expected
   import "core-js/stable";
   import "regenerator-runtime/runtime" ;
+  import 'hint.css';
   import React, { useState, useContext } from 'react';
   import ReactDOM from 'react-dom';
-  import { ColorProvider, ColorConsumer} from './components/colorcontext.js';
+  // import { ColorProvider, ColorConsumer} from './components/colorcontext.js';
   import {BrowserRouter, Route, Link, Switch, NavLink} from "react-router-dom";
-  import 'hint.css'
-
-
-  // const BrowserRouter = require("react-router-dom").BrowserRouter;
-  // const Route = require("react-router-dom").Route;
-  // const Link = require("react-router-dom").Link;
-  // const Switch = require("react-router-dom").Switch;
-  // const NavLink = require("react-router-dom").NavLink;
-
-  // import { BrowserRouter, Route, Switch, Link, NavLink } from 'react-router-dom';
-
-  import  {Help} from './helpers.js';
   import { Part } from './components/contact.js';
-
 
 /*
 ***********************************************************************************************
@@ -37,7 +25,7 @@
       super(props)
       this.state = {
         comp: [],
-        lacy: 'smooth-loader'
+        lazy: 'smooth-loader'
       }
       this.middle = [];
       this.aside = [];
@@ -45,18 +33,39 @@
       this.calculateFooter = this.calculateFooter.bind(this);
       this.calculateNavHeight = this.calculateNavHeight.bind(this);
       this.content = React.createRef();
+      this._isMounted = true;
+    }
+    componentWillUnmount() {
+      window.removeEventListener('resize', this.mobileResizer);
+      this._isMounted = false;
     }
     componentDidMount(){
-      window.addEventListener('resize', this.mobileResizer);
-
-
+      //https://reactjs.org/blog/2015/12/16/ismounted-antipattern.html <---- läs denna och fixa läckan!
+      //man måste checka och "avcheka"  _isMounted för att förhindra memory-leak? fun
+      this._isMounted = false;
       this.setState((prev) => {
-        return {
-          lazy: 'smooth-loaded'
-        }
+        return {lazy: 'smooth-loaded'}
       })
 
-
+    }
+    componentWillMount(){
+      if(this._isMounted === true && this.props.url){
+        window.addEventListener('resize', this.mobileResizer);
+        //Syntax supporter by babels '@babel/plugin-syntax-dynamic-import'
+        import(/*webpackChunkName: "[request]"*/ /* webpackMode: "lazy" */ '' + this.props.url).then(({Part}) => {
+          this.middle.push(<Part />);
+            this.setState((prev) => {
+              return{
+                comp: this.middle
+              }
+            })
+            }).catch((e) => {
+                console.log(`Error With dynamic import! Error: ${e}`);
+            })
+        return true
+      }else{
+        return false;
+      }
     }
     mobileResizer(e){
       //  window.screen.width  //true width of device
@@ -136,30 +145,12 @@
         }
     }
     }
-    componentWillMount(){
-      if(this.props.url){
-        //Syntax supporter by babels '@babel/plugin-syntax-dynamic-import'
-        import(/*webpackChunkName: "[request]"*/ /* webpackMode: "lazy" */ `${this.props.url}`).then(({Part}) => {
-          this.middle.push(<Part />);
-            this.setState((prev) => {
-              return{
-                comp: this.middle
-              }
-            })
-            }).catch((e) => {
-                console.log(`Error With dynamic import! Error: ${e}`);
-            })
-        return true
-      }else{
-        return false;
-      }
-    }
     render(){
       return(
-        <section id="main-box" className={` responsive-text border-box inline-block ${this.state.lazy}` }>
+        <section id="main-box" className={` responsive-text border-box inline-block` }>
           {
             this.state.comp.map((Element, i) => {
-              return <article ref={this.content}   className="main-text-box text-shadow pb-1333 " key={this.props.chunkname}>{Element}</article>
+              return <article ref={this.content}   className={`${this.state.lazy} main-text-box text-shadow pb-1333`} key={this.props.chunkname}>{Element}</article>
             })
 
           }
@@ -227,8 +218,6 @@ class Nav extends React.Component{
   render(){
     //z-10 fixed
     return (
-      <ColorConsumer>
-        {({ tsize,  updateTextSize }) => (
           <>
             <nav id="navbar" className="nav-bar border-box">
               <section id="nav-linkz" className="border-box nav-linkz smooth-loaded nav-text ">
@@ -253,8 +242,6 @@ class Nav extends React.Component{
               </section>
             </nav>
           </>
-        )}
-      </ColorConsumer>
     )
   }
 }
@@ -319,15 +306,14 @@ class Routes extends React.Component{
   }
   render(){
     return(
-      <ColorProvider>
         <BrowserRouter>
           <Nav />
             <section id="main-page-structure" className="main-page-structure border-box align-top">
               <Switch>
-                <Route path="/" exact={true} component={AboutMe} />
-                <Route exact path="/experience" component={Knowledge}/>
-                <Route exact path="/education" component={Education}/>
-                <Route exact path="/projects" component={Projects}/>
+                <Route exact={true} path="/"  component={AboutMe} />
+                <Route exact={true} path="/experience" component={Knowledge}/>
+                <Route exact={true} path="/education" component={Education}/>
+                <Route exact={true} path="/projects" component={Projects}/>
                 <Route render={() => {return <LoadAsync chunkname="error" url={'./components/404.js'} />}} />
               </Switch>
             </section>
@@ -337,7 +323,6 @@ class Routes extends React.Component{
               })
             }
         </BrowserRouter>
-      </ColorProvider>
     )
   }
 }

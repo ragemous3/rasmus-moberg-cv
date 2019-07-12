@@ -18,21 +18,24 @@ module.exports = {
   entry:  [appjs, styles],
   output: {
     //Local disk directory to store all your output files (Absolute path
-    path: path.resolve(__dirname + '/public/build'),
-    //publicPath: '/', //till för cdn men kan också användas för att skapa builds
+    // path: path.resolve(__dirname + '/public/'),
+    // publicPath: path.resolve(__dirname + 'src'),
     // filename: 'my-first-webpack.bundle.[hash].js',
     // chunkFilename: '[chunkhash].js'
-    filename: '[name].js',
+    filename: 'main.js',
     chunkFilename: '[name].[chunkhash].js'
   },
   mode: "development",
   node: {
     __dirname: false,
     console: true,
-
   },
   module: {
     rules: [
+      {
+        test: /\.html$/,
+        loader: 'html-loader'
+      },
       {
         test: /\.css$/,
         oneOf: [
@@ -73,8 +76,6 @@ module.exports = {
         use: {
         loader: "babel-loader",
         // publicPath: '/dist/js',
-        //targets: pgk.browserlists --> Här kan man göra ett system för att ladda
-        //in legacy- eller modernconfig när det behövs.
         options: {
           presets: ["@babel/preset-env", "@babel/preset-react"],
           plugins: [
@@ -105,8 +106,11 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html',
-      filename: 'index.html'
+      template: path.resolve(__dirname, './src/index.html'),
+      filename: 'index.html',
+      /*
+      html-webpack-plugin handles adding appropriate <script> tags for you, so you might have to remove any <script> tags from the original index.html file.
+      /*/
     }),
 
     new MiniCssExtractPlugin({

@@ -58,9 +58,9 @@
   const configureHtml = () => {
       return {
           // templateContent: '',
-          template: './public/index.html',
+          template: './public/dist/index.html',
           filename: 'index.html',
-          inject: 'body', //If you want to link in tags into index.
+          //inject: 'body', //If you want to link in tags into index.
       };
   };
 
@@ -73,8 +73,7 @@
                   {
                       loader: 'file-loader',
                       options: {
-                          name: 'img/[name].[ext]',
-                          path: '[path]/img',
+                          name: '../img/[name].[ext]',
                       }
                   }
               ]
@@ -88,7 +87,7 @@
                       loader: 'file-loader',
                       options: {
                           name: 'img/[name].[ext]',
-                          path: '[path]/img'
+                          // path: '[path]/img'
                       }
                   },
                   {
@@ -215,20 +214,8 @@
           sourceMap: true
       };
   };
-  const configureFontLoader = () => {
-      return {
-          test: /\.(ttf|eot|woff2?)$/i,
-          use: [
-              {
-                  loader: 'file-loader',
-                  options: {
-                      name: 'fonts/[name].[ext]'
-                  }
-              }
-          ]
-      };
-  };
-  //POstCSS
+
+  // Configure Postcss loader
   const configurePostcssLoader = (buildType) => {
       if (buildType === LEGACY_CONFIG) {
           return {
@@ -289,73 +276,86 @@
     };
 };
 
-  const configureEntries = () => {
-    var appjs =  path.resolve(__dirname + `/src/js/app.js`);
-    var styles =  path.resolve(__dirname + `/src/css/styles.css`);
-    var arr = [];
-    arr.push(styles);
-    arr.push(appjs);
-    return arr;
-  }
 
-  module.exports = {
-    name: 'rasmusm-cv',
-    entry: configureEntries(),
-    output: {
-        path: path.resolve(__dirname, 'public/dist/legacy'),
-        publicPath: () => process.env.PUBLIC_PATH || "/dist/legacy",
-        filename: path.join('./js', '[name]-legacy.js'),
-        chunkFilename: path.join('./js/components','[name].js'),
-    },
-    node: {
-      __dirname: false,
-      console: true,
-    },
-    stats: {
-    // Examine all modules
-    maxModules: Infinity,
-    // Display bailout reasons
-    optimizationBailout: true
-    },
-    mode: 'production',
-    devtool: 'source-map',
-    optimization: configureOptimization(LEGACY_CONFIG),
-    module: {
-        rules: [
-             configureBabelLoader(Object.values(pkg.browserslist.legacyBrowsers)),
-             configurePostcssLoader(LEGACY_CONFIG),
-             configureImageLoader(LEGACY_CONFIG),
-             configureFontLoader(),
+  module.exports = [
+      merge(shared.legacyConfig, {
+        output: {
+          path: path.resolve(__dirname, 'public/dist/legacy/'),
+          publicPath: () => process.env.PUBLIC_PATH || "/legacy/",
+          filename: path.join('./js', '/[name]-legacy.js'),
+          chunkFilename: path.join('./js/components/','[name].js'),
+        },
+        optimization: configureOptimization(LEGACY_CONFIG),
+        module: {
+            rules: [
+               configurePostcssLoader(LEGACY_CONFIG),
+               configureImageLoader(LEGACY_CONFIG),
+            ],
+        },
+        plugins: [
+            new WebpackNotifierPlugin({title: 'Webpack', excludeWarnings: false, alwaysNotify: true}),
+
+            new CleanWebpackPlugin(
+                configureCleanWebpack()
+            ),
+            new MiniCssExtractPlugin({
+                filename: path.join('../css', '[name].css'),
+                chunkFilename:path.join('../css', '[name].css'),
+            }),
+            new HtmlWebpackPlugin(
+                configureHtml()
+            ),
+            // new WebappWebpackPlugin(
+            //     configureWebapp()
+            // ),
+            // new CreateSymlinkPlugin(
+            //     settings.createSymlinkConfig,
+            //     true
+            // ),
+            // new SaveRemoteFilePlugin(
+            //     settings.saveRemoteFileConfig
+            // ),
+            new CompressionPlugin(
+                configureCompression()
+            ),
+            // new BundleAnalyzerPlugin(
+            //     configureBundleAnalyzer(LEGACY_CONFIG),
+            // ),
         ],
-    },
-    plugins: [
-        new WebpackNotifierPlugin({title: 'Webpack', excludeWarnings: false, alwaysNotify: true}),
-
-        new CleanWebpackPlugin(
-            configureCleanWebpack()
-        ),
-        new MiniCssExtractPlugin({
-            filename: path.join('../css', '[name].css'),
-            chunkFilename:path.join('../css', '[name].css'),
+    }), merge(shared.modernConfig, {
+            output: {
+                path: path.resolve(__dirname, 'public/dist/modern/'),
+                publicPath: () => process.env.PUBLIC_PATH || "/modern/",
+                filename: path.join('./js', '/[name]-modern.js'),
+                chunkFilename: path.join('./js/components','[name].js'),
+            },
+            mode: 'production',
+            devtool: 'source-map',
+            optimization: configureOptimization(MODERN_CONFIG),
+            module: {
+                rules: [
+                    configurePostcssLoader(MODERN_CONFIG),
+                    configureImageLoader(MODERN_CONFIG),
+                ],
+            },
+            plugins: [
+                new CleanWebpackPlugin(
+                    configureCleanWebpack()
+                ),
+                // new webpack.BannerPlugin(
+                //     configureBanner()
+                // ),
+                new ImageminWebpWebpackPlugin(),
+                // new WorkboxPlugin.GenerateSW(
+                //     configureWorkbox()
+                // ),
+                new CompressionPlugin(
+                    configureCompression()
+                ),
+                // new BundleAnalyzerPlugin(
+                //     configureBundleAnalyzer(MODERN_CONFIG),
+                // ),
+            ]
         }),
-        new HtmlWebpackPlugin(
-            configureHtml()
-        ),
-        // new WebappWebpackPlugin(
-        //     configureWebapp()
-        // ),
-        // new CreateSymlinkPlugin(
-        //     settings.createSymlinkConfig,
-        //     true
-        // ),
-        // new SaveRemoteFilePlugin(
-        //     settings.saveRemoteFileConfig
-        // ),
-        new CompressionPlugin(
-            configureCompression()
-        ),
-        // new BundleAnalyzerPlugin(
-        //     configureBundleAnalyzer(LEGACY_CONFIG),
-        // ),
-    ],
-      }
+
+];
