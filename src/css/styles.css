@@ -60,13 +60,21 @@
     }
     100%{
       /* filter: grayscale(100%); */
+      transform: translate3d(10px, 0, 0);
+    }
+  }
+  @keyframes cursorEff2{
+     0%{
+      /* filter: grayscale(0%); */
+      transform: translate3d(-1px, 0, 0);
+    }
+    100%{
+      /* filter: grayscale(100%); */
       transform: translate3d(4px, 0, 0);
     }
   }
-
-    button:hover, a:hover{
-      opacity: 0.7;
-      animation: cursorEff 2s;
+    #contact:focus{
+      animation: cursorEff 1s;
       outline: none;
       border:none;
       transform-style: preserve-3d;
@@ -77,7 +85,7 @@
 
     .floatAsideClick:hover{
       opacity: 0.5;
-      animation: cursorEff 2s;
+      animation: cursorEff2 2s;
       animation-fill-mode: forwards;
       cursor: pointer;
     }
@@ -164,12 +172,13 @@
 }
 @screen sm{
   .main-page-structure{
-    @apply w-3/4 ml-0 inline-block pl-6 pr-0;
+    @apply w-3/4 ml-0 inline-block pl-12 pr-0;
   }
+
 }
 @screen md{
   .main-page-structure{
-    @apply w-1/2 inline-block  pb-6 pr-6 pt-0;
+    @apply w-1/2 inline-block pb-6 pr-6 pt-0;
   }
 }
 /*
@@ -283,13 +292,19 @@
 
     transition: all 0.4s ease;
   }
-  .a-link:hover:after, .a-link:focus:after
+  .a-link:hover{
+    opacity: 0.7;
+  }
+  .a-link:focus:after
   {
     display:inline-block;
     animation-name: rotation;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     animation-duration: 2.5s;
+  }
+  #contact:focus:after{
+    animation: none;
   }
   .rotate{
     animation-name: rotation;
@@ -368,11 +383,14 @@
   *****************************NAV********************************
   */
   .nav-bar{
-    @apply text-2xl block fixed bottom-0 left-0 z-20 bg-grad-navcol;
+    @apply text-2xl block fixed bottom-0 left-0 z-20 bg-grad-navcol w-full;
     box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
   }
   .nav-linkz{
-    @apply flex flex-initial flex-row items-center flex-wrap justify-center h-80pex pr-80pex pl-80pex;
+    @apply flex flex-initial flex-row items-center flex-wrap justify-center h-80pex pr-80pex pl-40pex;
+  }
+  .nav-text{
+    @apply text-s;
   }
   .small-icons{
     @apply hidden;
@@ -386,14 +404,21 @@
   .a-link:focus:after{
     @apply hidden;
   }
-  .nav-text{
-    @apply text-base;
-  }
+
   .nav-link-box{
     @apply pr-3 m-0;
   }
   .nav-link-box-first{
     @apply pr-3
+  }
+}
+@screen xs{
+
+  .nav-text{
+    @apply text-base;
+  }
+  .nav-linkz{
+    @apply pl-80pex;
   }
 }
 @screen smallmstart{
@@ -456,7 +481,7 @@
     @apply hidden;
   }
   .nav-bar{
-    @apply w-1/4 align-top relative inline-block z-0;
+    @apply w-1/5 align-top relative inline-block z-0;
     background-image:  none;
     box-shadow: none;
   }
@@ -488,7 +513,7 @@
     @apply ml-0;
   }
   .main-card{
-    @apply w-1/4 inline-block fixed p-6 pt-0 ml-0;
+    @apply w-30proc inline-block fixed p-12 pb-0 pt-0 ml-0;
   }
   .inner-card{
     @apply inline-block m-0 p-0;
