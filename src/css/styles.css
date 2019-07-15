@@ -372,6 +372,7 @@
   .language-box{
     @apply border border-solid border-transparent rounded-xl border-4 relative bg-mediumblue text-white w-1/2;
     @apply p-3 text-center;
+    @apply truncate;
     background-clip: padding-box;
     /* m-1; */
   }
@@ -392,6 +393,7 @@
   .nav-text{
     @apply text-s;
   }
+
   .small-icons{
     @apply hidden;
   }
@@ -413,7 +415,9 @@
   }
 }
 @screen xs{
-
+  .language-box{
+    @apply break-normal;
+  }
   .nav-text{
     @apply text-base;
   }
