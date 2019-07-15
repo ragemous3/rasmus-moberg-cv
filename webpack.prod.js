@@ -27,7 +27,6 @@
   const PurgecssPlugin = require('purgecss-webpack-plugin'); //Tar bort oanvänd css!
   const TerserPlugin = require('terser-webpack-plugin'); //minifierar js
   const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-  const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 
   // const WebappWebpackPlugin = require('webapp-webpack-plugin');//Genererar olika storlekar av favicons.
   // const WorkboxPlugin = require('workbox-webpack-plugin'); //catchar så att webbsidan fungerar offline.

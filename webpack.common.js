@@ -9,7 +9,6 @@
   const webpack = require('webpack');
   const merge = require('webpack-merge');
 
-  const ExtractTextPlugin = require('extract-text-webpack-plugin');
   const HtmlWebpackPlugin = require('html-webpack-plugin');
   const WebpackNotifierPlugin = require('webpack-notifier');
   const MiniCssExtractPlugin = require('mini-css-extract-plugin');
