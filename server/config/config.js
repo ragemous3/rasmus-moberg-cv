@@ -10,15 +10,9 @@ var history = require('connect-history-api-fallback');
 
 var path = require('path');
 
-var devServerConfig = {
-      public: () => process.env.DEVSERVER_PUBLIC || "http://localhost:3000/",
-      host: () => process.env.DEVSERVER_HOST || "localhost",
-      poll: () => process.env.DEVSERVER_POLL || false,
-      port: () => process.env.DEVSERVER_PORT || 3000,
-      https: () => process.env.DEVSERVER_HTTPS || true,
-  }
 
-module.exports = (app, express) => {
+
+module.exports = (app, express, devServerConfig) => {
 
   var environment = process.env.NODE_ENV;
   console.log(`inside config ${__dirname}`)
@@ -51,8 +45,14 @@ module.exports = (app, express) => {
     }
     else if(environment === "production"){
       console.log(`${process.env.NODE_ENV} started!`)
+      app.use(express.static('public/dist/'));
       return;
     }else if(environment === "live"){
+      process.env.DEVSERVER_PUBLIC = "https://www.rasmusmoberg.me",
+      process.env.DEVSERVER_HOST = "rasmusmoberg",
+      process.env.DEVSERVER_POLL = false,
+      process.env.DEVSERVER_PORT = 443,
+      process.env.DEVSERVER_HTTPS = true,
       console.log(`${process.env.NODE_ENV} started!`)
       //Automize the routing for ya!
       app.use(express.static('public/dist/'));
