@@ -20,7 +20,7 @@ try {
   process.exit(1);
 }
 
-var devServerConfig = {
+var serverConfig = {
       public: () => process.env.DEVSERVER_PUBLIC || "https://localhost:3000/",
       host: () => process.env.DEVSERVER_HOST || "localhost",
       poll: () => process.env.DEVSERVER_POLL || false,
@@ -31,16 +31,12 @@ var devServerConfig = {
       passphrase: httpsOptions.passphrase
   }
 
-require('./config/config.js')(app, express, devServerConfig);
+require('./config/config.js')(app, express, serverConfig);
 
 /*
   Reverta tidigare ändringar eller bygg alla vägar manuellt.
   Nope!
 */
-
-
-var port = process.env.PORT || 3000
-
 app.get('/favicon.ico', (req, res) => {
   res.sendFile(path.resolve(__dirname, './favicon.png'));
 });
@@ -75,8 +71,18 @@ app.get('*', (req, res) => {
 function sendHome(req, res){
   res.sendFile(path.resolve(__dirname, './../public/index.html'));
 }
-
-https.createServer(devServerConfig, app).listen(port, () => {
-  console.log(`Server up on ${port}`);
+console.log(serverConfig.host())
+https.createServer({
+  host: serverConfig.host(),
+  port: serverConfig.port(),
+  path: '/',
+  cert: serverConfig.cert,
+  key: serverConfig.key,
+  passphrase: serverConfig.passphrase,
+  // rejectUnauthorized: false,
+  // requestCert: true,
+  // agent: false
+}, app).listen(serverConfig.port(), () => {
+  console.log(`Server up on ${serverConfig.port()}`);
 
 });
