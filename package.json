@@ -36,7 +36,6 @@
     ]
   },
   "dependencies": {
-    "@babel/plugin-transform-modules-commonjs": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.4.4",
     "@fullhuman/postcss-purgecss": "^1.2.0",
@@ -55,6 +54,7 @@
     "resolve-url-loader": "^3.1.0",
     "stylelint": "^10.1.0",
     "stylelint-config-recommended": "^2.2.0"
+
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
