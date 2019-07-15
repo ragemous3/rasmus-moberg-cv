@@ -12,7 +12,7 @@ var path = require('path');
 
 
 
-module.exports = (app, express, devServerConfig) => {
+module.exports = (app, express, serverConfig) => {
 
   var environment = process.env.NODE_ENV;
   console.log(`inside config ${__dirname}`)
@@ -23,11 +23,11 @@ module.exports = (app, express, devServerConfig) => {
         const compiler = webpack(devConf);
         app.use(history());
         app.use(middleware(compiler, {
-          public: devServerConfig.public(),
+          public: serverConfig.public(),
           //content base serving files from disk.
           //contentBase: path.resolve(__dirname, './../../public/'),
-          host: devServerConfig.host(),
-          port: devServerConfig.port(),
+          host: serverConfig.host(),
+          port: serverConfig.port(),
           index: path.resolve(__dirname, './../../public/index.html'),
           https: true,
           //https: !!parseInt(devServerConfig.https()),
@@ -48,8 +48,8 @@ module.exports = (app, express, devServerConfig) => {
       app.use(express.static('public/dist/'));
       return;
     }else if(environment === "live"){
-      process.env.DEVSERVER_PUBLIC = "https://www.rasmusmoberg.me",
-      process.env.DEVSERVER_HOST = "rasmusmoberg",
+      // process.env.DEVSERVER_PUBLIC = "https://www.rasmusmoberg.me",
+      process.env.DEVSERVER_HOST = "rasmusmoberg.me",
       process.env.DEVSERVER_POLL = false,
       process.env.DEVSERVER_PORT = 443,
       process.env.DEVSERVER_HTTPS = true,
