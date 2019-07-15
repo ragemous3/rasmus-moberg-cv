@@ -25,16 +25,16 @@ httpsOptions.passphrase = process.argv[2];
     tls.createSecureContext(httpsOptions);
   } catch (err) {
     console.error('There was a TLS error!', err.message);
-    console.error('Did you enter the right passphrase?');
+    console.error('Magic word please!');
     process.exit(1);
   }
 
   var serverConfig = {
-        public: () => process.env.SERVER_PUBLIC || "https://localhost:3000/",
+        public: () => process.env.SERVER_PUBLIC || "http://localhost:3000/",
         host: () => process.env.SERVER_HOST || "localhost",
         poll: () => process.env.SERVER_POLL || false,
         port: () => process.env.SERVER_PORT || 3000,
-        https: () => process.env.SERVER_HTTPS || true,
+        https: () => process.env.SERVER_HTTPS || false,
         cert: httpsOptions.cert,
         key: httpsOptions.key,
         passphrase: httpsOptions.passphrase
