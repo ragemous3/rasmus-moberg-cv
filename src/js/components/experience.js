@@ -92,12 +92,12 @@ class Accomplishments extends React.Component{
           <h2>Relevant work experience</h2>
             <div className=" responsive-text text-shadow">
                 <h3 className="h3-override-ml-nil">Freelance company - 2019</h3>
-                <p className={"responsive-text"}>Founded 2019</p>
+                <p className={"leading-snug responsive-text"}>Founded 2019</p>
             </div>
             <div className=" responsive-text">
               <h3 className="h3-override-ml-nil">Consultant at Regnet Co - 2019</h3>
-              <p className={"responsive-text"}>
-                I am concurrently consulted for programmatic bugs, hands on work with
+              <p className={"leading-snug responsive-text"}>
+                I've been consulted for programmatic bugs, hands on work with
                 implementing new features to websites
                 and other programmatic expertise.
               </p>
@@ -107,14 +107,14 @@ class Accomplishments extends React.Component{
           <h2>Other work experience</h2>
             <div>
               <h3 className="h3-override-ml-nil">Personal assistent - 2018</h3>
-                <p className={`responsive-text`}>
+                <p className={`leading-snug responsive-text`}>
                 As a personal assistent I learned
-                the value of building strong relationships
+                the value of building strong relationships.
               </p>
             </div>
             <div className="responsive-text text-shadow">
               <h3 className="h3-override-ml-nil">Preschool teacher - 2017-2018</h3>
-                <p className={`responsive-text`}>
+                <p className={`leading-snug responsive-text`}>
                 The work as a preschool teacher has given me
                 leadership skills and trained my ability
                 to lead and plan under pressure.
@@ -122,10 +122,9 @@ class Accomplishments extends React.Component{
             </div>
             <div className=" responsive-text text-shadow">
               <h3 className={`h3-override-ml-nil`}>Caretaker - 2015 och 2016</h3>
-              <p className={"responsive-text"}>
-                As a caretaker, I learned to
-                Understand the importance of maintaining
-                housing and the execution of such work.
+              <p className={"leading-snug responsive-text "}>
+                As a caretaker of a community college (folkhögskola), I got use for
+                my attention to detail.
               </p>
             </div>
         </article>

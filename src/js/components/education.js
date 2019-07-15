@@ -28,9 +28,9 @@ class Edu extends React.Component{
             <h3 className="h3-override-ml-nil">Preschool Teacher Education 2014-2017</h3>
             <p className="responsive-text">
               Three and a half year long education
-              in didactics including a bachelor's degree. The
+              in didactics. The
               education itself gave me the ability
-              to explain concepts thoroughly.
+              to explain concepts thoroughly, plan projects and I also developed my leadership skills.
             </p>
             <ul className="pl-6 pt-3">
               <li style={listStyles}>Bachelors degree</li>
@@ -45,7 +45,8 @@ class Edu extends React.Component{
             <ul className="pl-6 pt-3">
               <li style={listStyles}>Military guard training</li>
               <li style={listStyles}>Survival training</li>
-              <li style={listStyles}>Basic training</li>
+              <li style={listStyles}>AK5-C military license, tactical handgrenade training </li>
+              <li style={listStyles}>Basic training </li>
             </ul>
           </div>
         </article>
