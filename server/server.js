@@ -4,16 +4,39 @@ const path = require('path')
 const fs = require('fs');
 const https = require('https');
 const http = require('http');
+const bcrypt = require('bcryptjs');
 
-console.log(process.argv[2]);
+
+if(process.env.NODE_ENV !== 'development'){
+
+    var data = fs.readFileSync(path.resolve(__dirname, './config/crypt/crypt.txt'))
+    var hash = data.toString('utf-8');
+    var givenPass = '';
+    if(process.argv[2]){
+      givenPass = process.argv[2];
+    }else{
+      console.log("\x1b[31m", '---- You have to provide a password! ----')
+      process.exit(1);
+    }
+
+    var response = bcrypt.compareSync(givenPass, hash);
+
+
+    if(!response){
+      console.log("\x1b[31m", `---- Wrong password ----`);
+      process.exit(1);
+    }else{
+      console.log("\x1b[32m", '---- Nothing wrong here! Carry on ----');
+    };
+}
+
+
 var httpsOptions = {};
-httpsOptions.passphrase = process.argv[2];
-
   if(fs.existsSync(path.resolve(__dirname,'./config/ssl/cert.pem'))){
-    httpsOptions.cert = fs.readFileSync(path.resolve(__dirname,'./config/ssl/cert.pem');
+    httpsOptions.cert = fs.readFileSync(path.resolve(__dirname,'./config/ssl/cert.pem'));
   }
   if(fs.existsSync(path.resolve(__dirname,'./config/ssl/key.pem'))){
-    httpsOptions.key = fs.readFileSync(path.resolve(__dirname,'./config/ssl/key.pem')
+    httpsOptions.key = fs.readFileSync(path.resolve(__dirname,'./config/ssl/key.pem'));
   }
   if(fs.existsSync(path.resolve(__dirname,'./config/ssl/ca.pem'))){
     httpsOptions.ca = fs.readFileSync(path.resolve(__dirname,'./config/ssl/ca.pem'));
@@ -37,7 +60,7 @@ httpsOptions.passphrase = process.argv[2];
         https: () => process.env.SERVER_HTTPS || false,
         cert: httpsOptions.cert,
         key: httpsOptions.key,
-        passphrase: httpsOptions.passphrase
+        agent: false, //no connection pooling
     }
 
   require('./config/config.js')(app, express, serverConfig);
@@ -81,25 +104,13 @@ httpsOptions.passphrase = process.argv[2];
     res.sendFile(path.resolve(__dirname, './../public/index.html'));
   }
 
-  http.createServer(app).listen(80);
+  http.createServer(app, function(req,res) {
+    res.redirect('https://' + req.headers.host + req.url);
+  }).listen(80);
 //spreading that shit into the holy book
+
   let Server_Config_Holy_Book = {...serverConfig, ...httpsOptions};
 
-/*
-{
-  host: serverConfig.host(),
-  port: serverConfig.port(),
-  path: '/',
-  cert: serverConfig.cert,
-  key: serverConfig.key,
-  ca: serverConfig.ca,
-  passphrase: serverConfig.passphrase,
-  // rejectUnauthorized: false,
-  // requestCert: true,
-  // agent: false
-}
-
-*/
   https.createServer(Server_Config_Holy_Book, app).listen(serverConfig.port(), () => {
     console.log(`Server up on ${serverConfig.port()}`);
 
