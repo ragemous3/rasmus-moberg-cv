@@ -11,6 +11,7 @@ class TailwindExtractor {
 
 //Configure PurgeCSS
 const configurePurgeCss = () => {
+  if(process.env.NODE_ENV !== 'develoment'){
     return {
         //paths: arr, //purgecss tar flera paths
         exclude: '/node_modules/',
@@ -18,7 +19,7 @@ const configurePurgeCss = () => {
           './src/**/*.js',
           './tw-plugins/gradients.js',
           './tailwind.js',
-          './public/index.html'
+          './public/dist/index.html',
         ],
         css: ['./src/tailwind.css'],
         extractors: [
@@ -32,16 +33,13 @@ const configurePurgeCss = () => {
             }
         ]
     };
-  };
+  }else{
+    return false;
+  }
+};
 console.log('Postcss doing magic');
 
 module.exports = {
-    tryENV: function(){
-      if(process.env.NODE_ENV !== 'development'){
-        var Purge_Config = purgecss(configurePurgeCss());
-        return Purge_Config;
-      }
-    },
     plugins: [
 
         require('postcss-import')({
@@ -57,7 +55,9 @@ module.exports = {
                 'nesting-rules': true
             }
         }),
-
+        purgecss(
+          configurePurgeCss()
+        ),
         // require('postcss-assets')({
         //     loadPaths: ['**'],
         //   }),

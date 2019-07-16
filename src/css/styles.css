@@ -45,41 +45,11 @@
 ***********************Cursor Button Mechanics*************************
 ***********************************************************************
 */
-  @keyframes cursorEff{
-     0%{
-      /* filter: grayscale(0%); */
-      transform: translate3d(-1px, 0, 0);
-    }
-    100%{
-      /* filter: grayscale(100%); */
-      transform: translate3d(10px, 0, 0);
-    }
-  }
-  @keyframes cursorEff2{
-     0%{
-      /* filter: grayscale(0%); */
-      transform: translate3d(-1px, 0, 0);
-    }
-    100%{
-      /* filter: grayscale(100%); */
-      transform: translate3d(4px, 0, 0);
-    }
-  }
-    #contact:focus{
-      animation: cursorEff 1s;
-      outline: none;
-      border:none;
-      transform-style: preserve-3d;
-      animation-fill-mode: forwards;
-      cursor: pointer;
-    }
+
     button:focus {outline:0;}
 
     .floatAsideClick:hover{
       opacity: 0.5;
-      animation: cursorEff2 2s;
-      animation-fill-mode: forwards;
-      cursor: pointer;
     }
     .PointerCursor:hover{
       cursor: pointer;

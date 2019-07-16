@@ -32,17 +32,17 @@ if(process.env.NODE_ENV !== 'development'){
 
 
 var httpsOptions = {};
-  httpsOptions.passphrase = "hej1";
-  if(fs.existsSync(path.resolve(__dirname,'./config/ssl/cert.pem'))){
-    httpsOptions.cert = fs.readFileSync(path.resolve(__dirname,'./config/ssl/cert.pem'));
-  }
-  if(fs.existsSync(path.resolve(__dirname,'./config/ssl/key.pem'))){
-    httpsOptions.key = fs.readFileSync(path.resolve(__dirname,'./config/ssl/key.pem'));
-  }
-  if(fs.existsSync(path.resolve(__dirname,'./config/ssl/ca.pem'))){
-    httpsOptions.ca = fs.readFileSync(path.resolve(__dirname,'./config/ssl/ca.pem'));
-  }
+if(process.NODE_ENV === 'live'){
 
+  if(fs.existsSync(path.resolve(__dirname,'./config/ssl/letsencrypt/live/rasmusmoberg.me/privkey.pem'))){
+    httpsOptions.key = fs.readFileSync(path.resolve(__dirname,'./config/ssl/letsencrypt/live/rasmusmoberg.me/privkey.pem'));
+  }
+  if(fs.existsSync(path.resolve(__dirname,'./config/ssl/letsencrypt/live/rasmusmoberg.me/cert.pem'))){
+      httpsOptions.cert = fs.readFileSync(path.resolve(__dirname,'./config/ssl/letsencrypt/live/rasmusmoberg.me/cert.pem'));
+    }
+  if(fs.existsSync(path.resolve(__dirname,'./config/ssl/letsencrypt/live/rasmusmoberg.me/chain.pem'))){
+    httpsOptions.ca = fs.readFileSync(path.resolve(__dirname,'./config/ssl/letsencrypt/live/rasmusmoberg.me/chain.pem'));
+  }
 
   try {
     const tls = require('tls');
@@ -53,15 +53,36 @@ var httpsOptions = {};
     process.exit(1);
   }
 
+}else if(process.env.NODE_ENV === 'production'){
+
+  if(fs.existsSync(path.resolve(__dirname,'./config/ssl/cert.pem'))){
+    httpsOptions.cert = fs.readFileSync(path.resolve(__dirname,'./config/ssl/cert.pem'));
+  }
+  if(fs.existsSync(path.resolve(__dirname,'./config/ssl/key.pem'))){
+      httpsOptions.key = fs.readFileSync(path.resolve(__dirname,'./config/ssl/key.pem'));
+    }
+  if(fs.existsSync(path.resolve(__dirname,'./config/ssl/chain.pem'))){
+    httpsOptions.ca = fs.readFileSync(path.resolve(__dirname,'./config/ssl/chain.pem'));
+  }
+
+  try {
+    httpsOptions.passphrase = 'hej1';
+    const tls = require('tls');
+    tls.createSecureContext(httpsOptions);
+  } catch (err) {
+    console.error('There was a TLS error!', err.message);
+    console.error('Magic word please!');
+    process.exit(1);
+  }
+
+
+}
   var serverConfig = {
         public: () => process.env.SERVER_PUBLIC || "http://localhost:3000/",
         host: () => process.env.SERVER_HOST || "localhost",
         poll: () => process.env.SERVER_POLL || false,
         port: () => process.env.SERVER_PORT || 3000,
         https: () => process.env.SERVER_HTTPS || false,
-        cert: httpsOptions.cert,
-        key: httpsOptions.key,
-        agent: false, //no connection pooling
     }
 
   require('./config/config.js')(app, express, serverConfig);
@@ -105,14 +126,17 @@ var httpsOptions = {};
     res.sendFile(path.resolve(__dirname, './../public/index.html'));
   }
 
-  http.createServer(app, function(req,res) {
-    res.redirect('https://' + req.headers.host + req.url);
-  }).listen(80);
-//spreading that shit into the holy book
+  if(process.env.NODE_ENV === 'development'){
+    http.createServer(app, serverConfig).listen(80);
+  }
+    //spreading that shit into the holy book
+    //redirect all incoming request from http to https
 
-  let Server_Config_Holy_Book = {...serverConfig, ...httpsOptions};
 
-  https.createServer(Server_Config_Holy_Book, app).listen(serverConfig.port(), () => {
-    console.log(`Server up on ${serverConfig.port()}`);
+  if(process.env.NODE_ENV === 'live' || process.env.NODE_ENV === 'production'){
+    let Server_Config_Holy_Book = {...serverConfig, ...httpsOptions};
+      https.createServer(Server_Config_Holy_Book, app).listen(serverConfig.port(), () => {
+        console.log(`Server up on ${serverConfig.port()}`);
 
-  });
+      });
+  }

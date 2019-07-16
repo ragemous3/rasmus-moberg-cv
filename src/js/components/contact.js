@@ -27,7 +27,7 @@ class Card extends React.Component{
     document.body.removeChild(el);
     document.getElementById('mailtoer').setAttribute('aria-label', 'Email Copied!');
     setTimeout(function(){
-       document.getElementById('mailtoer').setAttribute('aria-label', 'Click to Copy email to clipboard!');
+       document.getElementById('mailtoer').setAttribute('aria-label', 'Click to copy email to clipboard!');
      }, 3000);
 
   }
@@ -76,7 +76,7 @@ class Card extends React.Component{
                           <svg className="m-1 mb-0 floatAsideClick  i-linkedin PointerCursor">
                           </svg>
                         </a>
-                        <a  id="mailtoer" onClick={(e) => {this.mailCopy()}} className="hint--bottom" aria-label="Click to Copy email to clipboard!">
+                        <a  id="mailtoer" onClick={(e) => {this.mailCopy()}} className="hint--bottom" aria-label="Click to copy email to clipboard!">
                           <svg className="m-1 mb-0 floatAsideClick  i-gmail PointerCursor">
                           </svg>
                         </a>

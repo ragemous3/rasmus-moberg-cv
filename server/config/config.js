@@ -46,12 +46,15 @@ module.exports = (app, express, serverConfig) => {
     else if(environment === "production"){
       console.log(`${process.env.NODE_ENV} started!`)
       app.use(express.static('public/dist/'));
+      process.env.SERVER_HOST = 'localhost';
+      process.env.SERVER_POLL = false;
+      process.env.SERVER_PORT = 443;
       return;
     }else if(environment === "live"){
       // process.env.DEVSERVER_PUBLIC = "https://www.rasmusmoberg.me",
-      process.env.SERVER_HOST = "rasmusmoberg.me",
-      process.env.SERVER_POLL = false,
-      process.env.SERVER_PORT = 443,
+      process.env.SERVER_HOST = "rasmusmoberg.me";
+      process.env.SERVER_POLL = false;
+      process.env.SERVER_PORT = 443;
       console.log(`${process.env.NODE_ENV} started!`)
       //Automize the routing for ya!
       app.use(express.static('public/dist/'));
