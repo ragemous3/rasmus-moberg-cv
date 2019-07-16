@@ -104,13 +104,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './src/index.html'),
-      filename: 'index.html',
-      /*
-      html-webpack-plugin handles adding appropriate <script> tags for you, so you might have to remove any <script> tags from the original index.html file.
-      /*/
-    }),
 
     new MiniCssExtractPlugin({
       //  "[name].css" || '[name].[hash].css'
@@ -119,7 +112,15 @@ module.exports = {
         template: '/css/styles.css',
         filename: 'styles.css',
         chunkFilename:'[id].styles.css' ,
-    })
+    }),
+
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/index.html'),
+      filename: 'index.html',
+      /*
+      html-webpack-plugin handles adding appropriate <script> tags for you, so you might have to remove any <script> tags from the original index.html file.
+      /*/
+    }),
 
   ],
 

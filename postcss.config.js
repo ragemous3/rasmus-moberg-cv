@@ -32,26 +32,32 @@ const configurePurgeCss = () => {
             }
         ]
     };
-};
+  };
 console.log('Postcss doing magic');
 
 module.exports = {
+    tryENV: function(){
+      if(process.env.NODE_ENV !== 'development'){
+        var Purge_Config = purgecss(configurePurgeCss());
+        return Purge_Config;
+      }
+    },
     plugins: [
+
         require('postcss-import')({
              plugins: [
                  require('stylelint') //Tool for understanding Different css-syntax and making that shit work
              ]
          }),
         require('tailwindcss')('./tailwind.config.js'),
-        // purgecss(
-        //   configurePurgeCss()
-        // ),
+
         require('postcss-preset-env')({
             autoprefixer: { grid: true },
             features: {
                 'nesting-rules': true
             }
         }),
+
         // require('postcss-assets')({
         //     loadPaths: ['**'],
         //   }),

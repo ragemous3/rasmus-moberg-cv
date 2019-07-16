@@ -13,6 +13,22 @@ function Main(){
 class Card extends React.Component{
   constructor(props){
     super(props)
+    this.mailCopy = this.mailcopy.bind(this);
+  }
+  mailcopy(e){
+    console.log('hejs')
+    var el = document.createElement('input');
+    el.style.height = 1 + 'px';
+    el.style.width = 1 + 'px';
+    el.value = 'rasmus.john.moberg@gmail.com';
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    document.getElementById('mailtoer').setAttribute('aria-label', 'Email Copied!');
+    setTimeout(function(){
+       document.getElementById('mailtoer').setAttribute('aria-label', 'Click to Copy email to clipboard!');
+     }, 3000);
 
   }
   scrollUp(){
@@ -45,7 +61,9 @@ class Card extends React.Component{
               </div>
                 <div className="responsive-text main-card-text">
                   <h4 className="text-shadow"><b>Rasmus Moberg</b></h4>
-                    <address className="text-shadow not-italic block contact-profile-text">
+
+                    <address className="text-shadow not-italic block ">
+
                       <p id="phone" className="typewriter-text contact-text-box">0722724429
                       </p>
                       <p id="adress" className="typewriter-text contact-text-box">
@@ -58,7 +76,7 @@ class Card extends React.Component{
                           <svg className="m-1 mb-0 floatAsideClick  i-linkedin PointerCursor">
                           </svg>
                         </a>
-                        <a href="mailto:rasmus.krister.moberg@gmail.com"  className="hint--bottom" aria-label="rasmus.krister.moberg@gmail.com">
+                        <a  id="mailtoer" onClick={(e) => {this.mailCopy()}} className="hint--bottom" aria-label="Click to Copy email to clipboard!">
                           <svg className="m-1 mb-0 floatAsideClick  i-gmail PointerCursor">
                           </svg>
                         </a>

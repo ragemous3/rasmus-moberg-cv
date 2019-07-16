@@ -123,8 +123,9 @@
         navbar.classList.remove('flex', 'flex-col', 'flex-1', 'flex-wrap', 'items-start', 'justify-between', 'p-6', 'pt-0');
       }else{
         var navbar = document.getElementById('nav-linkz');
-        var contactSection = document.getElementById('contact-section').clientHeight;
+        var contactSection = document.getElementById('contact-section').offsetHeight;
         navbar.style.height = contactSection + 'px';
+
         navbar.classList.add('flex', 'flex-col', 'flex-1', 'flex-wrap', 'items-start', 'justify-between', 'p-6', 'pt-0');
       }
     }

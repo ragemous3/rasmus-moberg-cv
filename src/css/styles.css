@@ -12,14 +12,6 @@
       scroll-behavior: smooth;
       -ms-overflow-style: none;
       overflow: -moz-scrollbars-none;
-      /* Prevent native touch events on Windows */
-      -ms-touch-action: none;
-      /* Prevent the callout on tap-hold and text selection */
-      -webkit-touch-callout: none;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
       /* Prevent text resize on orientation change, useful for web-apps */
       -webkit-text-size-adjust: none;
       -moz-text-size-adjust: none;
@@ -416,7 +408,7 @@
 }
 @screen xs{
   .language-box{
-    @apply break-normal;
+    @apply break-normal overflow-visible;
   }
   .nav-text{
     @apply text-base;

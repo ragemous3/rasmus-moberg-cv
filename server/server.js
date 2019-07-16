@@ -32,6 +32,7 @@ if(process.env.NODE_ENV !== 'development'){
 
 
 var httpsOptions = {};
+  httpsOptions.passphrase = "hej1";
   if(fs.existsSync(path.resolve(__dirname,'./config/ssl/cert.pem'))){
     httpsOptions.cert = fs.readFileSync(path.resolve(__dirname,'./config/ssl/cert.pem'));
   }

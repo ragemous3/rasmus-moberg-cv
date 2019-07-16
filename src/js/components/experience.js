@@ -72,7 +72,7 @@ class Accomplishments extends React.Component{
             {
               Array.from({length: this.state.languages.length}, (_, i) =>
                   <div key={`box${i}`}
-                     className={`${this.state.tooltips[i]} border-box language-box word-wrap responsive-text text-shadow`}
+                     className={`${this.state.tooltips[i]} border-box language-box  responsive-text text-shadow`}
                      aria-label={this.state.text[i]}
                      onClick={(e) => this.clicker(e)}
                    >
