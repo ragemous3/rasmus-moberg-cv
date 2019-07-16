@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development node server/server.js",
+    "lockserver": "node ./server/config/buildcrypt.js",
     "testprod": "cross-env NODE_ENV=production node server/server.js",
     "build": "cross-env ./node_modules/.bin/webpack -p --config ./webpack.prod.js",
     "live": "cross-env NODE_ENV=live node server/server.js"
@@ -40,6 +41,7 @@
     "@babel/register": "^7.4.4",
     "@fullhuman/postcss-purgecss": "^1.2.0",
     "animate.css": "^3.7.2",
+    "bcryptjs": "^2.4.3",
     "core-js": "^3.1.4",
     "create-react-context": "^0.3.0",
     "express": "^4.17.1",
@@ -54,7 +56,6 @@
     "resolve-url-loader": "^3.1.0",
     "stylelint": "^10.1.0",
     "stylelint-config-recommended": "^2.2.0"
-
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
