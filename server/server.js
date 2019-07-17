@@ -32,7 +32,11 @@ if(process.env.NODE_ENV !== 'development'){
 
 
 var httpsOptions = {};
-if(process.NODE_ENV === 'live'){
+/*
+  So the smart thing would be to put a nginx server up to handle ssl
+  but considering the size of this application it's not even necessary.
+*/
+if(process.env.NODE_ENV === 'live'){
 
   if(fs.existsSync(path.resolve(__dirname,'./config/ssl/letsencrypt/live/rasmusmoberg.me/privkey.pem'))){
     httpsOptions.key = fs.readFileSync(path.resolve(__dirname,'./config/ssl/letsencrypt/live/rasmusmoberg.me/privkey.pem'));
@@ -127,10 +131,10 @@ if(process.NODE_ENV === 'live'){
   }
 
   if(process.env.NODE_ENV === 'development'){
-    http.createServer(app, serverConfig).listen(80);
+    http.createServer(app, serverConfig).listen(3000);
   }
     //spreading that shit into the holy book
-    //redirect all incoming request from http to https
+
 
 
   if(process.env.NODE_ENV === 'live' || process.env.NODE_ENV === 'production'){
