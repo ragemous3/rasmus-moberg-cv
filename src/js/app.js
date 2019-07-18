@@ -20,6 +20,19 @@
 ****************Asynkroniskt laddning med dynamisk kodsplittning*******************************
 ***********************************************************************************************
 */
+const calculateNavHeight = () => {
+  if(document.defaultView.innerWidth <= 767 || window.screen.width <= 767){
+    var navbar = document.getElementById('nav-linkz');
+    navbar.classList.remove('flex', 'flex-col', 'flex-1', 'flex-wrap', 'items-start', 'justify-between', 'p-6', 'pt-0');
+  }else if(document.defaultView.innerWidth >= 767 || window.screen.width >= 767){
+    var navbar = document.getElementById('nav-linkz');
+    var contactSection = document.getElementById('contact-section').offsetHeight;
+    navbar.style.height = contactSection + 'px';
+    console.log('calculation made');
+        navbar.classList.add('flex', 'flex-col', 'flex-1', 'flex-wrap', 'items-start', 'justify-between', 'p-6', 'pt-0');
+  }
+}
+
   class LoadAsync extends React.Component{
     constructor(props){
       super(props)
@@ -31,7 +44,6 @@
       this.aside = [];
       this.mobileResizer = this.mobileResizer.bind(this);
       this.calculateFooter = this.calculateFooter.bind(this);
-      this.calculateNavHeight = this.calculateNavHeight.bind(this);
       this.content = React.createRef();
       this._isMounted = true;
     }
@@ -47,10 +59,11 @@
         return {lazy: 'smooth-loaded'}
       })
 
+      window.addEventListener('resize', this.mobileResizer);
+
     }
     componentWillMount(){
       if(this._isMounted === true && this.props.url){
-        window.addEventListener('resize', this.mobileResizer);
         //Syntax supporter by babels '@babel/plugin-syntax-dynamic-import'
         import(/*webpackChunkName: "[request]"*/ /* webpackMode: "lazy" */ '' + this.props.url).then(({Part}) => {
           this.middle.push(<Part />);
@@ -69,8 +82,7 @@
     }
     mobileResizer(e){
       //  window.screen.width  //true width of device
-
-      var innerwidth = document.body.clientWidth;
+      var innerwidth = document.body.offsetWidth;
         if(innerwidth >= 614){
           let navbar = document.getElementById('nav-linkz')
           navbar.classList.remove('hidden');
@@ -82,9 +94,9 @@
         if(document.defaultView.innerWidth <= 767 || window.screen.width <= 767){
 
           //kalkulera navbaren
-          this.calculateNavHeight();
           //kalkulera footer
           this.calculateFooter();
+          calculateNavHeight();
 
           if(document.getElementById('contact-section')){
             var contact = document.getElementById('contact-section');
@@ -109,7 +121,7 @@
           contact.style.display = 'inline-block';
 
             if(document.getElementById('navbar')){
-              this.calculateNavHeight();
+              calculateNavHeight();
             }
         }
 
@@ -117,32 +129,16 @@
     componentDidUpdate(){
       this.calculateFooter();
     }
-    calculateNavHeight(){
-      if(document.defaultView.innerWidth <= 767 || window.screen.width <= 767){
-        var navbar = document.getElementById('nav-linkz');
-        navbar.classList.remove('flex', 'flex-col', 'flex-1', 'flex-wrap', 'items-start', 'justify-between', 'p-6', 'pt-0');
-      }else{
-        var navbar = document.getElementById('nav-linkz');
-        var contactSection = document.getElementById('contact-section').offsetHeight;
-        navbar.style.height = contactSection + 'px';
 
-        navbar.classList.add('flex', 'flex-col', 'flex-1', 'flex-wrap', 'items-start', 'justify-between', 'p-6', 'pt-0');
-      }
-    }
     calculateFooter(){
       if(this.content.current){
         var contact = document.getElementById('contact-section').style;
         if(document.defaultView.innerWidth <= 767 || window.screen.width <= 767){
           var main = document.getElementById('main-page-structure');
-          main.style.height = this.content.current.clientHeight + 'px';
-
-          // this.content.current.clientHeight + 'px';
-          // contact.top = this.content.current.clientHeight + 'px';
+          main.style.height = this.content.current.offsetHeight + 'px';
         }else{
           contact.top = "";
-          if(document.getElementById('navbar')){
-            this.calculateNavHeight();
-          }
+
         }
     }
     }
@@ -182,6 +178,7 @@ class Nav extends React.Component{
       }
 
   }
+
   contactScroll(e){
     var image = document.getElementById('profile-pic');
     image.classList.remove('profile-flash');
@@ -208,8 +205,9 @@ class Nav extends React.Component{
       });
     }
   }
+
   componentDidMount(){
-    if(document.body.clientWidth >= 614){
+    if(document.body.offsetWidth >= 614){
         document.getElementById('nav-linkz').classList.remove('hidden');
     }else{
         document.getElementById('nav-linkz').classList.add('hidden');
@@ -293,6 +291,11 @@ class Routes extends React.Component{
     this.state = {
       contact: []
     }
+    this.onTheLoad = this.onTheLoad.bind(this);
+  }
+
+  onTheLoad(e){
+    calculateNavHeight();
   }
   componentWillMount(){
     import(/*webpackChunkName: "[request]"*/ /* webpackMode: "lazy" */ './components/contact.js').then(({Part}) => {
@@ -305,6 +308,7 @@ class Routes extends React.Component{
               console.log(`Error With dynamic import! Error: ${e}`);
         })
   }
+
   render(){
     return(
         <BrowserRouter>
@@ -320,7 +324,7 @@ class Routes extends React.Component{
             </section>
             {
               this.state.contact.map((Element, i) => {
-                  return (<div id="card-wrap" className="inline-block align-top main-card-wrapper" key={`Contact${i}`}>{Element}</div>);
+                  return (<div id="card-wrap" onLoad={(e) => { this.onTheLoad(e) }} className="inline-block align-top main-card-wrapper" key={`Contact${i}`}>{Element}</div>);
               })
             }
         </BrowserRouter>
