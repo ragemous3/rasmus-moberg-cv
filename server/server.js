@@ -113,6 +113,9 @@ if(process.env.NODE_ENV === 'live'){
   app.get('*', (req, res) => {
     process.env.ASSET_PATH = req.url;
     if(process.env.NODE_ENV === 'live' || process.env.NODE_ENV === 'production'){
+        if(req.headers.host === 'www.rasmusmoberg.me'){
+            return res.redirect(301, 'https://rasmusmoberg.me' + req.url);
+        }
         res.sendFile(path.resolve(__dirname + './../public/dist/index.html'));
     }else{
       res.status(400);
