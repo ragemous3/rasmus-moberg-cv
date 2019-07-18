@@ -55,7 +55,7 @@ module.exports = (app, express, serverConfig) => {
       app.get('/', (req, res, next) => {
           app.disable('x-powered-by'); //bots can use this header to identify my server
           if(req.headers.host === 'www.rasmusmoberg.me'){
-            //decided to not use NGINX because of the size of the page.
+            //decided not to use NGINX because of the size of the page.
             return res.reroute(301, 'https://rasmusmoberg.me');
           }
           next();
