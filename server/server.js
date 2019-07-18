@@ -99,13 +99,7 @@ if(process.env.NODE_ENV === 'live'){
     res.sendFile(path.resolve(__dirname, './favicon.png'));
   });
 
-  app.get('/', (req, res) => {
-    if(process.env.NODE_ENV === 'live' || process.env.NODE_ENV === 'production'){
-      app.disable('x-powered-by'); //bots can use this header to identify my server
-      sendHome(req, res);
-      res.end();
-    }
-  });
+
   app.get('/getcv', (req,res) => {
 
     var pth = path.resolve(__dirname, './../src/files/rasmusmcv.pdf');
