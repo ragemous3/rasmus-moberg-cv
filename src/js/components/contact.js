@@ -59,7 +59,7 @@ class Card extends React.Component{
                   <img id="profile-pic" src="../../img/profilbild.jpg" className={`img rounded  border-box `} alt="A picture of Rasmus" />
                 </figure>
               </div>
-                <div className="responsive-text main-card-text">
+                <div className="responsive-text main-card-text smooth-">
                   <h4 className="text-shadow"><b>Rasmus Moberg</b></h4>
 
                     <address className="text-shadow not-italic block ">
