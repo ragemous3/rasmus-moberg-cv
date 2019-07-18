@@ -51,7 +51,16 @@ module.exports = (app, express, serverConfig) => {
       process.env.SERVER_PORT = 443;
       return;
     }else if(environment === "live"){
-      // process.env.DEVSERVER_PUBLIC = "https://www.rasmusmoberg.me",
+      // Trigger a reroute before i let over routing to express.
+      app.get('/', (req, res, next) => {
+          app.disable('x-powered-by'); //bots can use this header to identify my server
+          if(req.headers.host === 'www.rasmusmoberg.me'){
+            //decided to not use NGINX because of the size of the page.
+            return res.reroute(301, 'https://rasmusmoberg.me');
+          }
+          next();
+        });
+
       process.env.SERVER_HOST = "rasmusmoberg.me";
       process.env.SERVER_POLL = false;
       process.env.SERVER_PORT = 443;
