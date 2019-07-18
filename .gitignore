@@ -1,11 +1,15 @@
 /node_modules/
-ssl/
-crypt/
-# Ignores dist subfolders #
+
+# Ignores subfolders #
+
 **/dist/css
 **/dist/img
 **/dist/legacy
 **/dist/modern
+
+**/crypt/*
+**/ssl/*
+
 
 # Compiled source #
 ###################
