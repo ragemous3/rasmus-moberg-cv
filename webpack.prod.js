@@ -210,7 +210,7 @@
       return {
           cache: true,
           parallel: true,
-          sourceMap: true
+          // sourceMap: true
       };
   };
 
@@ -249,7 +249,7 @@
                 {
                     loader: 'postcss-loader',
                     options: {
-                        sourceMap: true,
+                        // sourceMap: true,
                     }
                 },
                 'resolve-url-loader'
@@ -329,7 +329,7 @@
                 chunkFilename: path.join('./js/components','[name].js'),
             },
             mode: 'production',
-            devtool: 'source-map',
+            // devtool: 'source-map',
             optimization: configureOptimization(MODERN_CONFIG),
             module: {
                 rules: [

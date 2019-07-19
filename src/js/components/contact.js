@@ -45,7 +45,7 @@ class Card extends React.Component{
   }
   render(){
     return(
-          <aside id="contact-section" className={`main-card border-box smooth-loaded`}>
+          <aside id="contact-section" className={`main-card border-box`}>
             <div id="close-card" className="close-card">
               <img  className="close-image" src="../../img/close32.png"  alt="close card" />
             </div>
