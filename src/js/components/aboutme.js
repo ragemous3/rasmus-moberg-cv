@@ -44,7 +44,7 @@ class AboutText extends React.Component{
                     <div className="pb-4 leading-loose text-shadow responsive-text">
                       This page was created with react, some vanilla js, node(with express) as a server and
                       slimified with webpack.
-                      The website works great in both mobile- and tabloid-format, and that can be checked out <a href="http://quirktools.com/screenfly/#u=http%3A//rasmusmoberg.me&w=375&h=667&a=37" className="underline">here</a>,
+                      The website works great in both mobile- and tabloid-format, and that can be checked out,
                       or simply by resizing your browser window.
                     </div>
                     <div className="pb-4 leading-loose text-shadow responsive-text">
