@@ -35,7 +35,6 @@ const calculateNavHeight = () => {
 
 //resetting scaled up contact-card to original position
 const resetProfile = (e) => {
-
   let prfcover = document.getElementById('prf-cover');
   prfcover.classList.remove('block');
   prfcover.classList.add('hidden');
@@ -119,8 +118,10 @@ const resetProfile = (e) => {
           this.calculateFooter();
           //kalkulera navbaren
           calculateNavHeight();
-          //If user resizes window when contact-page is up It's closed
-          resetProfile();
+          //If user resizes window when contact-page is up. Checking if it's ever been clicked
+          if(document.getElementById('prf-cover')){
+            resetProfile();
+          }
           if(document.getElementById('contact-section')){
             var contact = document.getElementById('contact-section');
             contact.style.display = "flex";
