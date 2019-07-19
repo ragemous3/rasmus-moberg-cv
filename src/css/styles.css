@@ -166,7 +166,7 @@
   animation: genomskinlig 0.5s 1;
 }
 .smooth-loaded2{
-  animation: genomskinlig 0.8s 1;
+  animation: genomskinlig 1s 1;
   animation-timing-function: ease-in;
 }
 
