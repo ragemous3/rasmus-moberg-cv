@@ -24,12 +24,12 @@
 const calculateNavHeight = () => {
   if(document.defaultView.innerWidth <= 767 || window.screen.width <= 767){
     var navbar = document.getElementById('nav-linkz');
-    //navbar.classList.remove('flex', 'flex-col', 'flex-1', 'flex-wrap', 'items-start', 'justify-between', 'p-6', 'pt-0');
+    navbar.classList.remove('flex', 'flex-col', 'flex-1', 'flex-wrap', 'items-start', 'justify-between', 'p-6', 'pt-0');
   }else if(document.defaultView.innerWidth >= 768 || window.screen.width >= 768){
     var navbar = document.getElementById('nav-linkz');
     var contactSection = document.getElementById('contact-section').offsetHeight;
     navbar.style.height = contactSection + 'px';
-    // navbar.classList.add('flex', 'flex-col', 'flex-1', 'flex-wrap', 'items-start', 'justify-between', 'p-6', 'pt-0');
+    navbar.classList.add('flex', 'flex-col', 'flex-1', 'flex-wrap', 'items-start', 'justify-between', 'p-6', 'pt-0');
   }
 }
 

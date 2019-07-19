@@ -473,9 +473,9 @@
 
 }
 @screen md{
-  .nav-linkz{
+  /* .nav-linkz{
     @apply flex flex-col flex-1 flex-wrap items-start justify-between p-6 pt-0;
-  }
+  } */
   .main-card-wrapper{
     @apply ml-0;
   }
