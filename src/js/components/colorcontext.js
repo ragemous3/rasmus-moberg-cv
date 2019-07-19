@@ -1,4 +1,8 @@
   import React from 'react';
+  /*
+    Unused code but safekept for sentimental reasons  (It's a great piece of code)
+  */
+
 
   //Initiala kontexten skapas
   const ColorContext = React.createContext({

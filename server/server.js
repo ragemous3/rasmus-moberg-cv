@@ -113,6 +113,7 @@ if(process.env.NODE_ENV === 'live'){
   app.get('*', (req, res) => {
     process.env.ASSET_PATH = req.url;
     if(process.env.NODE_ENV === 'live' || process.env.NODE_ENV === 'production'){
+        //Route www. paths to ->https://rasmusmober.me
         if(req.headers.host === 'www.rasmusmoberg.me'){
             return res.redirect(301, 'https://rasmusmoberg.me' + req.url);
         }

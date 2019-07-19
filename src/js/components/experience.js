@@ -63,12 +63,16 @@ class Accomplishments extends React.Component{
 
   }
   render(){
+    const listStyle = {
+      "listStyleType": "circle",
+      "listStylePosition": "outside",
+    };
     return(
         <>
         <h1>Experience</h1>
         <article>
           <h2>Languages, frameworks, environments and libraries</h2>
-          <section className="flex flex-1 flex-wrap mt-3">
+          <section className="flex flex-1 flex-wrap mt-3 pb-4">
             {
               Array.from({length: this.state.languages.length}, (_, i) =>
                   <div key={`box${i}`}
@@ -88,15 +92,23 @@ class Accomplishments extends React.Component{
               </div>
           </article>
         </article>
-        <article className="pb-4 pt-4">
+        <article className="pt-4 pb-4">
           <h2>Relevant work experience</h2>
-            <div className=" responsive-text text-shadow">
-                <h3 className="h3-override-ml-nil">Freelance company - 2019</h3>
-                <p className={"leading-snug responsive-text"}>Founded 2019</p>
+            <div className=" responsive-text text-shadow ">
+              <ul className="pl-6" style={listStyle}>
+                <li>
+                  <h3 className="h3-override-ml-nil">Freelance company - 2019</h3>
+                </li>
+              </ul>
+              <p className={"pl-6  responsive-text"}>Founded 2019</p>
             </div>
             <div className=" responsive-text">
-              <h3 className="h3-override-ml-nil">Consultant at Regnet Co - 2019</h3>
-              <p className={"leading-snug responsive-text"}>
+              <ul className="pl-6" style={listStyle}>
+                <li>
+                  <h3 className="h3-override-ml-nil">Consultant at Regnet Co - 2019</h3>
+                </li>
+              </ul>
+              <p className={" responsive-text pl-6"}>
                 I've been consulted for programmatic bugs, hands on work with
                 implementing new features to websites
                 and other programmatic expertise.
@@ -105,24 +117,36 @@ class Accomplishments extends React.Component{
         </article>
         <article className="pb-4 pt-4">
           <h2>Other work experience</h2>
-            <div>
-              <h3 className="h3-override-ml-nil">Personal assistent - 2018</h3>
-                <p className={`leading-snug responsive-text`}>
+            <div className="responsive-text text-shadow ">
+              <ul className="pl-6" style={listStyle}>
+                <li>
+                  <h3 className="h3-override-ml-nil">Personal assistent - 2018</h3>
+                </li>
+              </ul>
+                <p className={` responsive-text  pl-6`}>
                 As a personal assistent I learned
                 the value of building strong relationships.
               </p>
             </div>
-            <div className="responsive-text text-shadow">
-              <h3 className="h3-override-ml-nil">Preschool teacher - 2017-2018</h3>
-                <p className={`leading-snug responsive-text`}>
+            <div className="text-shadow pb-4">
+              <ul className="pl-6" style={listStyle}>
+                <li>
+                  <h3 className="h3-override-ml-nil">Preschool teacher - 2017-2018</h3>
+                </li>
+              </ul>
+                <p className={` responsive-text pl-6`}>
                 The work as a preschool teacher has given me
                 leadership skills and trained my ability
                 to lead and plan under pressure.
               </p>
             </div>
-            <div className=" responsive-text text-shadow">
-              <h3 className={`h3-override-ml-nil`}>Caretaker - 2015 och 2016</h3>
-              <p className={"leading-snug responsive-text "}>
+            <div className=" text-shadow">
+              <ul className="pl-6" style={listStyle}>
+                <li>
+                  <h3 className={`h3-override-ml-nil`}>Caretaker - 2015 och 2016</h3>
+                </li>
+              </ul>
+              <p className={" responsive-text pl-6 "}>
                 As a caretaker of a community college (folkhögskola), I got use for
                 my attention to detail.
               </p>

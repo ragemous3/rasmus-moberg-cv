@@ -8,6 +8,7 @@ module.exports = {
       'purple-blue': [theme('colors.purple.500'), theme('colors.blue.500')],
       'bgcol': ['to top', '#fbc2eb 0%', '#a6c1ee 100%'],
       'navcol': ['to bottom', '#fbc2eb 0%', '#a6c1ee 100%'],
+      'cardcol': ['to top', '#2c4164 0%', '#ced8ed 100%']
     }),
     screens: {
       '0': '0px',
@@ -152,6 +153,8 @@ module.exports = {
       '6': '1.5rem',
       '20pex': '20px',
       '40pex': '40px',
+      '12k5pex': '12.5px',
+      '65pex': '65px',
       '80pex': '80px',
       '120pex': '120pex',
       '2755pex': '275.5px',
@@ -325,6 +328,8 @@ module.exports = {
       '85':'85%',
       '100': '100%',
       '1000': '1000%',
+      'm20':'-2rem',
+      'm25': '-2.5rem',
       auto: 'auto',
     },
     letterSpacing: {
@@ -485,6 +490,7 @@ module.exports = {
     zIndex: {
       auto: 'auto',
       '0': '0',
+      '5': '5',
       '10': '10',
       '20': '20',
       '30': '30',

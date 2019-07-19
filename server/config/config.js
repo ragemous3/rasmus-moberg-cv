@@ -51,9 +51,9 @@ module.exports = (app, express, serverConfig) => {
       process.env.SERVER_PORT = 443;
       return;
     }else if(environment === "live"){
-      // Trigger a reroute before i let over routing to express.
+      // Trigger a reroute of "www."-prefix before letting over routing to express.
       app.get('/', (req, res, next) => {
-          app.disable('x-powered-by'); //bots can use this header to identify my server
+          app.disable('x-powered-by');
           if(req.headers.host === 'www.rasmusmoberg.me'){
             //decided not to use NGINX because of the size of the page.
             return res.reroute(301, 'https://rasmusmoberg.me');
