@@ -13,7 +13,11 @@ function Main(){
 class Card extends React.Component{
   constructor(props){
     super(props)
+    this.state = {
+      lazy: 'smooth-loader'
+    }
     this.mailCopy = this.mailcopy.bind(this);
+    this.onLoading = this.onLoading.bind(this);
   }
   mailcopy(e){
     var el = document.createElement('input');
@@ -31,6 +35,11 @@ class Card extends React.Component{
        }, 3000);
 
   }
+  onLoading(){
+    this.setState(() => {
+      return {lazy: 'smooth-loaded'}
+    })
+  }
   scrollUp(){
     if(window.innerWidth <= 613){
       let contact = document.getElementById('contact-section');
@@ -45,7 +54,7 @@ class Card extends React.Component{
   }
   render(){
     return(
-          <aside id="contact-section" className={`main-card border-box`}>
+          <aside id="contact-section" onLoad={(e) => this.onLoading(e)} className={`main-card border-box ${this.state.lazy}`}>
             <div id="close-card" className="close-card">
               <img  className="close-image" src="../../img/close32.png"  alt="close card" />
             </div>

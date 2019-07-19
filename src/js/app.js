@@ -27,7 +27,7 @@ const calculateNavHeight = () => {
     navbar.classList.remove('flex', 'flex-col', 'flex-1', 'flex-wrap', 'items-start', 'justify-between', 'p-6', 'pt-0');
   }else if(document.defaultView.innerWidth >= 768 || window.screen.width >= 768){
     var navbar = document.getElementById('nav-linkz');
-    var contactSection = document.getElementById('contact-section').offsetHeight;
+    var contactSection = document.getElementById('contact-section').clientHeight;
     navbar.style.height = contactSection + 'px';
     navbar.classList.add('flex', 'flex-col', 'flex-1', 'flex-wrap', 'items-start', 'justify-between', 'p-6', 'pt-0');
   }
@@ -204,6 +204,9 @@ const resetProfile = (e) => {
 class Nav extends React.Component{
   constructor(props){
     super(props)
+    this.state = {
+      lazy: 'smooth-loader'
+    }
     this.contactScroll = this.contactScroll.bind(this);
     this.showNav = this.showNav.bind(this);
   }
@@ -271,6 +274,9 @@ class Nav extends React.Component{
  }
 
   componentDidMount(){
+    this.setState(() => {
+      return {lazy: 'smooth-loaded2'}
+    })
     //If lower than 614px hide the navbar
     if(document.body.offsetWidth >= 614){
         document.getElementById('nav-linkz').classList.remove('hidden');
@@ -282,7 +288,7 @@ class Nav extends React.Component{
   render(){
     return (
       <>
-        <nav id="navbar" className="nav-bar border-box ">
+        <nav id="navbar" className={`nav-bar border-box ${this.state.lazy} `}>
           <section id="nav-linkz" className="border-box nav-linkz nav-text ">
             <div className={`nav-link-box-first bg-transparent`}>
               <NavLink className={` border-box a-link `} to="/">About Me</NavLink>

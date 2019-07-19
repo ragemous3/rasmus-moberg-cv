@@ -152,7 +152,7 @@
 
 .smooth-loader{
   opacity:0;
-  transition: all 0.1s ease;
+  transition: all 0.2s ease;
 }
 
 @keyframes genomskinlig{
@@ -164,8 +164,11 @@
 }
 .smooth-loaded{
   animation: genomskinlig 0.5s 1;
-}
+}.smooth-loaded2{
+  animation: genomskinlig 1.2s 1;
+  animation-timing-function: ease-in;
 
+}
 
 /*
 *******************************GENERAL*****************************
