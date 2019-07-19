@@ -164,10 +164,10 @@
 }
 .smooth-loaded{
   animation: genomskinlig 0.5s 1;
-}.smooth-loaded2{
-  animation: genomskinlig 1.2s 1;
+}
+.smooth-loaded2{
+  animation: genomskinlig 0.8s 1;
   animation-timing-function: ease-in;
-
 }
 
 /*
