@@ -61,12 +61,12 @@ class Card extends React.Component{
                 <div className="responsive-text main-card-text smooth-">
                   <h4 className="text-shadow pt-4"><b>Rasmus Moberg</b></h4>
                     <address className="text-shadow not-italic block ">
-                      <p id="phone" className="typewriter-text contact-text-box">0722724429
+                      <p id="phone" className=" contact-text-box">0722724429
                       </p>
-                      <p id="adress" className="typewriter-text contact-text-box">
+                      <p id="adress" className=" contact-text-box">
                         Sköllerstagatan 27,
                       </p>
-                      <p className="typewriter-text text-sm">124 65, Bandhagen</p>
+                      <p className=" text-sm">124 65, Bandhagen</p>
                       <div className="leading-snug pt-3 flex flex-1 flex-row">
                         <a href="https://www.linkedin.com/in/rasmus-moberg-0aba88174/" target="_blank">
                           <svg className="m-1 mb-0 floatAsideClick  i-linkedin PointerCursor">

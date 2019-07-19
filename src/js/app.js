@@ -283,7 +283,7 @@ class Nav extends React.Component{
     return (
       <>
         <nav id="navbar" className="nav-bar border-box smooth-loaded">
-          <section id="nav-linkz" className="border-box nav-linkz smooth-loaded nav-text ">
+          <section id="nav-linkz" className="border-box nav-linkz nav-text ">
             <div className={`nav-link-box-first bg-transparent`}>
               <NavLink className={` border-box a-link `} to="/">About Me</NavLink>
             </div>
