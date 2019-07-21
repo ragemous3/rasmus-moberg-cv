@@ -164,11 +164,18 @@
 75%  {opacity: 0.75;}
 100% {opacity: 1;}
 }
+@keyframes genomskinlig2{
+0%   {opacity: 0;}
+25%  {opacity: 0.0;}
+50%  {opacity: 0.50;}
+75%  {opacity: 0.75;}
+100% {opacity: 1;}
+}
 .smooth-loaded{
   animation: genomskinlig 0.5s 1;
 }
 .smooth-loaded2{
-  animation: genomskinlig 1s 1;
+  animation: genomskinlig2 1s 1;
   animation-timing-function: ease-in;
 }
 
@@ -370,7 +377,7 @@ transform: rotate3d(0, 1, 0, 360deg);
     @apply w-full;
   }
 .bg-ham {
-  @apply fixed right-10 bottom-5 block;
+  @apply fixed right-10 bottom-5 block z-50;
 	width: 30px;
 	height: 30px;
 	margin: 25px;
@@ -405,15 +412,7 @@ transform: rotate3d(0, 1, 0, 360deg);
   background-color: rgb(98, 5, 30);
   /* transform:rotate(45deg); */
 }
-  /* .bg-ham{
-    @apply fixed right-10 bottom-20pex block rounded-full border-1 border-solid border-black;
-    background-image: url('./../img/hamburger.png');
-    background-color: #d1ccd7;
-    background-size: 100% 100%;
-    width: 45px;
-    height: 45px;
-    background-repeat: no-repeat;
-  } */
+
   /*
   *******************************Language-box*****************************
   */
@@ -434,13 +433,11 @@ transform: rotate3d(0, 1, 0, 360deg);
   */
   .nav-bar{
     @apply text-2xl block fixed bottom-0 left-0 z-20 bg-grad-navcol w-full;
-		/* box-shadow: 0 -5px 5px -5px #333; */
-    box-shadow: rgba(0,0,0,0.6) 0px 2px 3px, inset rgba(0,0,0,0.6) 0px -1px 2px;
+    box-shadow: rgba(0,0,0,0.6) 0 2px 3px;
 
   }
   .nav-linkz{
     @apply flex flex-initial flex-row items-center flex-wrap justify-center h-80pex pl-40pex pb-12k5pex pr-40pex ;
-    /*  pl-40pex*/
   }
   .nav-text{
     @apply text-sm;

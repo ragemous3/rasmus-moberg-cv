@@ -45,11 +45,13 @@ class AboutText extends React.Component{
                       This page was created with react, some vanilla js, node(with express) as a server and
                       slimified with webpack.
                       The website works great in both mobile- and tabloid-format, and that can be checked out
-                      by resizing your browser window - if not already on mobile ofcourse.
+                      by resizing your browser window - if not already on mobile ofcourse. Older mobile browsers
+                      will have a jerky scrolling.
                     </div>
                     <div className="pb-4 leading-loose text-shadow responsive-text">
-                    You can check out the code for this website <a href="https://github.com/ragemous3/rasmus-moberg-cv" className="underline"> here</a>.
-                    This site have a pretty great polyfill-cover for most browsers.
+                      You can check out the code for this website <a href="https://github.com/ragemous3/rasmus-moberg-cv" className="underline"> here</a>.
+                      This site have a pretty great polyfill-cover for most browsers. Older browsers and Edge
+                      will have a more jerky scrolling and will performe less smoothly.
                     </div>
                 </article>
               </div>

@@ -103,6 +103,7 @@ const resetProfile = (e) => {
     }
     mobileResizer(e){
       //  window.screen.width  //true width of device
+      document.getElementById('hamburger-id').classList.remove('activated');
       var innerwidth = document.body.offsetWidth;
         if(innerwidth >= 614){
           let navbar = document.getElementById('nav-linkz')
@@ -264,17 +265,22 @@ class Nav extends React.Component{
     }else{
       //Scroll down to contact Edge/chrome/firefox
         var rect = contact.getBoundingClientRect();
-
         if(e.target.id === 'contact'){
-          if(rect.y === 378 || rect.top === 378){
+
+          if(rect.y < 400  || rect.top < 400){
             contact.classList.add('before-card');
             image.classList.add('profile-flash');
             console.log('trigger inside of contact')
           }else{
-            contact.scrollIntoView();
+            contact.scrollIntoView({behavior: "smooth"});
           }
         }else{
-          main.scrollIntoView();
+          //prevent hacky rendering when getting other components;
+          if(e.target.pathname === location.pathname){
+            window.scrollTo({
+              top: 0,
+              behavior:"smooth"});
+          }
           contact.classList.remove('before-card');
           image.classList.remove('profile-flash');
         }
