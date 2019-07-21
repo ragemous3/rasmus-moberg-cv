@@ -6,11 +6,11 @@ class Accomplishments extends React.Component{
     super(props)
     this.state = {
       languages: [
-        'javaScript',
+        'jS',
         'React',
         'C#',
-        'TypeScript',
-        'Craft3 CMS',
+        'tS',
+        'Craft3',
         'Node.js',
         'Webpack',
         'PHP',

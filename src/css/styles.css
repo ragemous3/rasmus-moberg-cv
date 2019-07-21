@@ -41,7 +41,9 @@
     p {
       @apply leading-loose text-lg;
     }
-
+    .general-shadow{
+        box-shadow: rgba(0,0,0,0.3) 0px 2px 3px, inset rgba(0,0,0,0.3) 0px -1px 2px;
+    }
 /*
 ***********************************************************************
 ***********************Cursor Button Mechanics*************************
@@ -314,17 +316,47 @@
    .main-card{
      @apply w-full relative ml-0 align-bottom flex flex-1 items-center justify-center;
    }
+
+   /*
+        before-card animation (The "before-box" of main-card)
+   */
+   @keyframes rotateAround {
+     0% {
+       @apply top-m30;
+
+transform: rotate3d(0, 1, 0, 0deg);
+}
+     50% {
+       @apply top-m50;
+transform: rotate3d(0, 1, 0, 180deg);
+     }
+     100% {
+       @apply top-m30;
+transform: rotate3d(0, 1, 0, 360deg);
+     }
+   }
+   /*
+          The "before-box" of main-card
+   */
+   .before-card:before{
+     @apply absolute z-20 top-m35 inline-block;
+     background-image: url('./../img/downdown.png');
+     background-size: 100% 100%;
+     opacity: 1;
+     width: 45px;
+     height: 45px;
+     content:"";
+     display:inline-block;
+     animation-name: rotateAround;
+     animation-iteration-count: infinite;
+     animation-timing-function: linear;
+     animation-duration: 2.5s;
+   }
+
    .inner-card{
      @apply h-1333 mb-20  inline-block h-full;
    }
-   .main-card-down{
-     @apply absolute left-0 z-10;
-     background-image: url('./../img/downdown.png');
-     background-size: 100% 100%;
-     width: 30px;
-     height: 30px;
-     background-repeat: no-repeat;
-   }
+
    .main-image{
      @apply static w-image-w flex-shrink-0;
    }
@@ -337,15 +369,51 @@
   .main-text-box{
     @apply w-full;
   }
-  .bg-ham{
-    @apply fixed right-10 bottom-20pex block rounded-full;
+.bg-ham {
+  @apply fixed right-10 bottom-5 block;
+	width: 30px;
+	height: 30px;
+	margin: 25px;
+}
+.bg-ham span {
+	margin: 0 auto;
+	position: relative;
+	top: 12px;
+}
+.bg-ham span:before, .bg-ham span:after {
+	position: absolute;
+	content: '';
+}
+.bg-ham span:before {
+	margin-top: -12px;
+}
+.bg-ham span:after {
+	margin-top: 12px;
+}
+.bg-ham span, .bg-ham  span:before, .bg-ham span:after {
+	width: 30px;
+	height: 6px;
+	background-color: #000;
+	display: block;
+  transition: all 0.3s ease;
+}
+.bg-ham span {
+  transition: 0.2s ease 0s;
+}
+.activated span, .activated span:before ,.activated span:after  {
+  margin: 0px;
+  background-color: rgb(98, 5, 30);
+  /* transform:rotate(45deg); */
+}
+  /* .bg-ham{
+    @apply fixed right-10 bottom-20pex block rounded-full border-1 border-solid border-black;
     background-image: url('./../img/hamburger.png');
     background-color: #d1ccd7;
     background-size: 100% 100%;
-    width: 35px;
-    height: 35px;
+    width: 45px;
+    height: 45px;
     background-repeat: no-repeat;
-  }
+  } */
   /*
   *******************************Language-box*****************************
   */
@@ -366,7 +434,9 @@
   */
   .nav-bar{
     @apply text-2xl block fixed bottom-0 left-0 z-20 bg-grad-navcol w-full;
-    box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.6);
+		/* box-shadow: 0 -5px 5px -5px #333; */
+    box-shadow: rgba(0,0,0,0.6) 0px 2px 3px, inset rgba(0,0,0,0.6) 0px -1px 2px;
+
   }
   .nav-linkz{
     @apply flex flex-initial flex-row items-center flex-wrap justify-center h-80pex pl-40pex pb-12k5pex pr-40pex ;
@@ -451,6 +521,7 @@
     @apply w-1/5 align-top relative inline-block z-0;
     background-image:  none;
     box-shadow: none;
+    border: none;
   }
   .nav-linkz{
     /*
@@ -470,9 +541,7 @@
   .main-card-wrapper{
     @apply ml-1/4;
   }
-  .main-card-down{
-    @apply hidden;
-  }
+
 
 }
 @screen md{

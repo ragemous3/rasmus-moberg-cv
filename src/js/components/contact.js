@@ -40,31 +40,17 @@ class Card extends React.Component{
       return {lazy: 'smooth-loaded'}
     })
   }
-  scrollUp(){
-    if(window.innerWidth <= 613){
-      let contact = document.getElementById('contact-section');
-      var ctn = Array(contact);
-      let main = document.getElementById('main-page-structure');
-      // main.scrollIntoView(false);
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    }
-  }
   render(){
     return(
           <aside id="contact-section" onLoad={(e) => this.onLoading(e)} className={`main-card border-box ${this.state.lazy}`}>
-            <div id="close-card" className="close-card">
+            <div id="close-card" className="close-card general-shadow">
               <img  className="close-image" src="../../img/close32.png"  alt="close card" />
             </div>
             <article id="contact-inner" className="inner-card h-full">
               <div className="relative block main-image object-center">
-                <div onClick={(e) => {this.scrollUp()}}  className="main-card-down">
 
-                </div>
                 <figure id="profile-carrier ">
-                  <img id="profile-pic" src="../../img/profilbild.jpg" className={`border-box `} alt="A picture of Rasmus" />
+                  <img id="profile-pic" src="../../img/profilbild.jpg" className={`general-shadow border-box `} alt="A picture of Rasmus" />
                 </figure>
               </div>
                 <div className="responsive-text main-card-text smooth-">

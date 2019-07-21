@@ -40,7 +40,7 @@ const resetProfile = (e) => {
   prfcover.classList.add('hidden');
 
   //reseting contact-card;
-  document.getElementById('contact-section').classList.remove('z-10', 'contact-center', 'p-12', 'bg-gradient-card');
+  document.getElementById('contact-section').classList.remove('z-10', 'contact-center', 'p-12', 'bg-gradient-card', 'general-shadow');
   //hiding close-button
    var close = document.getElementById('close-card');
    close.classList.add('hidden');
@@ -112,6 +112,7 @@ const resetProfile = (e) => {
           navbar.classList.add('hidden');
           navbar.style.height = '';
         }
+
         if(document.defaultView.innerWidth <= 767 || window.screen.width <= 767){
 
           //kalkulera footer
@@ -212,21 +213,25 @@ class Nav extends React.Component{
   }
   showNav(e){
     var nav = document.getElementById('nav-linkz');
-    e.stopPropagation();
+    var ham = document.getElementById('hamburger-id')
     if(nav.classList.contains('hidden')){
       nav.classList.remove('hidden');
+      nav.classList.add('smooth-loaded');
+      ham.classList.add('activated');
     }else{
-      nav.classList.add('hidden');
+      nav.classList.add('hidden', );
+      nav.classList.remove('smooth-loaded')
+      ham.classList.remove('activated');
     }
   }
 
   contactScroll(e){
     var image = document.getElementById('profile-pic');
+    image.classList.remove('profile-flash');
     var contact = document.getElementById('contact-section');
-
-    if(e.target.id === 'contact'){
+    var main = document.getElementById('main-page-structure');
       //document.body.clientWidth to handle iframes and user resizes
-      if( document.defaultView.innerWidth >= 768 && window.screen.width >= 768){
+      if(e.target.id === 'contact' && document.defaultView.innerWidth >= 768 && window.screen.width >= 768){
       //if there are no cover. Create it and put it out on the screen;
         if(!document.getElementById('prf-cover')){
         //  Get the computed heights of all elements;
@@ -248,7 +253,7 @@ class Nav extends React.Component{
         }
 
         //adding css to put card in the middle of the page;
-      contact.classList.add('z-10', 'contact-center', 'p-12', 'bg-gradient-card');
+      contact.classList.add('z-10', 'contact-center', 'p-12', 'bg-gradient-card', 'general-shadow');
       //close button;
       var close = document.getElementById('close-card');
       close.classList.remove('hidden');
@@ -258,18 +263,21 @@ class Nav extends React.Component{
       image.classList.add('profile-flash');
     }else{
       //Scroll down to contact Edge/chrome/firefox
-        if(contact.getBoundingClientRect().y > 297){
-        window.scrollTo({
-          top: document.body.scrollHeight,
-          behavior: 'smooth'
-        });
+        var rect = contact.getBoundingClientRect();
 
-        }else if(contact.getBoundingClientRect().top > 297){
-          contact.scrollIntoView();
+        if(e.target.id === 'contact'){
+          if(rect.y === 378 || rect.top === 378){
+            contact.classList.add('before-card');
+            image.classList.add('profile-flash');
+            console.log('trigger inside of contact')
+          }else{
+            contact.scrollIntoView();
+          }
+        }else{
+          main.scrollIntoView();
+          contact.classList.remove('before-card');
+          image.classList.remove('profile-flash');
         }
-
-    }
-
    }
  }
 
@@ -291,23 +299,24 @@ class Nav extends React.Component{
         <nav id="navbar" className={`nav-bar border-box ${this.state.lazy} `}>
           <section id="nav-linkz" className="border-box nav-linkz nav-text ">
             <div className={`nav-link-box-first bg-transparent`}>
-              <NavLink className={` border-box a-link `} to="/">About Me</NavLink>
+              <NavLink className={` border-box a-link `} to="/"  onClick={(e) => {this.contactScroll(e)}}>About Me</NavLink>
             </div>
             <div className={`nav-link-box bg-transparent`}>
-              <NavLink className={` border-box a-link `} to="/projects">Projects</NavLink>
+              <NavLink className={` border-box a-link `} to="/projects"  onClick={(e) => {this.contactScroll(e)}}>Projects</NavLink>
             </div>
             <div className={`nav-link-box bg-transparent`}>
-              <NavLink className={` border-box a-link `} to="/education">Education</NavLink>
+              <NavLink className={` border-box a-link `} to="/education"  onClick={(e) => {this.contactScroll(e)}}>Education</NavLink>
             </div>
             <div className={`nav-link-box bg-transparent`}>
-              <NavLink className={` border-box a-link `} to="/experience">Experience</NavLink>
+              <NavLink className={` border-box a-link `} to="/experience"  onClick={(e) => {this.contactScroll(e)}}>Experience</NavLink>
             </div>
             <div className={`nav-link-box bg-transparent `}>
               <button id="contact"  className={` border-box a-link `} onClick={(e) => {this.contactScroll(e)}}>Contact</button>
             </div>
           </section>
-          <section className="bg-ham" onClick={(e) => {this.showNav(e)}}>
-            &nbsp;
+          <section id="hamburger-id" className="bg-ham" onClick={(e) => {this.showNav(e)}}>
+            <span>
+            </span>
           </section>
         </nav>
       </>

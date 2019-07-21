@@ -315,6 +315,7 @@ module.exports = {
     }),
     inset: {
       'noll': '""',
+      'm20': '-25px',
       '0': '0',
       '5': '5px',
       '10': '10px',
@@ -330,6 +331,11 @@ module.exports = {
       '1000': '1000%',
       'm20':'-2rem',
       'm25': '-2.5rem',
+      'm25p': '-25px',
+      'm30': '-30px',
+      'm35': '-30px',
+      'm40': '-40px',
+      'm50': '-50px',
       auto: 'auto',
     },
     letterSpacing: {
