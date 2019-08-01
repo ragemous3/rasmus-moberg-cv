@@ -56,7 +56,6 @@ class AboutText extends React.Component{
                 </article>
               </div>
           </>
-
     )
     }
   }

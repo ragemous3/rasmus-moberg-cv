@@ -19,25 +19,29 @@ class Accomplishments extends React.Component{
         'CSS3',
         'HTML5',
         'Twig',
-        'bankID'
+        'Git',
+        'bankID',
     ],
     text: [
-      'Javascript-skills: ⚡⚡⚡⚡⚡',
-      'React-skills: ⚡⚡⚡⚡',
-      'C#-skills: ⚡ (One book)',
-      'Typescript-skills: ⚡⚡⚡',
-      'Craft3-Skills: ⚡⚡⚡',
-      'Node-skills: ⚡⚡⚡⚡',
-      'Webpack-skills: ⚡⚡⚡⚡',
-      'PHP-skills: ⚡⚡',
-      'Mysql-skills: ⚡⚡',
-      'MongoDB-skills: ⚡⚡⚡',
-      'CSS3-skills: ⚡⚡⚡',
-      'HTML5-skills: ⚡⚡⚡⚡⚡',
-      'Twig-skills: ⚡⚡⚡',
-      'Bankid-skills: ⚡⚡⚡⚡⚡',
+      'Javascript: ⚡⚡⚡⚡⚡',
+      'React: ⚡⚡⚡⚡',
+      'C#: ⚡ (Long time ago)',
+      'Typescript: ⚡⚡⚡',
+      'Craft3: ⚡⚡⚡',
+      'Node: ⚡⚡⚡⚡',
+      'Webpack: ⚡⚡⚡⚡',
+      'PHP: ⚡⚡',
+      'Mysql: ⚡⚡',
+      'MongoDB: ⚡⚡⚡',
+      'CSS3: ⚡⚡⚡',
+      'HTML5: ⚡⚡⚡⚡⚡',
+      'Twig: ⚡⚡⚡',
+      'Git: ⚡⚡⚡⚡⚡',
+      'Bankid: ⚡⚡⚡⚡⚡',
+
     ],
     tooltips: [
+      'hint--bottom',
       'hint--bottom',
       'hint--bottom',
       'hint--bottom',
@@ -72,9 +76,10 @@ class Accomplishments extends React.Component{
         <h1>Experience</h1>
         <article>
           <h2>Languages, frameworks, environments and libraries</h2>
+          <p className="responsive-text">Hover boxes to see profiency (1-5)</p>
           <section className="flex flex-1 flex-wrap mt-3 pb-4">
             {
-              Array.from({length: this.state.languages.length}, (_, i) =>
+              Array.from({length: this.state.languages.length }, (_, i) =>
                   <div key={`box${i}`}
                      className={`${this.state.tooltips[i]} border-box language-box  responsive-text text-shadow`}
                      aria-label={this.state.text[i]}

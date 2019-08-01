@@ -145,7 +145,7 @@ const resetProfile = (e) => {
         }else if(document.getElementById('contact-section')){
           var contact = document.getElementById('contact-section');
           contact.style.display = 'inline-block';
-
+          contact.classList.remove('before-card');
             if(document.getElementById('navbar')){
               calculateNavHeight();
             }
@@ -210,6 +210,7 @@ class Nav extends React.Component{
       lazy: 'smooth-loader'
     }
     this.contactScroll = this.contactScroll.bind(this);
+    this.closeOnEscape.bind(this);
     this.showNav = this.showNav.bind(this);
   }
   showNav(e){
@@ -225,7 +226,12 @@ class Nav extends React.Component{
       ham.classList.remove('activated');
     }
   }
-
+  closeOnEscape(e){
+    if(e.key == 'Escape' || e.key == 'Esc'){
+      document.removeEventListener('keydown', this.closeOnEscape);
+      resetProfile(e);
+    }
+  }
   contactScroll(e){
     var image = document.getElementById('profile-pic');
     image.classList.remove('profile-flash');
@@ -260,6 +266,8 @@ class Nav extends React.Component{
       close.classList.remove('hidden');
       close.classList.add('block', 'profile-flash');
       close.addEventListener('click', resetProfile);
+      //adding close-effect on escape-button;
+      document.addEventListener('keydown', this.closeOnEscape);
       document.getElementById('contact-inner').classList.add('smooth-loaded')
       image.classList.add('profile-flash');
     }else{
@@ -270,12 +278,11 @@ class Nav extends React.Component{
           if(rect.y < 400  || rect.top < 400){
             contact.classList.add('before-card');
             image.classList.add('profile-flash');
-            console.log('trigger inside of contact')
           }else{
             contact.scrollIntoView({behavior: "smooth"});
           }
         }else{
-          //prevent hacky rendering when getting other components;
+          //prevent bad looking rendering when getting other components;
           if(e.target.pathname === location.pathname){
             window.scrollTo({
               top: 0,

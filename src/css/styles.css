@@ -346,7 +346,7 @@ transform: rotate3d(0, 1, 0, 360deg);
           The "before-box" of main-card
    */
    .before-card:before{
-     @apply absolute z-20 top-m35 inline-block;
+     @apply absolute z-20 top-m50 inline-block;
      background-image: url('./../img/downdown.png');
      background-size: 100% 100%;
      opacity: 1;
