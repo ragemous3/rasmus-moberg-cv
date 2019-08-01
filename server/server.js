@@ -112,11 +112,15 @@ if(process.env.NODE_ENV === 'live'){
 
   app.get('*', (req, res) => {
     process.env.ASSET_PATH = req.url;
+
     if(process.env.NODE_ENV === 'live' || process.env.NODE_ENV === 'production'){
         //Route www. paths to ->https://rasmusmober.me
         if(req.headers.host === 'www.rasmusmoberg.me'){
             return res.redirect(301, 'https://rasmusmoberg.me' + req.url);
         }
+        if(!req.secure){
+            return res.redirect(301, 'https://rasmusmoberg.me' + req.url);
+        };
         res.sendFile(path.resolve(__dirname + './../public/dist/index.html'));
     }else{
       res.status(400);
@@ -130,6 +134,8 @@ if(process.env.NODE_ENV === 'live'){
 
   if(process.env.NODE_ENV === 'development'){
     http.createServer(app, serverConfig).listen(3000);
+  }else{
+    http.createServer(app, serverConfig).listen(80);
   }
     //spreading that shit into the holy book
 

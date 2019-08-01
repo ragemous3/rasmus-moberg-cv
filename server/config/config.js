@@ -44,19 +44,30 @@ module.exports = (app, express, serverConfig) => {
 
     }
     else if(environment === "production"){
-      console.log(`${process.env.NODE_ENV} started!`)
-      app.use(express.static('public/dist/'));
-      process.env.SERVER_HOST = 'localhost';
+      console.log(`${process.env.NODE_ENV} started!`);
+      app.disable('x-powered-by');
+      app.get('/', (req, res, next) => {
+        if(!req.secure){
+            return res.redirect(301, 'https://localhost:443/');
+        };
+      next();
+      });
+      process.env.SERVER_HOST = 'localhost:443';
       process.env.SERVER_POLL = false;
       process.env.SERVER_PORT = 443;
+      app.use(express.static('public/dist/'));
+
       return;
     }else if(environment === "live"){
       // Trigger a reroute of "www."-prefix before letting over routing to express.
       app.get('/', (req, res, next) => {
           app.disable('x-powered-by');
+          if(!req.secure){
+              return res.redirect(301, 'https://rasmusmoberg.me');
+          };
           if(req.headers.host === 'www.rasmusmoberg.me'){
             //decided not to use NGINX because of the size of the page.
-            return res.reroute(301, 'https://rasmusmoberg.me');
+            return res.redirect(301, 'https://rasmusmoberg.me');
           }
           next();
         });
