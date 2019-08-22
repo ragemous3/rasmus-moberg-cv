@@ -46,7 +46,7 @@ class Card extends React.Component{
             <div id="close-card" className="close-card general-shadow">
               <img  className="close-image" src="../../img/close32.png"  alt="close card" />
             </div>
-            <article id="contact-inner" className="inner-card h-full">
+            <article id="contact-inner" className="inner-card">
               <div className="relative block main-image object-center">
 
                 <figure id="profile-carrier ">

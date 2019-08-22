@@ -9,20 +9,24 @@
   import "core-js/stable";
   import "regenerator-runtime/runtime" ;
   import 'hint.css';
-  import raf from 'raf';
-  import smoothscroll from 'smoothscroll-polyfill';
   import React, { useState, useContext } from 'react';
   import ReactDOM from 'react-dom';
   // import { ColorProvider, ColorConsumer} from './components/colorcontext.js';
   import {BrowserRouter, Route, Link, Switch, NavLink} from "react-router-dom";
   import { Part } from './components/contact.js';
-  smoothscroll.polyfill(); //kickar av smoothscrollen
+  import smoothscroll from 'smoothscroll-polyfill';
+  import disableScroll from 'disable-scroll';
+
+
 
 /*
 ***********************************************************************************************
 ****************Asynkroniskt laddning med dynamisk kodsplittning*******************************
 ***********************************************************************************************
 */
+
+// kick off the polyfill!
+smoothscroll.polyfill();
 //Calculating the height of Nav for different screens
 const calculateNavHeight = () => {
   //this triggers two times. Yes it is not necessary!
@@ -64,9 +68,9 @@ class FrontPage extends React.Component{
   componentDidUpdate(){
     if(this.fp.current){
       //activates normal scrolling after page animation
-      document.body.style.overflow = 'auto';
-      document.documentElement.style.overflow = 'auto';
+
       this.fp.current.addEventListener('animationend', (e) => {
+        disableScroll.off(); // re-enable scroll
         if(e.target.id == 'frontP-cover'){
           this.fp.current.style.display = 'none';
         }
@@ -80,8 +84,7 @@ class FrontPage extends React.Component{
   }
   render(){
     //make page unscrollable
-    document.body.style.overflow = 'hidden';
-    document.documentElement.style.overflow = 'hidden';
+    disableScroll.on(); // prevent scrolling
     var svgStyle = {
       'stroke': 'white',
       'fill': 'white'
@@ -345,7 +348,7 @@ class Nav extends React.Component{
             contact.classList.add('before-card');
             image.classList.add('profile-flash');
           }else{
-            contact.scrollIntoView({behavior: "smooth"});
+            contact.scrollIntoView({left: 0, behavior: "smooth"});
           }
         }else{
           //prevent bad looking rendering when getting other components;

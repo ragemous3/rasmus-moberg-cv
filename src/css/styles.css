@@ -1,13 +1,14 @@
 /* @import url('https://fonts.googleapis.com/css?family=Exo+2&display=swap'); */
 /* 'Exo 2', sans-serif; */
-@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
-
+@import url('https://fonts.googleapis.com/css?family=Jura&display=swap');
 @tailwind base;
 @tailwind components;
 
 body, html, main {
   @apply min-h-full min-w-full;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Jura', sans-serif;
+
+  /* font-family: 'Open Sans', sans-serif; */
   @apply h-screen max-w-full;
   scroll-behavior: smooth;
   -ms-overflow-style: none;
@@ -129,13 +130,11 @@ button:focus {
      margin-left: -500px;
      opacity: 0;
    }
-   65%{
+   /* 50%{
      margin-left: 75px;
-     opacity: 0.2;
-   }
-   90%{
-     opacity: 0.6;
-   }
+     opacity: 0.5;
+   } */
+
    100%{
      margin-left: 0px;
      opacity: 1;
@@ -146,14 +145,17 @@ button:focus {
      margin-right: -500px;
      opacity: 0;
    }
-   65%{
+   /* 50%{
+     margin-right: 75px;
+     opacity:0.5;
+   } */
+   /* 65%{
      margin-right: 70px;
      opacity: 0.2;
    }
    90%{
      opacity: 0.6;
-     @apply -mr-5
-   }
+   } */
    100%{
      @apply -mr-10;
      opacity: 1;
@@ -172,6 +174,10 @@ button:focus {
   @apply w-full h-full z-60 absolute top-0 left-0;
   background-color: #0e0e0e;
   opacity:1;
+  font-family: 'Jura', sans-serif;
+
+
+
   animation: fcaway;
   animation-delay: 5s;
   animation-timing-function: ease-in-out;
@@ -193,7 +199,7 @@ button:focus {
   @apply text-white text-6xl text-center align-middle m-0 p-0;
   @apply leading-frontp;
   opacity: 0;
-  animation: fname 1s ease-in;
+  animation: fname 0.8s ease-in-out;
   animation-fill-mode: forwards;
   animation-delay: 1s;
 }
@@ -207,7 +213,7 @@ button:focus {
   @apply text-white text-6xl text-center align-middle m-0  -mt-7 -mr-10;
   @apply leading-frontp;
   opacity:0;
-  animation: sname 1s ease-in;
+  animation: sname 0.8s ease-in-out;
   animation-fill-mode: forwards;
   animation-delay: 1s;
 }
@@ -363,7 +369,7 @@ button:focus {
 ************************Main Profile**************************
 */
 #profile-pic {
-  @apply rounded-lg;
+  @apply rounded-lg max-w-eighty max-h-eighty mx-auto;
   filter: brightness(70%);
 }
 
@@ -536,7 +542,7 @@ button:focus {
   }
 
   .inner-card {
-    @apply h-1333 mb-20 inline-block h-full;
+    @apply h-1333 mb-20 inline-block max-h-eighty;
   }
 
   .main-image {
@@ -761,7 +767,7 @@ button:focus {
   }
 
   .main-card {
-    @apply w-30proc inline-block fixed p-12 pb-0 pt-0 ml-0;
+    @apply w-30proc inline-block fixed p-12 pb-0 pt-0 ml-0 ;
   }
 
   .inner-card {
@@ -773,7 +779,7 @@ button:focus {
   }
 
   .main-card-text {
-    @apply mt-0 mt-0 ml-0 static;
+    @apply mt-0 mt-0 ml-8 static;
   }
 }
 

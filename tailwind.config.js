@@ -382,6 +382,8 @@ module.exports = {
     }),
     maxHeight: {
       full: '100%',
+      eighty: '80%',
+      contact: '350px',
       screen: '100vh',
     },
     maxWidth: {
@@ -390,6 +392,7 @@ module.exports = {
       '150': '150px',
       '200': '200px',
       '250': '250px',
+      eighty: '80%',
       xs: '20rem',
       sm: '24rem',
       md: '28rem',
