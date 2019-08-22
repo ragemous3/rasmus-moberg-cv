@@ -63,6 +63,7 @@ class FrontPage extends React.Component{
   constructor(props){
     super(props);
     this.fp = React.createRef();
+    disableScroll.on(); // prevent scrolling when frontpage loading
   }
 
   componentDidUpdate(){
@@ -70,8 +71,8 @@ class FrontPage extends React.Component{
       //activates normal scrolling after page animation
 
       this.fp.current.addEventListener('animationend', (e) => {
-        disableScroll.off(); // re-enable scroll
         if(e.target.id == 'frontP-cover'){
+          disableScroll.off(); // re-enable scroll
           this.fp.current.style.display = 'none';
         }
       })
@@ -83,8 +84,8 @@ class FrontPage extends React.Component{
     }
   }
   render(){
+
     //make page unscrollable
-    disableScroll.on(); // prevent scrolling
     var svgStyle = {
       'stroke': 'white',
       'fill': 'white'
