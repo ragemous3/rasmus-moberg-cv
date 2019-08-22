@@ -56,7 +56,7 @@ class Edu extends React.Component{
             <ul className="pl-6 pt-4">
               <li style={listStyles}>Military guard training</li>
               <li style={listStyles}>Survival training</li>
-              <li style={listStyles}>AK5-C military license, tactical handgrenade training </li>
+              <li style={listStyles}>AK5-C military license, tactical handgrenade military license </li>
               <li style={listStyles}>Basic training </li>
             </ul>
           </div>

@@ -20,7 +20,7 @@ class Accomplishments extends React.Component{
         'HTML5',
         'Twig',
         'Git',
-        'bankID',
+        'BankID',
     ],
     text: [
       'Javascript: ⚡⚡⚡⚡⚡',

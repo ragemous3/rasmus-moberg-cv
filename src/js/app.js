@@ -225,16 +225,11 @@ class FrontPage extends React.Component{
       this.calculateFooter();
       if(this.content.current){
         this.content.current.addEventListener("animationstart", (e) => {
-            window.scrollTo({
-              top: 0,
-              behavior: 'smooth'
-            });
+          window.scroll({ top: 0, left: 0, behavior: 'smooth' });
         },false);
         this.content.current.addEventListener('webkitAnimationStart', (e) => {
-            window.scrollTo({
-              top: 0,
-              behavior: 'smooth'
-            });
+          window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+
         })
       }
 
@@ -355,9 +350,11 @@ class Nav extends React.Component{
         }else{
           //prevent bad looking rendering when getting other components;
           if(e.target.pathname === location.pathname){
-            window.scrollTo({
-              top: 0,
-              behavior:"smooth"});
+            window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+
+            // window.scrollTo({
+            //   top: 0,
+            //   behavior:"smooth"});
           }
           contact.classList.remove('before-card');
           image.classList.remove('profile-flash');
@@ -380,6 +377,7 @@ class Nav extends React.Component{
   }
   render(){
     /*
+    //In case a The first page should be other than "aboutme"-me
     <div className={`nav-link-box-first bg-transparent`}>
       <NavLink className={` border-box a-link `} to="/"  onClick={(e) => {this.contactScroll(e)}}>Home</NavLink>
     </div>

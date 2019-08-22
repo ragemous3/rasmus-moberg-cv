@@ -71,7 +71,7 @@ function Projects(){
             </p>
         </li>
         </ul>
-        <p className="h3-override-ml-nil">...and loads of small quirky apps</p>
+        <p className="h3-override-ml-nil">...and loads of small apps</p>
 
       </article>
     </section>

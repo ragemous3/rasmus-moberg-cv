@@ -18,6 +18,8 @@ body, html, main {
   -ms-text-size-adjust: none;
   -o-text-size-adjust: none;
   text-size-adjust: none;
+  letter-spacing: 0.1rem;
+
 }
 
 * {
@@ -553,12 +555,11 @@ button:focus {
   .main-text-box {
     @apply w-full text-white;
     /* color: #878787; */
-    letter-spacing: 0.1rem;
     /* text-shadow: 0 0px 20px rgba(119, 50, 210); */
   }
 
   .bg-ham {
-    @apply fixed right-10 bottom-5 block z-50;
+    @apply fixed right-2dot5 bottom-5 block z-50;
     width: 30px;
     height: 30px;
     margin: 25px;
@@ -626,6 +627,7 @@ button:focus {
 
   .nav-linkz {
     @apply flex flex-initial flex-row items-center flex-wrap justify-center h-80pex pl-40pex pb-12k5pex pr-40pex;
+    letter-spacing: normal;
   }
 
   .nav-text {

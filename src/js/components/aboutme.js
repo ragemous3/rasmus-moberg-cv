@@ -22,10 +22,9 @@ class AboutText extends React.Component{
               <h1 >About me</h1>
                 <article className="pb-4">
                   <div className="dampcolor pb-4 leading-loose text-shadow responsive-text">
-                    My name is Rasmus Moberg, a junior web developer currently studying the fine arts
-                    of javaScript. I'm also the owner of a freelance business should the need arise.
-                    I've created this website for you - take a look around! If you like what you see; I'm available as of now
-                    for internship later in October.
+                    My name is Rasmus Moberg.
+                    I've created this website for <em>you</em> - take a look around! If you like what you see; I'm available as of now
+                    for internship in October.
                  </div>
                  <div className="dampcolor pb-4 leading-loose text-shadow responsive-text">
                     To describe myself as a programmer I would say that I'm
