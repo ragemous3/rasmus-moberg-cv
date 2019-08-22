@@ -9,7 +9,7 @@
   import "core-js/stable";
   import "regenerator-runtime/runtime" ;
   import 'hint.css';
-  const raf = require('raf');
+  import raf from 'raf';
   import smoothscroll from 'smoothscroll-polyfill';
   import React, { useState, useContext } from 'react';
   import ReactDOM from 'react-dom';
