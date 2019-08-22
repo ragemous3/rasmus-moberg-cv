@@ -30,8 +30,9 @@ module.exports = {
       mediumblue: '#364e84',
       black: '#000',
       white: '#fff',
-
+// #f5f5f5
       gray: {
+        'light': '#c7c6c6',
         100: '#f7fafc',
         200: '#edf2f7',
         300: '#e2e8f0',
@@ -151,6 +152,9 @@ module.exports = {
       '4': '1rem',
       '5': '1.25rem',
       '6': '1.5rem',
+      '7': '1.75rem',
+      '8': '2rem',
+      '7k85': '1.85rem',
       '20pex': '20px',
       '40pex': '40px',
       '12k5pex': '12.5px',
@@ -348,6 +352,7 @@ module.exports = {
     },
     lineHeight: {
       none: '1',
+      frontp: '1.15',
       tight: '1.25',
       snug: '1.375',
       normal: '1.5',
@@ -502,6 +507,8 @@ module.exports = {
       '30': '30',
       '40': '40',
       '50': '50',
+      '60': '60',
+      '70': '70',
     },
   },
   variants: {

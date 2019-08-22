@@ -9,11 +9,14 @@
   import "core-js/stable";
   import "regenerator-runtime/runtime" ;
   import 'hint.css';
+  const raf = require('raf');
+  import smoothscroll from 'smoothscroll-polyfill';
   import React, { useState, useContext } from 'react';
   import ReactDOM from 'react-dom';
   // import { ColorProvider, ColorConsumer} from './components/colorcontext.js';
   import {BrowserRouter, Route, Link, Switch, NavLink} from "react-router-dom";
   import { Part } from './components/contact.js';
+  smoothscroll.polyfill(); //kickar av smoothscrollen
 
 /*
 ***********************************************************************************************
@@ -22,6 +25,8 @@
 */
 //Calculating the height of Nav for different screens
 const calculateNavHeight = () => {
+  //this triggers two times. Yes it is not necessary!
+
   if(document.defaultView.innerWidth <= 767 || window.screen.width <= 767){
     var navbar = document.getElementById('nav-linkz');
     navbar.classList.remove('flex', 'flex-col', 'flex-1', 'flex-wrap', 'items-start', 'justify-between', 'p-6', 'pt-0');
@@ -40,7 +45,7 @@ const resetProfile = (e) => {
   prfcover.classList.add('hidden');
 
   //reseting contact-card;
-  document.getElementById('contact-section').classList.remove('z-10', 'contact-center', 'p-12', 'bg-gradient-card', 'general-shadow');
+  document.getElementById('contact-section').classList.remove('z-10', 'main-card-bg', 'contact-center', 'p-12', 'general-shadow');
   //hiding close-button
    var close = document.getElementById('close-card');
    close.classList.add('hidden');
@@ -50,6 +55,63 @@ const resetProfile = (e) => {
    document.getElementById('profile-pic').classList.remove('profile-flash');
 
 }
+class FrontPage extends React.Component{
+  constructor(props){
+    super(props);
+    this.fp = React.createRef();
+  }
+
+  componentDidUpdate(){
+    if(this.fp.current){
+      //activates normal scrolling after page animation
+      document.body.style.overflow = 'auto';
+      document.documentElement.style.overflow = 'auto';
+      this.fp.current.addEventListener('animationend', (e) => {
+        if(e.target.id == 'frontP-cover'){
+          this.fp.current.style.display = 'none';
+        }
+      })
+      this.fp.current.addEventListener('webkitAnimationEnd', (e) => {
+        if(e.target.id == 'frontP-cover'){
+          this.fp.current.style.display = 'none';
+        }
+      })
+    }
+  }
+  render(){
+    //make page unscrollable
+    document.body.style.overflow = 'hidden';
+    document.documentElement.style.overflow = 'hidden';
+    var svgStyle = {
+      'stroke': 'white',
+      'fill': 'white'
+    }
+    return(
+      <div id="frontP-cover" className="front-page-cover" ref={this.fp}>
+        <div className="front-page-inner">
+          <h1 className="front-page-name ">
+            Rasmus
+          </h1>
+            <svg className="the-underline" >
+
+              <line x="20" x2="300" style={svgStyle} >
+              </line>
+              <circle style={svgStyle}>
+              </circle>
+            </svg>
+          <h1 className="front-page-surname ">
+            Moberg
+          </h1>
+          <h1 className="devel">
+            Developer
+          </h1>
+        </div>
+      </div>
+    )
+  }
+}
+
+
 
   class LoadAsync extends React.Component{
     constructor(props){
@@ -72,9 +134,11 @@ const resetProfile = (e) => {
 
     }
     componentDidMount(){
+
       //https://reactjs.org/blog/2015/12/16/ismounted-antipattern.html <---- läs denna och fixa läckan!
       //man måste checka och "avcheka"  _isMounted för att förhindra memory-leak? fun
       this._isMounted = false;
+
       this.setState((prev) => {
         return {lazy: 'smooth-loaded'}
       })
@@ -125,8 +189,10 @@ const resetProfile = (e) => {
             resetProfile();
           }
           if(document.getElementById('contact-section')){
-            var contact = document.getElementById('contact-section');
-            contact.style.display = "flex";
+            if(this.props.url !== './components/home.js'){
+              var contact = document.getElementById('contact-section');
+              contact.style.display = "flex";
+            }
             try{
               if(!this.props.chunkname){
                 if(this.props.chunkname === "projects"){
@@ -143,18 +209,20 @@ const resetProfile = (e) => {
             }
           }
         }else if(document.getElementById('contact-section')){
-          var contact = document.getElementById('contact-section');
-          contact.style.display = 'inline-block';
-          contact.classList.remove('before-card');
-            if(document.getElementById('navbar')){
-              calculateNavHeight();
-            }
+          //contact is hidden at first page-load
+          if(this.props.url !== './components/home.js'){
+            var contact = document.getElementById('contact-section');
+            contact.style.display = 'inline-block';
+            contact.classList.remove('before-card');
+          }
+          if(document.getElementById('navbar')){
+            calculateNavHeight();
+          }
         }
 
     }
     componentDidUpdate(){
       this.calculateFooter();
-
       if(this.content.current){
         this.content.current.addEventListener("animationstart", (e) => {
             window.scrollTo({
@@ -180,13 +248,15 @@ const resetProfile = (e) => {
           main.style.height = this.content.current.offsetHeight + 'px';
         }else{
           contact.top = "";
-
         }
       }
     }
     render(){
       return(
         <section id="main-box" className={` responsive-text border-box inline-block` }>
+          {window.location.pathname === '/' &&
+            <FrontPage />
+          }
           {
             this.state.comp.map((Element, i) => {
               return <article ref={this.content}   className={`${this.state.lazy} main-text-box text-shadow pb-1333`} key={this.props.chunkname}>{Element}</article>
@@ -216,15 +286,15 @@ class Nav extends React.Component{
   showNav(e){
     var nav = document.getElementById('nav-linkz');
     var ham = document.getElementById('hamburger-id')
-    if(nav.classList.contains('hidden')){
-      nav.classList.remove('hidden');
-      nav.classList.add('smooth-loaded');
-      ham.classList.add('activated');
-    }else{
-      nav.classList.add('hidden', );
-      nav.classList.remove('smooth-loaded')
-      ham.classList.remove('activated');
-    }
+      if(nav.classList.contains('hidden')){
+        nav.classList.remove('hidden');
+        nav.classList.add('smooth-loaded');
+        ham.classList.add('activated');
+      }else{
+        nav.classList.add('hidden', );
+        nav.classList.remove('smooth-loaded')
+        ham.classList.remove('activated');
+      }
   }
   closeOnEscape(e){
     if(e.key == 'Escape' || e.key == 'Esc'){
@@ -251,6 +321,7 @@ class Nav extends React.Component{
           var div = document.createElement('div');
           div.id = 'prf-cover';
           div.classList.add('profile-cover', 'block');
+          //apply the highest height
           div.style.height = height + 'px';
           document.body.appendChild(div);
         }else{
@@ -260,7 +331,7 @@ class Nav extends React.Component{
         }
 
         //adding css to put card in the middle of the page;
-      contact.classList.add('z-10', 'contact-center', 'p-12', 'bg-gradient-card', 'general-shadow');
+      contact.classList.add('z-10', 'contact-center', 'p-12', 'main-card-bg', 'general-shadow');
       //close button;
       var close = document.getElementById('close-card');
       close.classList.remove('hidden');
@@ -303,16 +374,23 @@ class Nav extends React.Component{
         document.getElementById('nav-linkz').classList.remove('hidden');
     }else{
         document.getElementById('nav-linkz').classList.add('hidden');
+
     }
 
   }
   render(){
+    /*
+    <div className={`nav-link-box-first bg-transparent`}>
+      <NavLink className={` border-box a-link `} to="/"  onClick={(e) => {this.contactScroll(e)}}>Home</NavLink>
+    </div>
+
+    */
     return (
       <>
         <nav id="navbar" className={`nav-bar border-box ${this.state.lazy} `}>
           <section id="nav-linkz" className="border-box nav-linkz nav-text ">
             <div className={`nav-link-box-first bg-transparent`}>
-              <NavLink className={` border-box a-link `} to="/"  onClick={(e) => {this.contactScroll(e)}}>About Me</NavLink>
+              <NavLink className={` border-box a-link `} to="/about"  onClick={(e) => {this.contactScroll(e)}}>About Me</NavLink>
             </div>
             <div className={`nav-link-box bg-transparent`}>
               <NavLink className={` border-box a-link `} to="/projects"  onClick={(e) => {this.contactScroll(e)}}>Projects</NavLink>
@@ -348,6 +426,13 @@ function AboutMe(props){
   <>
    {<LoadAsync chunkname="aboutme" url="./components/aboutme.js" />}
   </>
+  )
+}
+function Home(props){
+  return (
+    <>
+      {<LoadAsync chunkname="aboutme" url="./components/home.js" />}
+    </>
   )
 }
 function Knowledge(){
@@ -409,6 +494,7 @@ class Routes extends React.Component{
             <section id="main-page-structure" className="main-page-structure border-box align-top">
               <Switch>
                 <Route exact={true} path="/"  component={AboutMe} />
+                <Route exact={true} path="/about"  component={AboutMe} />
                 <Route exact={true} path="/experience" component={Knowledge}/>
                 <Route exact={true} path="/education" component={Education}/>
                 <Route exact={true} path="/projects" component={Projects}/>

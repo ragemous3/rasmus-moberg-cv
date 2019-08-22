@@ -38,11 +38,11 @@ class Card extends React.Component{
   onLoading(){
     this.setState(() => {
       return {lazy: 'smooth-loaded'}
-    })
-  }
+    });
+  };
   render(){
     return(
-          <aside id="contact-section" onLoad={(e) => this.onLoading(e)} className={`main-card border-box ${this.state.lazy}`}>
+          <aside id="contact-section" onLoad={(e) => this.onLoading(e)} className={` main-card border-box ${this.state.lazy}`}>
             <div id="close-card" className="close-card general-shadow">
               <img  className="close-image" src="../../img/close32.png"  alt="close card" />
             </div>
