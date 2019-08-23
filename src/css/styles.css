@@ -222,7 +222,7 @@ button:focus {
   100%{ opacity: 1}
 }
 .devel{
-  @apply text-white text-6xl text-center align-middle;
+  @apply text-white text-5xl text-center align-middle;
   opacity: 0;
   animation-fill-mode: forwards;
   animation-name: dev;

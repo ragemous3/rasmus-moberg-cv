@@ -15,7 +15,6 @@
   import {BrowserRouter, Route, Link, Switch, NavLink} from "react-router-dom";
   import { Part } from './components/contact.js';
   import smoothscroll from 'smoothscroll-polyfill';
-  import disableScroll from 'disable-scroll';
 
 
 
@@ -63,7 +62,8 @@ class FrontPage extends React.Component{
   constructor(props){
     super(props);
     this.fp = React.createRef();
-    disableScroll.on(); // prevent scrolling when frontpage loading
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
   }
 
   componentDidUpdate(){
@@ -72,8 +72,9 @@ class FrontPage extends React.Component{
 
       this.fp.current.addEventListener('animationend', (e) => {
         if(e.target.id == 'frontP-cover'){
-          disableScroll.off(); // re-enable scroll
           this.fp.current.style.display = 'none';
+          document.documentElement.style.overflow = "";
+          document.body.style.overflow = "";
         }
       })
       this.fp.current.addEventListener('webkitAnimationEnd', (e) => {
@@ -356,9 +357,6 @@ class Nav extends React.Component{
           if(e.target.pathname === location.pathname){
             window.scroll({ top: 0, left: 0, behavior: 'smooth' });
 
-            // window.scrollTo({
-            //   top: 0,
-            //   behavior:"smooth"});
           }
           contact.classList.remove('before-card');
           image.classList.remove('profile-flash');
