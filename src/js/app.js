@@ -61,9 +61,19 @@ const resetProfile = (e) => {
 class FrontPage extends React.Component{
   constructor(props){
     super(props);
+    let html = document.documentElement;
+    let body = document.body;
     this.fp = React.createRef();
-    document.documentElement.style.overflow = "hidden";
-    document.body.style.overflow = "hidden";
+    html.style.overflow = "hidden";
+    body.style.overflow = "hidden";
+
+      html.ontouchend = (e) => {
+        e.preventDefault();
+      };
+      body.ontouchend = (e) => {
+        e.preventDefault();
+      };
+
   }
 
   componentDidUpdate(){
@@ -73,8 +83,13 @@ class FrontPage extends React.Component{
       this.fp.current.addEventListener('animationend', (e) => {
         if(e.target.id == 'frontP-cover'){
           this.fp.current.style.display = 'none';
-          document.documentElement.style.overflow = "";
-          document.body.style.overflow = "";
+          let html = document.documentElement;
+          let body = document.body;
+          //enabling scrolling for both IOS and Android,
+          html.documentElement.style.overflow = "";
+          body.body.style.overflow = "";
+          html.removeEventListener('ontouchend');
+          body.removeEventListener('ontouchend');
         }
       })
       this.fp.current.addEventListener('webkitAnimationEnd', (e) => {
