@@ -50,7 +50,7 @@ const resetProfile = (e) => {
   //reseting contact-card;
   let contact = document.getElementById('contact-section');
 
-  contact.classList.remove('z-10', 'main-card-bg', 'contact-center', 'general-shadow', 'p-12');
+  contact.classList.remove('z-10', 'main-card-bg', 'contact-center', 'general-shadow', 'p-4');
 
   //hiding close-button
    var close = document.getElementById('close-card');
@@ -75,11 +75,11 @@ class FrontPage extends React.Component{
     //function binds
     this.onTouch = this.onTouch.bind(this);
 
-      //disabling scrolling for android and ios, and all browsers
-      let html = document.documentElement;
-      let body = document.body;
-      html.style.overflow = "hidden";
-      body.style.overflow = "hidden";
+    //disabling scrolling for android and ios, and all browsers
+    let html = document.documentElement;
+    let body = document.body;
+    html.style.overflow = "hidden";
+    body.style.overflow = "hidden";
         body.addEventListener('touchmove', disableScrolling);
         html.addEventListener('touchmove', disableScrolling);
   }
@@ -358,7 +358,7 @@ class Nav extends React.Component{
         }
 
       //adding css to put card in the middle of the page;
-      contact.classList.add('p-12','z-10', 'contact-center', 'main-card-bg', 'general-shadow');
+      contact.classList.add('p-4','z-10', 'contact-center', 'main-card-bg', 'general-shadow');
       //close button;
       var close = document.getElementById('close-card');
       close.classList.remove('hidden');
