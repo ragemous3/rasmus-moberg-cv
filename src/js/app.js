@@ -73,7 +73,6 @@ class FrontPage extends React.Component{
       body.ontouchend = (e) => {
         e.preventDefault();
       };
-    this.blockTouch = this.blockTouch.bind(this);
   }
   componentDidUpdate(){
     if(this.fp.current){
