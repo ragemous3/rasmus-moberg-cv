@@ -99,9 +99,9 @@ class FrontPage extends React.Component{
           html.style.overflow = "";
           body.style.overflow = "";
           //Enabling scrolling for IOS and Android
-          e.target.removeEventListener('ontouchmove', disableScrolling);
-          body.removeEventListener('ontouchmove', disableScrolling);
-          html.removeEventListener('ontouchmove', disableScrolling);
+          // e.target.removeEventListener('ontouchmove', disableScrolling);
+          // body.removeEventListener('ontouchmove', disableScrolling);
+          // html.removeEventListener('ontouchmove', disableScrolling);
         }
       })
       this.fp.current.addEventListener('webkitAnimationEnd', (e) => {
