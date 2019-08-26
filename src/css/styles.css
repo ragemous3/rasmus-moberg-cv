@@ -500,10 +500,9 @@ button:focus {
     @apply ml-0 flex flex-1 flex-wrap;
   }
   .main-card-bg{
-    @apply bg-gray-900;
+     @apply bg-gray-900;
   }
   .main-card {
-    background-clip: content-box;
     @apply w-full relative ml-0 align-bottom flex flex-1 items-center justify-center;
   }
 
@@ -771,7 +770,7 @@ button:focus {
   }
 
   .main-card {
-    @apply w-30proc inline-block fixed p-12 pt-0 pb-0 ml-0 ;
+    @apply w-30proc inline-block fixed pl-12 pt-0 pb-0 ml-0;
   }
 
   .inner-card {
