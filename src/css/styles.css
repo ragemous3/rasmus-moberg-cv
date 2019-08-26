@@ -172,6 +172,7 @@ button:focus {
 }
 .front-page-cover{
   @apply w-full h-full z-60 absolute top-0 left-0;
+  touch-action: none;
   background-color: #0e0e0e;
   opacity:1;
   font-family: 'Jura', sans-serif;

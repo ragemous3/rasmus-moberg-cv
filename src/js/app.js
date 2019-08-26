@@ -75,9 +75,6 @@ class FrontPage extends React.Component{
       };
     this.blockTouch = this.blockTouch.bind(this);
   }
-  blockTouch(e){
-    e.preventDefault();
-  }
   componentDidUpdate(){
     if(this.fp.current){
       //activates normal scrolling after page animation
@@ -110,7 +107,7 @@ class FrontPage extends React.Component{
       'fill': 'white'
     }
     return(
-      <div id="frontP-cover" onTouchEnd={(e) => {this.blockTouch()}}className="front-page-cover" ref={this.fp}>
+      <div id="frontP-cover" className="front-page-cover" ref={this.fp}>
         <div className="front-page-inner">
           <h1 className="front-page-name ">
             Rasmus
