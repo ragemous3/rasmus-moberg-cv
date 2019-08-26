@@ -56,7 +56,9 @@ p {
 }
 
 .general-shadow {
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 3px, inset rgba(0, 0, 0, 0.3) 0px -1px 2px;
+  filter: drop-shadow(rgba(0, 0, 0, 0.3) 0px 2px 3px, inset rgba(0, 0, 0, 0.3) 0px -1px 2px;);
+
+  /* box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 3px, inset rgba(0, 0, 0, 0.3) 0px -1px 2px; */
 }
 
 /*
@@ -172,7 +174,6 @@ button:focus {
 }
 .front-page-cover{
   @apply w-full h-full z-60 absolute top-0 left-0;
-  touch-action: none;
   background-color: #0e0e0e;
   opacity:1;
   font-family: 'Jura', sans-serif;
@@ -481,7 +482,8 @@ button:focus {
   }
 
   .close-image {
-    @apply absolute right-m25 top-m25 z-10;
+    @apply float-right;
+    /*  absolute right-m25 top-m25 z-10; */
   }
 
   .contact-center {
@@ -501,6 +503,7 @@ button:focus {
     @apply bg-gray-900;
   }
   .main-card {
+    background-clip: content-box;
     @apply w-full relative ml-0 align-bottom flex flex-1 items-center justify-center;
   }
 
@@ -739,7 +742,7 @@ button:focus {
     /*
     Denna bastard jobbar ihop med javascripten jag skrivit. Orkante göra om det!
      */
-    @apply flex-none relative inline-block w-full p-0 fixed pl-0 w-1/4;
+    @apply flex-none relative inline-block w-full p-0 fixed pl-2 w-1/4;
   }
 
   /*
@@ -760,24 +763,27 @@ button:focus {
 
 @screen md {
 
+  /* .nav-linkz{
+    @apply flex flex-col flex-1 flex-wrap items-start justify-between p-6 pt-0;
+  } */
   .main-card-wrapper {
     @apply ml-0;
   }
 
   .main-card {
-    @apply w-30proc inline-block fixed  pb-0 pt-1 ml-0 ;
+    @apply w-30proc inline-block fixed p-12 pt-0 pb-0 ml-0 ;
   }
 
   .inner-card {
     @apply inline-block m-0 p-0;
   }
-
   .main-image {
     @apply inline-block w-auto relative;
   }
 
   .main-card-text {
-    @apply mt-0 mt-0 ml-8 static;
+    @apply m-0 static block ;
+    margin-left: 10%;
   }
 }
 

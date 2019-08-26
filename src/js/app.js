@@ -48,7 +48,10 @@ const resetProfile = (e) => {
   prfcover.classList.add('hidden');
 
   //reseting contact-card;
-  document.getElementById('contact-section').classList.remove('z-10', 'main-card-bg', 'contact-center', 'p-12', 'general-shadow');
+  let contact = document.getElementById('contact-section');
+
+  contact.classList.remove('z-10', 'main-card-bg', 'contact-center', 'general-shadow', 'p-12');
+
   //hiding close-button
    var close = document.getElementById('close-card');
    close.classList.add('hidden');
@@ -58,21 +61,31 @@ const resetProfile = (e) => {
    document.getElementById('profile-pic').classList.remove('profile-flash');
 
 }
+const disableScrolling = (e) => {
+  e.preventDefault();
+  return false;
+}
+
 class FrontPage extends React.Component{
   constructor(props){
     super(props);
-    let html = document.documentElement;
-    let body = document.body;
-    this.fp = React.createRef();
-    html.style.overflow = "hidden";
-    body.style.overflow = "hidden";
 
-      html.ontouchend = (e) => {
-        e.preventDefault();
-      };
-      body.ontouchend = (e) => {
-        e.preventDefault();
-      };
+    //creating reference
+    this.fp = React.createRef();
+    //function binds
+    this.onTouch = this.onTouch.bind(this);
+
+      //disabling scrolling for android and ios, and all browsers
+      let html = document.documentElement;
+      let body = document.body;
+      html.style.overflow = "hidden";
+      body.style.overflow = "hidden";
+
+        body.addEventListener('ontouchmove', disableScrolling, false);
+        body.addEventListener('ontouchmove', disableScrolling, false);
+  }
+  onTouch(e){
+    e.target.addEventListener('ontouchmove',  disableScrolling, false);
   }
   componentDidUpdate(){
     if(this.fp.current){
@@ -84,11 +97,12 @@ class FrontPage extends React.Component{
           let html = document.documentElement;
           let body = document.body;
           //enabling scrolling for both IOS and Android,
-          html.documentElement.style.overflow = "";
-          body.body.style.overflow = "";
-
-          html.removeEventListener('ontouchend');
-          body.removeEventListener('ontouchend');
+          html.style.overflow = "";
+          body.style.overflow = "";
+          //Enabling scrolling for IOS and Android
+          e.target.removeEventListener('ontouchmove', disableScrolling);
+          body.removeEventListener('ontouchmove', disableScrolling);
+          html.removeEventListener('ontouchmove', disableScrolling);
         }
       })
       this.fp.current.addEventListener('webkitAnimationEnd', (e) => {
@@ -106,7 +120,7 @@ class FrontPage extends React.Component{
       'fill': 'white'
     }
     return(
-      <div id="frontP-cover" className="front-page-cover" ref={this.fp}>
+      <div id="frontP-cover" onTouchMove={(e) => {this.onTouch(e)}} className="front-page-cover" ref={this.fp}>
         <div className="front-page-inner">
           <h1 className="front-page-name ">
             Rasmus
@@ -344,8 +358,8 @@ class Nav extends React.Component{
           prf.classList.add('block');
         }
 
-        //adding css to put card in the middle of the page;
-      contact.classList.add('z-10', 'contact-center', 'p-12', 'main-card-bg', 'general-shadow');
+      //adding css to put card in the middle of the page;
+      contact.classList.add('p-12','z-10', 'contact-center', 'main-card-bg', 'general-shadow');
       //close button;
       var close = document.getElementById('close-card');
       close.classList.remove('hidden');
