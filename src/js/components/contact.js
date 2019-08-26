@@ -62,15 +62,15 @@ class Card extends React.Component{
                 </p>
                 <p className=" text-sm">124 65, Bandhagen</p>
                 <div className="leading-snug pt-3 flex flex-1 flex-row">
-                  <a href="https://www.linkedin.com/in/rasmus-moberg-0aba88174/" target="_blank">
+                  <a href="https://www.linkedin.com/in/rasmus-moberg-0aba88174/" target="_blank" className="hint--top" aria-label="Redirect yourself to my linkedin">
                     <svg className="m-1 mb-0 floatAsideClick  i-linkedin PointerCursor">
                     </svg>
                   </a>
-                  <a  id="mailtoer" onClick={(e) => {this.mailCopy()}} className="hint--bottom" aria-label="Click to copy email to clipboard!">
+                  <a  id="mailtoer" onClick={(e) => {this.mailCopy()}} className="hint--top" aria-label="Click to copy email to clipboard!">
                     <svg className="m-1 mb-0 floatAsideClick  i-gmail PointerCursor">
                     </svg>
                   </a>
-                  <a href="/getcv"  download>
+                  <a href="/getcv"  download className="hint--top" aria-label="Click to download my CV">
                     <svg className="m-1 mb-0 floatAsideClick i-cv PointerCursor">
                     </svg>
                   </a>
