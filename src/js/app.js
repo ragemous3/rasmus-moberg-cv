@@ -80,12 +80,11 @@ class FrontPage extends React.Component{
       let body = document.body;
       html.style.overflow = "hidden";
       body.style.overflow = "hidden";
-
-        body.addEventListener('ontouchmove', disableScrolling, false);
-        body.addEventListener('ontouchmove', disableScrolling, false);
+        body.addEventListener('ontouchmove', disableScrolling);
+        html.addEventListener('ontouchmove', disableScrolling);
   }
   onTouch(e){
-    e.target.addEventListener('ontouchmove',  disableScrolling, false);
+    e.target.addEventListener('ontouchmove',  disableScrolling);
   }
   componentDidUpdate(){
     if(this.fp.current){
@@ -121,7 +120,7 @@ class FrontPage extends React.Component{
     }
     return(
       <div id="frontP-cover" onTouchMove={(e) => {this.onTouch(e)}} className="front-page-cover" ref={this.fp}>
-        <div className="front-page-inner">
+        <div className="front-page-inner" onTouchMove={(e) => {this.onTouch(e)}}>
           <h1 className="front-page-name ">
             Rasmus
           </h1>
