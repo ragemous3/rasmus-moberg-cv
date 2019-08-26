@@ -80,11 +80,11 @@ class FrontPage extends React.Component{
       let body = document.body;
       html.style.overflow = "hidden";
       body.style.overflow = "hidden";
-        body.addEventListener('ontouchmove', disableScrolling);
-        html.addEventListener('ontouchmove', disableScrolling);
+        body.addEventListener('touchmove', disableScrolling);
+        html.addEventListener('touchmove', disableScrolling);
   }
   onTouch(e){
-    e.target.addEventListener('ontouchmove',  disableScrolling);
+    e.target.addEventListener('touchmove',  disableScrolling);
   }
   componentDidUpdate(){
     if(this.fp.current){
@@ -99,9 +99,9 @@ class FrontPage extends React.Component{
           html.style.overflow = "";
           body.style.overflow = "";
           //Enabling scrolling for IOS and Android
-          // e.target.removeEventListener('ontouchmove', disableScrolling);
-          // body.removeEventListener('ontouchmove', disableScrolling);
-          // html.removeEventListener('ontouchmove', disableScrolling);
+          e.target.removeEventListener('touchmove', disableScrolling);
+          body.removeEventListener('touchmove', disableScrolling);
+          html.removeEventListener('touchmove', disableScrolling);
         }
       })
       this.fp.current.addEventListener('webkitAnimationEnd', (e) => {
