@@ -500,7 +500,7 @@ button:focus {
     @apply ml-0 flex flex-1 flex-wrap;
   }
   .main-card-bg{
-     @apply bg-gray-900;
+     @apply bg-black;
   }
   .main-card {
     @apply w-full relative ml-0 align-bottom flex flex-1 items-center justify-center;
