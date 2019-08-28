@@ -38,6 +38,7 @@ var httpsOptions = {};
 */
 if(process.env.NODE_ENV === 'live'){
 
+
   if(fs.existsSync(path.resolve(__dirname,'./config/ssl/letsencrypt/live/rasmusmoberg.me/privkey.pem'))){
     httpsOptions.key = fs.readFileSync(path.resolve(__dirname,'./config/ssl/letsencrypt/live/rasmusmoberg.me/privkey.pem'));
   }
@@ -70,6 +71,7 @@ if(process.env.NODE_ENV === 'live'){
   }
 
   try {
+    //this is just mock-code
     httpsOptions.passphrase = 'hej1';
     const tls = require('tls');
     tls.createSecureContext(httpsOptions);
@@ -88,7 +90,28 @@ if(process.env.NODE_ENV === 'live'){
         port: () => process.env.SERVER_PORT || 3000,
         https: () => process.env.SERVER_HTTPS || false,
     }
+    //checking
+    var bool;
+    app.get('*', (req,res, next) => {
+      let x = req.get('accept-encoding');
+      bool = x.indexOf('gzip');
+      next();
+    })
 
+    if(bool !== -1){
+        app.get('*/main-modern.js', (req, res, next) => {
+          req.url = req.url + '.gz';
+          res.set('Content-Encoding', 'gzip');
+          res.set('Content-Type', 'text/javascript');
+          next();
+        });
+        app.get('*.css', (req, res, next) => {
+          req.url = req.url + '.gz';
+          res.set('Content-Encoding', 'gzip');
+          res.set('Content-Type', 'text/css');
+          next();
+        });
+    }
   require('./config/config.js')(app, express, serverConfig);
 
   /*
@@ -114,6 +137,9 @@ if(process.env.NODE_ENV === 'live'){
     process.env.ASSET_PATH = req.url;
 
     if(process.env.NODE_ENV === 'live' || process.env.NODE_ENV === 'production'){
+      /*
+          *************Sending Gzips instead*******************
+      */
         //Route www. paths to ->https://rasmusmober.me
         if(req.headers.host === 'www.rasmusmoberg.me'){
             return res.redirect(301, 'https://rasmusmoberg.me' + req.url);
