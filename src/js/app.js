@@ -391,9 +391,8 @@ class Nav extends React.Component{
             contact.classList.add('before-card');
             image.classList.add('profile-flash');
           }else{
-            var max = Math.max(this.body.scrollHeight, this.body.offsetHeight,
-                     this.html.clientHeight, this.html.scrollHeight, this.html.offsetHeight);
-            window.scroll({top: max, left: 0, behavior: "smooth"});
+
+            contact.scrollIntoView({left: 0, behavior: "smooth"});
           }
         }else{
           //prevent bad looking rendering when getting other components;
