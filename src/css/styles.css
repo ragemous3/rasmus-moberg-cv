@@ -8,7 +8,7 @@ body, html, main {
   @apply  relative;
     width:100%;
     font-family: 'Jura', sans-serif;
-    overflow-x:none;
+    overflow-x:'hidden';
     /*
     min-h-full min-w-full h-screen max-w-full
     This one breaks the smooth-scrolling to top.
