@@ -109,7 +109,7 @@ class FrontPage extends React.Component{
           //enabling scrolling for both IOS and Android,
           html.style.overflow = "auto";
           body.style.overflow = "auto";
-          document.getElementById('root').style.overflowX = "hidden";
+          // document.getElementById('root').style.overflowX = "hidden";
           //Enabling scrolling for IOS and Android
           e.target.removeEventListener('touchmove', disableScrolling);
           body.removeEventListener('touchmove', disableScrolling);
@@ -181,7 +181,7 @@ class FrontPage extends React.Component{
       if(location.pathname !== '/'){
         document.documentElement.style.overflow = "auto";
         document.body.style.overflow = "auto";
-        document.getElementById('root').style.overflowX = "hidden";
+        // document.getElementById('root').style.overflowX = "hidden";
       }
 
       //https://reactjs.org/blog/2015/12/16/ismounted-antipattern.html <---- läs denna och fixa läckan!

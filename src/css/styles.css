@@ -196,9 +196,9 @@ button:focus {
 .front-page-inner{
   position: absolute;
   /* make the top edge of .inner appear in the vertical center of .outer */
-  top: 10%;
+  top: 15%;
   /* move .inner up by half of its height so that its middle is in the middle of .outer */
-  transform: translateY(-10%);
+  transform: translateY(-15%);
   width: 100%;
   background-color: #0e0e0e;
 
