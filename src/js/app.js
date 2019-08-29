@@ -69,8 +69,11 @@ const resetProfile = (e) => {
 
 }
 const disableScrolling = (e) => {
-  e.preventDefault();
-  return false;
+  try{
+    e.preventDefault();
+  }catch(e){
+    console.log('A scrolling operation was prevented By your browser')
+  }
 }
 
 class FrontPage extends React.Component{
@@ -87,16 +90,20 @@ class FrontPage extends React.Component{
     let body = document.body;
     html.style.overflow = "hidden";
     body.style.overflow = "hidden";
-        body.addEventListener('touchmove', disableScrolling);
-        html.addEventListener('touchmove', disableScrolling);
+    body.addEventListener('touchmove', disableScrolling);
+    html.addEventListener('touchmove', disableScrolling);
   }
   onTouch(e){
+    e.target.addEventListener('touchstart',  disableScrolling);
     e.target.addEventListener('touchmove',  disableScrolling);
+    e.target.addEventListener('touchend',  disableScrolling);
+  }
+  componentWillMount(){
+
   }
   componentDidUpdate(){
     if(this.fp.current){
       //activates normal scrolling after page animation
-
       this.fp.current.addEventListener('animationend', (e) => {
         if(e.target.id == 'frontP-cover'){
           this.fp.current.style.display = 'none';
@@ -126,8 +133,8 @@ class FrontPage extends React.Component{
       'fill': 'white'
     }
     return(
-      <div id="frontP-cover" onTouchMove={(e) => {this.onTouch(e)}} className="front-page-cover" ref={this.fp}>
-        <div className="front-page-inner" onTouchMove={(e) => {this.onTouch(e)}}>
+      <div id="frontP-cover" className="disable-touch disable-scroll" onTouchEnd={(e) => {this.onTouch(e)}} onTouchMove={(e) => {this.onTouch(e)}} onTouchStart={(e) => {this.onTouch(e)}} className="front-page-cover" ref={this.fp}>
+        <div className="front-page-inner" onTouchEnd={(e) => {this.onTouch(e)}} onTouchMove={(e) => {this.onTouch(e)}} onTouchStart={(e) => {this.onTouch(e)}}>
           <h1 className="front-page-name ">
             Rasmus
           </h1>
@@ -391,7 +398,6 @@ class Nav extends React.Component{
             contact.classList.add('before-card');
             image.classList.add('profile-flash');
           }else{
-
             contact.scrollIntoView({left: 0, behavior: "smooth"});
           }
         }else{

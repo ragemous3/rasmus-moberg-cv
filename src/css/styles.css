@@ -5,14 +5,13 @@
 @tailwind components;
 
 body, html, main {
-  @apply min-h-full min-w-full;
+  @apply min-h-full min-w-full h-screen max-w-full relative;
     font-family: 'Jura', sans-serif;
-    max-width: 100%;
-    /* overflow-x: hidden;
+    touch-action: none;
+    /*
     This one breaks the smooth-scrolling to top.
     */
     /* font-family: 'Open Sans', sans-serif; */
-    @apply h-screen max-w-full;
     scroll-behavior: smooth;
     -ms-overflow-style: none;
     overflow: -moz-scrollbars-none;
@@ -46,7 +45,14 @@ body {
   background-color: #0e0e0e;
 
 }
-
+.disable-touch{
+  touch-action: none;
+}
+.disable-scroll{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+}
 .dampcolor{
   color: #878787;
 }
