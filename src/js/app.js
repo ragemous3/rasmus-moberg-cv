@@ -88,8 +88,8 @@ class FrontPage extends React.Component{
     //disabling scrolling for android and ios, and all browsers
     let html = document.documentElement;
     let body = document.body;
-    // html.style.overflow = "hidden";
-    // body.style.overflow = "hidden";
+    html.style.overflow = "hidden";
+    body.style.overflow = "hidden";
       document.documentElement.addEventListener('touchmove', disableScrolling);
       document.body.addEventListener('touchmove', disableScrolling);
     }

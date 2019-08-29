@@ -186,6 +186,7 @@ button:focus {
   background-color: #0e0e0e;
   opacity:1;
   overflow: hidden;
+  touch-action:none;
   font-family: 'Jura', sans-serif;
   animation: fcaway;
   animation-delay: 5s;
