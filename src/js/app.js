@@ -550,14 +550,14 @@ class Routes extends React.Component{
         <BrowserRouter>
           <Nav />
             <section id="main-page-structure" className="main-page-structure border-box align-top">
-              <CacheSwitch>
-                <CacheRoute exact={true} path="/"  component={AboutMe} />
+              <Switch>
+                <Route exact={true} path="/"  component={AboutMe} />
                 <Route exact={true} path="/about"  component={AboutMe} />
                 <Route exact={true} path="/experience" component={Knowledge}/>
                 <Route exact={true} path="/education" component={Education}/>
                 <Route exact={true} path="/projects" component={Projects}/>
                 <Route render={() => {return <LoadAsync chunkname="error" url={'./components/404.js'} />}} />
-              </CacheSwitch>
+              </Switch>
             </section>
             {
 
