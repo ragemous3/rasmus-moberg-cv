@@ -215,6 +215,7 @@ class FrontPage extends React.Component{
 
         if(innerwidth >= 614){
           ham.classList.add('hidden');
+          navbar.classList.remove('hidden');
         }else if(innerwidth <= 613 || window.screen.width <= 613){ //resize
           ham.classList.remove('hidden');
           navbar.style.height = ""; //nullling previous height
