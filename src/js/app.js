@@ -90,17 +90,14 @@ class FrontPage extends React.Component{
     let body = document.body;
     html.style.overflow = "hidden";
     body.style.overflow = "hidden";
-    body.addEventListener('touchmove', disableScrolling);
-    html.addEventListener('touchmove', disableScrolling);
-  }
-  onTouch(e){
-    e.target.addEventListener('touchstart',  disableScrolling);
-    e.target.addEventListener('touchmove',  disableScrolling);
-    e.target.addEventListener('touchend',  disableScrolling);
-  }
-  componentWillMount(){
-
-  }
+      document.documentElement.addEventListener('touchmove', disableScrolling);
+      document.body.addEventListener('touchmove', disableScrolling);
+    }
+    onTouch(e){
+      e.target.addEventListener('touchstart',  disableScrolling);
+      e.target.addEventListener('touchmove',  disableScrolling);
+      e.target.addEventListener('touchend',  disableScrolling);
+    }
   componentDidUpdate(){
     if(this.fp.current){
       //activates normal scrolling after page animation
@@ -110,10 +107,9 @@ class FrontPage extends React.Component{
           let html = document.documentElement;
           let body = document.body;
           //enabling scrolling for both IOS and Android,
-          html.style.overflowY = "auto";
-          body.style.overflowY = "auto";
-          body.style.overflowX = 'hidden';
-          html.style.overflowX = 'hidden';
+          html.style.overflow = "auto";
+          body.style.overflow = "auto";
+          document.getElementById('root').style.overflowX = "hidden";
           //Enabling scrolling for IOS and Android
           e.target.removeEventListener('touchmove', disableScrolling);
           body.removeEventListener('touchmove', disableScrolling);
@@ -141,7 +137,6 @@ class FrontPage extends React.Component{
             Rasmus
           </h1>
             <svg className="the-underline" >
-
               <line x="20" x2="300" style={svgStyle} >
               </line>
               <circle style={svgStyle}>
@@ -183,6 +178,11 @@ class FrontPage extends React.Component{
 
     }
     componentDidMount(){
+      if(location.pathname !== '/'){
+        document.documentElement.style.overflow = "auto";
+        document.body.style.overflow = "auto";
+        document.getElementById('root').style.overflowX = "hidden";
+      }
 
       //https://reactjs.org/blog/2015/12/16/ismounted-antipattern.html <---- läs denna och fixa läckan!
       //man måste checka och "avcheka"  _isMounted för att förhindra memory-leak? fun
@@ -197,9 +197,7 @@ class FrontPage extends React.Component{
     }
 
     componentWillMount(){
-      var width = Math.max(document.body.scrollWidth, document.body.offsetWidth,
-               document.documentElement.clientWidth, document.documentElement.scrollWidth, document.documentElement.offsetWidth);
-      console.log(width);
+
       if(this._isMounted === true && this.props.url){
         //Syntax supporter by babels '@babel/plugin-syntax-dynamic-import'
         import(/*webpackChunkName: "[request]"*/ /* webpackMode: "lazy" */ '' + this.props.url).then(({Part}) => {
@@ -281,13 +279,12 @@ class FrontPage extends React.Component{
       if(this.content.current){
         let root = document.getElementById('root');
         this.content.current.addEventListener("animationstart", (e) => {
-          // window.scroll({ top: 0, behavior: 'smooth' });
-          root.scrollIntoView({behavior:'smooth'});
+          window.scroll({ top: 0, behavior: 'smooth' });
+          // root.scrollIntoView({behavior:'smooth'});
         },false);
         this.content.current.addEventListener('webkitAnimationStart', (e) => {
-          root.scrollIntoView({behavior:'smooth'});
-
-          // window.scroll({ top: 0, behavior: 'smooth' });
+          // root.scrollIntoView({behavior:'smooth'});
+          window.scroll({ top: 0, behavior: 'smooth' });
 
         })
       }
@@ -377,7 +374,8 @@ class Nav extends React.Component{
         //  Get the computed heights of all elements;
 
           //get the heighest calculated height!
-
+          let height = Math.max(document.body.scrollHeight, document.body.offsetHeight,
+               document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight);
           var div = document.createElement('div');
           div.id = 'prf-cover';
           div.classList.add('profile-cover', 'block');
@@ -390,19 +388,19 @@ class Nav extends React.Component{
           prf.classList.add('block');
         }
 
-      //adding css to put card in the middle of the page;
-      contact.classList.add('p-4','z-10', 'contact-center', 'main-card-bg', 'general-shadow');
+        //adding css to put card in the middle of the page;
+        contact.classList.add('p-4','z-10', 'contact-center', 'main-card-bg', 'general-shadow');
 
-      //close button of contact-card;
-      var close = document.getElementById('close-card');
-      close.classList.remove('hidden');
-      close.classList.add('block', 'profile-flash');
-      close.addEventListener('click', resetProfile);
-      //adding close-effect on escape-button;
-      document.addEventListener('keydown', this.closeOnEscape);
-      document.getElementById('contact-inner').classList.add('smooth-loaded')
-      image.classList.add('profile-flash');
-    }else{
+        //close button of contact-card;
+        var close = document.getElementById('close-card');
+        close.classList.remove('hidden');
+        close.classList.add('block', 'profile-flash');
+        close.addEventListener('click', resetProfile);
+        //adding close-effect on escape-button;
+        document.addEventListener('keydown', this.closeOnEscape);
+        document.getElementById('contact-inner').classList.add('smooth-loaded')
+        image.classList.add('profile-flash');
+      }else{
       //Scroll down to contact Edge/chrome/firefox
         var rect = contact.getBoundingClientRect();
         if(e.target.id === 'contact'){
@@ -415,10 +413,9 @@ class Nav extends React.Component{
           }
         }else{
           //prevent bad looking rendering when getting other components;
-          if(e.target.pathname === location.pathname){
-              let root = document.getElementById('root')
-              root.scrollIntoView({ behavior: 'smooth' });
-          }
+              window.scroll({ top: 0, behavior: 'smooth' });
+
+
           contact.classList.remove('before-card');
           image.classList.remove('profile-flash');
         }
@@ -547,8 +544,6 @@ class Routes extends React.Component{
 
   }
 
-
-
   onContactLoad(e){
     calculateNavHeight();
   }
@@ -571,7 +566,7 @@ class Routes extends React.Component{
           <Nav />
             <section id="main-page-structure" className="main-page-structure border-box align-top">
               <Switch>
-                <Route exact={true} path="/"  component={AboutMe} />
+                <Route exact={true} path="/"  component={AboutMe}  />
                 <Route exact={true} path="/about"  component={AboutMe} />
                 <Route exact={true} path="/experience" component={Knowledge}/>
                 <Route exact={true} path="/education" component={Education}/>

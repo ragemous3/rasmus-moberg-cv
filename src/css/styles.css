@@ -5,7 +5,8 @@
 @tailwind components;
 
 body, html, main {
-  @apply min-h-full h-screen max-w-full relative;
+  @apply min-h-full max-w-full relative;
+  /* h-screen  */
     font-family: 'Jura', sans-serif;
     /*
     This one breaks the smooth-scrolling to top.
@@ -185,9 +186,6 @@ button:focus {
   background-color: #0e0e0e;
   opacity:1;
   font-family: 'Jura', sans-serif;
-
-
-
   animation: fcaway;
   animation-delay: 5s;
   animation-timing-function: ease-in-out;
@@ -198,9 +196,9 @@ button:focus {
 .front-page-inner{
   position: absolute;
   /* make the top edge of .inner appear in the vertical center of .outer */
-  top: 25%;
+  top: 10%;
   /* move .inner up by half of its height so that its middle is in the middle of .outer */
-  transform: translateY(-50%, -50%);
+  transform: translateY(-10%);
   width: 100%;
   background-color: #0e0e0e;
 
@@ -218,6 +216,9 @@ button:focus {
    height: 5px;
    width: 250px;
    stroke-width: 3;
+   animation: genomskinlig 3s ease-in;
+   animation-fill-mode: forwards;
+
 }
 .front-page-surname{
   @apply text-white text-6xl text-center align-middle m-0  -mt-7 -mr-10;
@@ -347,6 +348,7 @@ button:focus {
 
 .smooth-loaded {
   animation: genomskinlig 0.5s 1;
+
 }
 
 .smooth-loaded2 {
