@@ -70,7 +70,7 @@ const resetProfile = (e) => {
 }
 const disableScrolling = (e) => {
   try{
-    e.preventDefault();
+    // e.preventDefault();
   }catch(e){
     console.log('A scrolling operation was prevented By your browser')
   }
@@ -110,8 +110,8 @@ class FrontPage extends React.Component{
           let html = document.documentElement;
           let body = document.body;
           //enabling scrolling for both IOS and Android,
-          html.style.overflow = "";
-          body.style.overflow = "";
+          html.style.overflow = "auto";
+          body.style.overflow = "auto";
           //Enabling scrolling for IOS and Android
           e.target.removeEventListener('touchmove', disableScrolling);
           body.removeEventListener('touchmove', disableScrolling);
