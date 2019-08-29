@@ -5,9 +5,11 @@
 @tailwind components;
 
 body, html, main {
-  @apply min-h-full min-w-full h-screen max-w-full relative;
+  @apply  relative;
+    width:100%;
     font-family: 'Jura', sans-serif;
     /*
+    min-h-full min-w-full h-screen max-w-full
     This one breaks the smooth-scrolling to top.
     */
     /* font-family: 'Open Sans', sans-serif; */
