@@ -31,7 +31,7 @@ intro-page{
 
 }
 main {
-  @apply p-6 min-w-full;
+  @apply p-6 max-w-full;
 }
 
 ::-webkit-scrollbar {

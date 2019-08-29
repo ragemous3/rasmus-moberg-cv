@@ -110,8 +110,10 @@ class FrontPage extends React.Component{
           let html = document.documentElement;
           let body = document.body;
           //enabling scrolling for both IOS and Android,
-          html.style.overflow = "auto";
-          body.style.overflow = "auto";
+          html.style.overflowY = "auto";
+          body.style.overflowY = "auto";
+          body.style.overflowX = 'hidden';
+          html.style.overflowX = 'hidden';
           //Enabling scrolling for IOS and Android
           e.target.removeEventListener('touchmove', disableScrolling);
           body.removeEventListener('touchmove', disableScrolling);
@@ -277,11 +279,15 @@ class FrontPage extends React.Component{
     componentDidUpdate(){
       this.calculateFooter();
       if(this.content.current){
+        let root = document.getElementById('root');
         this.content.current.addEventListener("animationstart", (e) => {
-          window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+          // window.scroll({ top: 0, behavior: 'smooth' });
+          root.scrollIntoView({behavior:'smooth'});
         },false);
         this.content.current.addEventListener('webkitAnimationStart', (e) => {
-          window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+          root.scrollIntoView({behavior:'smooth'});
+
+          // window.scroll({ top: 0, behavior: 'smooth' });
 
         })
       }
@@ -410,8 +416,8 @@ class Nav extends React.Component{
         }else{
           //prevent bad looking rendering when getting other components;
           if(e.target.pathname === location.pathname){
-            window.scroll({ top: 0, left: 0, behavior: 'smooth' });
-
+              let root = document.getElementById('root')
+              root.scrollIntoView({ behavior: 'smooth' });
           }
           contact.classList.remove('before-card');
           image.classList.remove('profile-flash');
