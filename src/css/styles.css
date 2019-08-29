@@ -559,7 +559,7 @@ button:focus {
   }
 
   .main-card-text {
-    @apply mt-4 mt-0 ml-2 static flex-grow-2 pb-24;
+    @apply mt-4 mt-0 ml-2 static flex-grow-2 pb-20;
     color: #878787;
   }
 
@@ -768,7 +768,7 @@ button:focus {
   }
 
   .main-card-text {
-    @apply m-0 static block ;
+    @apply m-0 static block pb-0;
     margin-left: 10%;
   }
 }
