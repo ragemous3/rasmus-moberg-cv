@@ -297,11 +297,17 @@ class FrontPage extends React.Component{
       }
     }
     render(){
+/*
+//             <FrontPage />
+
+{window.location.pathname === '/' &&
+}
+
+
+*/
       return(
         <section id="main-box" className={` responsive-text border-box inline-block` }>
-          {window.location.pathname === '/' &&
-            <FrontPage />
-          }
+
           {
             this.state.comp.map((Element, i) => {
               return <article ref={this.content}   className={`${this.state.lazy} main-text-box text-shadow pb-1333`} key={this.props.chunkname}>{Element}</article>
