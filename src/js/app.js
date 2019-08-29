@@ -195,6 +195,9 @@ class FrontPage extends React.Component{
     }
 
     componentWillMount(){
+      var width = Math.max(document.body.scrollWidth, document.body.offsetWidth,
+               document.documentElement.clientWidth, document.documentElement.scrollWidth, document.documentElement.offsetWidth);
+      console.log(width);
       if(this._isMounted === true && this.props.url){
         //Syntax supporter by babels '@babel/plugin-syntax-dynamic-import'
         import(/*webpackChunkName: "[request]"*/ /* webpackMode: "lazy" */ '' + this.props.url).then(({Part}) => {
@@ -298,16 +301,16 @@ class FrontPage extends React.Component{
     }
     render(){
 /*
-//             <FrontPage />
-
-{window.location.pathname === '/' &&
-}
+//
 
 
 */
       return(
         <section id="main-box" className={` responsive-text border-box inline-block` }>
+          {window.location.pathname === '/' &&
+            <FrontPage />
 
+          }
           {
             this.state.comp.map((Element, i) => {
               return <article ref={this.content}   className={`${this.state.lazy} main-text-box text-shadow pb-1333`} key={this.props.chunkname}>{Element}</article>
@@ -368,8 +371,6 @@ class Nav extends React.Component{
         //  Get the computed heights of all elements;
 
           //get the heighest calculated height!
-          var height = Math.max(this.body.scrollHeight, this.body.offsetHeight,
-                   this.html.clientHeight, this.html.scrollHeight, this.html.offsetHeight);
 
           var div = document.createElement('div');
           div.id = 'prf-cover';

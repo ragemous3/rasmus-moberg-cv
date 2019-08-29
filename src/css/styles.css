@@ -93,11 +93,11 @@ button:focus {
 /*
 *******************************main-profile*****************************
 */
-.main-profile {
+/* .main-profile {
   @apply pt-0;
   max-width: 270px;
   width: 270px;
-}
+} */
 
 .contact-profile-text {
   font-weight: 700;
@@ -112,24 +112,24 @@ button:focus {
 .i-linkedin {
   background: url('./../img/linkedin.svg');
   background-size: 100% 100%;
-  width: 30px;
-  height: 30px;
+  width: 1.875rem;
+  height: 1.875rem;
   background-repeat: no-repeat;
 }
 
 .i-gmail {
   background: url('./../img/gmail.svg');
   background-size: 100% 100%;
-  width: 30px;
-  height: 30px;
+  width: 1.875rem;
+  height: 1.875rem;
   background-repeat: no-repeat;
 }
 
 .i-cv {
   background: url('./../img/exportpdf.png');
   background-size: 100% 100%;
-  width: 30px;
-  height: 30px;
+  width: 1.875rem;
+  height: 1.875rem;
   background-repeat: no-repeat;
 }
 /*
@@ -155,17 +155,6 @@ button:focus {
      margin-right: -500px;
      opacity: 0;
    }
-   /* 50%{
-     margin-right: 75px;
-     opacity:0.5;
-   } */
-   /* 65%{
-     margin-right: 70px;
-     opacity: 0.2;
-   }
-   90%{
-     opacity: 0.6;
-   } */
    100%{
      @apply -mr-10;
      opacity: 1;
@@ -216,7 +205,7 @@ button:focus {
 .the-underline{
    margin: 0 auto;
    height: 5px;
-   width: 250px;
+   width: 15.625rem;
    stroke-width: 3;
 }
 .front-page-surname{
@@ -409,8 +398,8 @@ button:focus {
   /* @apply p-8; */
   background: url('./../img/abc.png');
   background-size: 100% 100%;
-  width: 30px;
-  height: 30px;
+  width: 1.875rem;
+  height: 1.875rem;
   background-repeat: no-repeat;
 }
 
@@ -444,10 +433,10 @@ button:focus {
   background-size: 100% 100%;
   display: none;
   opacity: 1;
-  height: 24px;
-  width: 24px;
+  height: 1.5rem;
+  width: 1.5rem;
   position: relative;
-  top: 5px;
+  top: 0.313rem;
   transition: all 0.4s ease;
 }
 
@@ -545,8 +534,8 @@ button:focus {
     background-image: url('./../img/downdown.png');
     background-size: 100% 100%;
     opacity: 1;
-    width: 45px;
-    height: 45px;
+    width: 2.813rem;
+    height: 2.813rem;
     content: "";
     display: inline-block;
     animation-name: rotateAround;
@@ -586,16 +575,16 @@ button:focus {
     vertical-align: top;
     background-color: #1a202c;
     border-radius: 25px 25px 0px 0px ;
-    height: 30px;
-    width: 50px;
+    height: 3.125rem;
+    width: 3.125rem;
   }
 
   .bg-ham svg{
     @apply w-50pex;
     position: relative;
     transition: all 0.3s ease;
-    width: 30px;
-    height:20px;
+    width: 1.875rem;
+    height:1.25rem;
   }
   .bg-ham svg {
     transition: 0.4s ease 0s;
@@ -630,7 +619,7 @@ button:focus {
   }
 
   .nav-linkz {
-    @apply flex flex-initial flex-row  items-center flex-wrap  h-80pex pl-40pex pb-12k5pex pr-40pex;
+    @apply flex flex-initial flex-row  items-center flex-wrap pl-2 pr-2  h-80pex  pb-12k5pex ;
     letter-spacing: normal;
     justify-content: space-around;
   }
@@ -663,7 +652,7 @@ button:focus {
   }
 
   .nav-linkz {
-    @apply pl-40pex;
+    @apply pl-4;
   }
 }
 
@@ -684,9 +673,7 @@ button:focus {
 }
 
 @screen navbreak {
-  .nav-linkz {
-    @apply pr-65pex pl-65pex;
-  }
+
 }
 
 @screen sm {
@@ -754,9 +741,6 @@ button:focus {
 
 @screen md {
 
-  /* .nav-linkz{
-    @apply flex flex-col flex-1 flex-wrap items-start justify-between p-6 pt-0;
-  } */
   .main-card-wrapper {
     @apply ml-0;
   }
