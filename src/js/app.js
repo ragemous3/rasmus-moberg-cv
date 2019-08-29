@@ -390,7 +390,7 @@ class Nav extends React.Component{
             contact.classList.add('before-card');
             image.classList.add('profile-flash');
           }else{
-            contact.scrollIntoView({left: 0, behavior: "smooth"});
+            window.scroll({top: document.body.scrollHeight, left: 0, behavior: "smooth"});
           }
         }else{
           //prevent bad looking rendering when getting other components;
