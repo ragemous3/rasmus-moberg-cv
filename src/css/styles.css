@@ -182,7 +182,7 @@ button:focus {
   }
 }
 .front-page-cover{
-  @apply w-full h-full z-60 absolute top-0 left-0;
+  @apply w-full h-full z-60 fixed top-0 left-0;
   background-color: #0e0e0e;
   opacity:1;
   overflow: hidden;
@@ -195,9 +195,10 @@ button:focus {
 }
 
 .front-page-inner{
-  position: absolute;
+  position: fixed;
+  overflow: hidden;
   /* make the top edge of .inner appear in the vertical center of .outer */
-  top: 10%;
+  top: 25%;
   /* move .inner up by half of its height so that its middle is in the middle of .outer */
   width: 100%;
   background-color: #0e0e0e;

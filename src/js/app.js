@@ -88,8 +88,8 @@ class FrontPage extends React.Component{
     //disabling scrolling for android and ios, and all browsers
     let html = document.documentElement;
     let body = document.body;
-    html.style.overflow = "hidden";
-    body.style.overflow = "hidden";
+    // html.style.overflow = "hidden";
+    // body.style.overflow = "hidden";
       document.documentElement.addEventListener('touchmove', disableScrolling);
       document.body.addEventListener('touchmove', disableScrolling);
     }
@@ -107,8 +107,8 @@ class FrontPage extends React.Component{
           let html = document.documentElement;
           let body = document.body;
           //enabling scrolling for both IOS and Android,
-          html.style.overflow = "auto";
-          body.style.overflow = "auto";
+          // html.style.overflow = "auto";
+          // body.style.overflow = "auto";
           // document.getElementById('root').style.overflowX = "hidden";
           //Enabling scrolling for IOS and Android
           e.target.removeEventListener('touchmove', disableScrolling);
@@ -179,8 +179,8 @@ class FrontPage extends React.Component{
     }
     componentDidMount(){
       if(location.pathname !== '/'){
-        document.documentElement.style.overflow = "auto";
-        document.body.style.overflow = "auto";
+        // document.documentElement.style.overflow = "auto";
+        // document.body.style.overflow = "auto";
         // document.getElementById('root').style.overflowX = "hidden";
       }
 
