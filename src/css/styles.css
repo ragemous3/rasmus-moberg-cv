@@ -559,7 +559,7 @@ button:focus {
   }
 
   .main-card-text {
-    @apply mt-4 mt-0 ml-2 static flex-grow-2 mb-24;
+    @apply mt-4 mt-0 ml-2 static flex-grow-2 pb-24;
     color: #878787;
   }
 
