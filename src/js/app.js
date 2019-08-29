@@ -86,10 +86,10 @@ class FrontPage extends React.Component{
     this.onTouch = this.onTouch.bind(this);
 
     //disabling scrolling for android and ios, and all browsers
-    let html = document.documentElement;
-    let body = document.body;
-    html.style.overflow = "hidden";
-    body.style.overflow = "hidden";
+    // let html = document.documentElement;
+    // let body = document.body;
+    // html.style.overflow = "hidden";
+    // body.style.overflow = "hidden";
       document.documentElement.addEventListener('touchmove', disableScrolling);
       document.body.addEventListener('touchmove', disableScrolling);
     }
@@ -100,6 +100,12 @@ class FrontPage extends React.Component{
     }
   componentDidUpdate(){
     if(this.fp.current){
+
+      //Making frontpage unscrollable full cover. Dont want to mix with root overflow
+      //because that has different effects on different browsers.
+      let height = Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight);
+      this.fp.current.style.height = height + 'px';
+
       //activates normal scrolling after page animation
       this.fp.current.addEventListener('animationend', (e) => {
         if(e.target.id == 'frontP-cover'){
