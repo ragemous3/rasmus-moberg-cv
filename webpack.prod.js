@@ -77,7 +77,7 @@
                   }
               ]
           };
-      }
+       }
       if(buildType === MODERN_CONFIG){
           return {
               test: /\.(png|jpe?g|gif|svg|webp)$/i,
@@ -85,7 +85,7 @@
                   {
                       loader: 'file-loader',
                       options: {
-                          name: 'img/[name].[ext]',
+                          name: '../img/[name].[ext]',
                           // path: '[path]/img'
                       }
                   },

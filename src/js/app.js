@@ -26,16 +26,23 @@
 
 // kick off the polyfill!
 smoothscroll.polyfill();
-//Calculating the height of Nav for different screens
+
+//Calculating the height of Nav for different screen-sizes. ()
 const calculateNavHeight = () => {
   //this triggers two times. Yes it is not necessary!
+  var navbar = document.getElementById('nav-linkz');
+  var ham = document.getElementById('hamburger-id')
 
   if(document.defaultView.innerWidth <= 767 || window.screen.width <= 767){
-    var navbar = document.getElementById('nav-linkz');
+
     navbar.classList.remove('flex', 'flex-col', 'flex-1', 'flex-wrap', 'items-start', 'justify-between', 'p-6', 'pt-0');
+
+
   }else if(document.defaultView.innerWidth >= 768 || window.screen.width >= 768){
-    var navbar = document.getElementById('nav-linkz');
+    //Profile-image scales as the screens get larger. This code puts the height
+    //of the box where the image is located and applies it to the navbar
     var contactSection = document.getElementById('contact-section').clientHeight;
+    navbar.classList.remove('hidden');//if browser window is resizing full while menu is hidden
     navbar.style.height = contactSection + 'px';
     navbar.classList.add('flex', 'flex-col', 'flex-1', 'flex-wrap', 'items-start', 'justify-between', 'p-6', 'pt-0');
   }
@@ -199,15 +206,16 @@ class FrontPage extends React.Component{
     }
     mobileResizer(e){
       //  window.screen.width  //true width of device
-      document.getElementById('hamburger-id').classList.remove('activated');
+      //document.getElementById('hamburger-id').classList.remove('activated');
       var innerwidth = document.body.offsetWidth;
+      var navbar = document.getElementById('nav-linkz');
+      var ham = document.getElementById('ham-placeholder')
+
         if(innerwidth >= 614){
-          let navbar = document.getElementById('nav-linkz')
-          navbar.classList.remove('hidden');
+          ham.classList.add('hidden');
         }else if(innerwidth <= 613 || window.screen.width <= 613){ //resize
-          let navbar = document.getElementById('nav-linkz')
-          navbar.classList.add('hidden');
-          navbar.style.height = '';
+          ham.classList.remove('hidden');
+          navbar.style.height = ""; //nullling previous height
         }
 
         if(document.defaultView.innerWidth <= 767 || window.screen.width <= 767){
@@ -240,9 +248,10 @@ class FrontPage extends React.Component{
               console.log(e)
             }
           }
-        }else if(document.getElementById('contact-section')){
+        }else{
           //contact is hidden at first page-load
-          if(this.props.url !== './components/home.js'){
+          if(
+            document.getElementById('contact-section') && this.props.url !== './components/home.js'){
             var contact = document.getElementById('contact-section');
             contact.style.display = 'inline-block';
             contact.classList.remove('before-card');
@@ -296,7 +305,7 @@ class FrontPage extends React.Component{
 
 /*
 ***********************************************************************************************
-*****************************NAV-BAR MED TILLHÖRANDE KOMPONENTER*******************************
+*****************************NAV-BAR DYNAMICS MODERBOARD***************************************
 ***********************************************************************************************
 */
 
@@ -311,17 +320,17 @@ class Nav extends React.Component{
     this.showNav = this.showNav.bind(this);
   }
   showNav(e){
-    var nav = document.getElementById('nav-linkz');
-    var ham = document.getElementById('hamburger-id')
-      if(nav.classList.contains('hidden')){
-        nav.classList.remove('hidden');
-        nav.classList.add('smooth-loaded');
-        ham.classList.add('activated');
-      }else{
-        nav.classList.add('hidden', );
-        nav.classList.remove('smooth-loaded')
-        ham.classList.remove('activated');
-      }
+    var navbar = document.getElementById('nav-linkz');
+    var ham = document.getElementById('hamburger-id');
+    if(navbar.classList.contains('hidden')){
+      navbar.classList.remove('hidden');
+      navbar.classList.add('smooth-loaded');
+      ham.classList.remove('activated');
+    }else{
+      navbar.classList.add('hidden', );
+      navbar.classList.remove('smooth-loaded')
+      ham.classList.add('activated');
+    }
   }
   closeOnEscape(e){
     if(e.key == 'Escape' || e.key == 'Esc'){
@@ -337,6 +346,7 @@ class Nav extends React.Component{
       //document.body.clientWidth to handle iframes and user resizes
       if(e.target.id === 'contact' && document.defaultView.innerWidth >= 768 && window.screen.width >= 768){
       //if there are no cover. Create it and put it out on the screen;
+        //in case of employer hides nav and resizing browser window
         if(!document.getElementById('prf-cover')){
         //  Get the computed heights of all elements;
           var body = document.body;
@@ -359,7 +369,8 @@ class Nav extends React.Component{
 
       //adding css to put card in the middle of the page;
       contact.classList.add('p-4','z-10', 'contact-center', 'main-card-bg', 'general-shadow');
-      //close button;
+
+      //close button of contact-card;
       var close = document.getElementById('close-card');
       close.classList.remove('hidden');
       close.classList.add('block', 'profile-flash');
@@ -396,11 +407,11 @@ class Nav extends React.Component{
       return {lazy: 'smooth-loaded2'}
     })
     //If lower than 614px hide the navbar
+    var ham = document.getElementById('ham-placeholder');
     if(document.body.offsetWidth >= 614){
-        document.getElementById('nav-linkz').classList.remove('hidden');
+      ham.classList.add('hidden');
     }else{
-        document.getElementById('nav-linkz').classList.add('hidden');
-
+      ham.classList.remove('hidden');
     }
 
   }
@@ -415,8 +426,26 @@ class Nav extends React.Component{
     return (
       <>
         <nav id="navbar" className={`nav-bar border-box ${this.state.lazy} `}>
+          <article className="hamburger-placeholder" id="ham-placeholder">
+            <section id="hamburger-id" className="bg-ham" onClick={(e) => {this.showNav(e)}}>
+              <svg viewBox="0 0 100 100">
+                  <path
+                    d="
+                       M 50,16
+                       l 0,72
+                       M 20,60
+                       l 30,28
+                       M 80,60
+                       l -30,28"
+                    stroke="#0096dd"
+                    strokeLinecap="round"
+                    strokeWidth="8"
+                  />
+                </svg>
+            </section>
+          </article>
           <section id="nav-linkz" className="border-box nav-linkz nav-text ">
-            <div className={`nav-link-box-first bg-transparent`}>
+            <div className={`nav-link-box bg-transparent`}>
               <NavLink className={` border-box a-link `} to="/about"  onClick={(e) => {this.contactScroll(e)}}>About Me</NavLink>
             </div>
             <div className={`nav-link-box bg-transparent`}>
@@ -431,10 +460,6 @@ class Nav extends React.Component{
             <div className={`nav-link-box bg-transparent `}>
               <button id="contact"  className={` border-box a-link `} onClick={(e) => {this.contactScroll(e)}}>Contact</button>
             </div>
-          </section>
-          <section id="hamburger-id" className="bg-ham" onClick={(e) => {this.showNav(e)}}>
-            <span>
-            </span>
           </section>
         </nav>
       </>

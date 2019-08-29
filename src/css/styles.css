@@ -6,20 +6,21 @@
 
 body, html, main {
   @apply min-h-full min-w-full;
-  font-family: 'Jura', sans-serif;
-
-  /* font-family: 'Open Sans', sans-serif; */
-  @apply h-screen max-w-full;
-  scroll-behavior: smooth;
-  -ms-overflow-style: none;
-  overflow: -moz-scrollbars-none;
-  /* Prevent text resize on orientation change, useful for web-apps */
-  -webkit-text-size-adjust: none;
-  -moz-text-size-adjust: none;
-  -ms-text-size-adjust: none;
-  -o-text-size-adjust: none;
-  text-size-adjust: none;
-  letter-spacing: 0.1rem;
+    font-family: 'Jura', sans-serif;
+    max-width: 100%;
+    overflow-x: hidden;
+    /* font-family: 'Open Sans', sans-serif; */
+    @apply h-screen max-w-full;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+    /* Prevent text resize on orientation change, useful for web-apps */
+    -webkit-text-size-adjust: none;
+    -moz-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    -o-text-size-adjust: none;
+    text-size-adjust: none;
+    letter-spacing: 0.1rem;
 
 }
 
@@ -566,49 +567,34 @@ button:focus {
     /* color: #878787; */
     /* text-shadow: 0 0px 20px rgba(119, 50, 210); */
   }
-
+  .hamburger-placeholder{
+      @apply relative z-50 flex bg-transparent w-full justify-center -mt-50pex;
+      /* flex-1 is all about size inheritance */
+  }
   .bg-ham {
-    @apply fixed right-2dot5 bottom-5 block z-50;
-    width: 30px;
-    height: 30px;
-    margin: 25px;
+    @apply inline-block block z-50 flex  items-center justify-center self-start;
+    vertical-align: top;
+    background-color: #1a202c;
+    border-radius: 15px 15px 0px 0px ;
+    height: 50px;
+    width: 60px;
   }
 
-  .bg-ham span {
-    margin: 0 auto;
+  .bg-ham svg{
+    @apply w-50pex;
     position: relative;
-    top: 12px;
-  }
-
-  .bg-ham span:before, .bg-ham span:after {
-    position: absolute;
-    content: '';
-  }
-
-  .bg-ham span:before {
-    margin-top: -12px;
-  }
-
-  .bg-ham span:after {
-    margin-top: 12px;
-  }
-
-  .bg-ham span, .bg-ham span:before, .bg-ham span:after {
-    width: 30px;
-    height: 6px;
-    background-color: #fff;
-    display: block;
     transition: all 0.3s ease;
+    width: 30px;
+    height:30px;
+  }
+  .bg-ham svg {
+    transition: 0.4s ease 0s;
   }
 
-  .bg-ham span {
-    transition: 0.2s ease 0s;
-  }
-
-  .activated span, .activated span:before, .activated span:after {
-    margin: 0px;
-    background-color: rgb(98, 5, 30);
-    /* transform:rotate(45deg); */
+  .activated svg{
+    margin-top: 0px;
+      /* background-color: rgb(98, 5, 30); */
+    transform: rotate(180deg);
   }
 
   /*
@@ -630,13 +616,13 @@ button:focus {
   *****************************NAV********************************
   */
   .nav-bar {
-    @apply text-2xl block fixed bottom-0 left-0 z-20 bg-gray-900 w-full;
-    box-shadow: rgba(0, 0, 0, 0.6) 0 2px 3px;
+    @apply text-2xl block fixed bottom-0 left-0 z-20 bg-gray-900 w-full shadow-lg;
   }
 
   .nav-linkz {
-    @apply flex flex-initial flex-row items-center flex-wrap justify-center h-80pex pl-40pex pb-12k5pex pr-40pex;
+    @apply flex flex-initial flex-row  items-center flex-wrap  h-80pex pl-40pex pb-12k5pex pr-40pex;
     letter-spacing: normal;
+    justify-content: space-around;
   }
 
   .nav-text {
@@ -651,14 +637,10 @@ button:focus {
     @apply hidden;
   }
 
-  .nav-link-box {
-    @apply pr-3 m-0;
-    /* leading-loose; */
+   .nav-link-box {
+    @apply p-1 m-0;
   }
 
-  .nav-link-box-first {
-    @apply pr-3
-  }
 }
 
 @screen xs {

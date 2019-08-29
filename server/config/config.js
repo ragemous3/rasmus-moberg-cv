@@ -59,6 +59,9 @@ module.exports = (app, express, serverConfig) => {
 
       return;
     }else if(environment === "live"){
+/*
+    *************REROUTING*******************
+*/
       // Trigger a reroute of "www."-prefix before letting over routing to express.
       app.get('/', (req, res, next) => {
           app.disable('x-powered-by');
@@ -72,12 +75,16 @@ module.exports = (app, express, serverConfig) => {
           next();
         });
 
+  /*
+      *************Reconfigure env-obj*******************
+  */
       process.env.SERVER_HOST = "rasmusmoberg.me";
       process.env.SERVER_POLL = false;
       process.env.SERVER_PORT = 443;
       console.log(`${process.env.NODE_ENV} started!`)
-      //Automize the routing for ya!
       app.use(express.static('public/dist/'));
+
+      //Automize the routing for ya!
       return;
     }
 }
