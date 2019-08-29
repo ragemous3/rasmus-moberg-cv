@@ -466,6 +466,27 @@ button:focus {
 /*
 *********************************Nav-bar and Contact Screen************************************
 */
+
+
+  /*
+        before-card animation (The "before-box" of main-card)
+   */
+  @keyframes rotateAround {
+    0% {
+      @apply top-m30;
+      transform: rotate3d(0, 1, 0, 0deg);
+    }
+
+    50% {
+      @apply top-m50;
+      transform: rotate3d(0, 1, 0, 180deg);
+    }
+
+    100% {
+      @apply top-m30;
+      transform: rotate3d(0, 1, 0, 360deg);
+    }
+  }
 @screen 0 {
 
   /*
@@ -507,25 +528,6 @@ button:focus {
     @apply w-full relative ml-0 align-bottom flex flex-1 items-center justify-center;
   }
 
-  /*
-        before-card animation (The "before-box" of main-card)
-   */
-  @keyframes rotateAround {
-    0% {
-      @apply top-m30;
-      transform: rotate3d(0, 1, 0, 0deg);
-    }
-
-    50% {
-      @apply top-m50;
-      transform: rotate3d(0, 1, 0, 180deg);
-    }
-
-    100% {
-      @apply top-m30;
-      transform: rotate3d(0, 1, 0, 360deg);
-    }
-  }
 
   /*
           The "before-box" of main-card
@@ -554,7 +556,7 @@ button:focus {
   }
 
   .main-card-text {
-    @apply mt-4 mt-0 ml-2 static flex-grow-2;
+    @apply mt-4 mt-0 ml-2 static flex-grow-2 mb-24;
     color: #878787;
   }
 
