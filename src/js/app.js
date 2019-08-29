@@ -13,7 +13,6 @@
   import ReactDOM from 'react-dom';
   // import { ColorProvider, ColorConsumer} from './components/colorcontext.js';
   import {BrowserRouter, Route, Link, Switch, NavLink} from "react-router-dom";
-  import CacheRoute, { CacheSwitch } from 'react-router-cache-route'
   import { Part } from './components/contact.js';
   import smoothscroll from 'smoothscroll-polyfill';
 

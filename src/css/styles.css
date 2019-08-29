@@ -8,7 +8,9 @@ body, html, main {
   @apply min-h-full min-w-full;
     font-family: 'Jura', sans-serif;
     max-width: 100%;
-    overflow-x: hidden;
+    /* overflow-x: hidden;
+    This one breaks the smooth-scrolling to top.
+    */
     /* font-family: 'Open Sans', sans-serif; */
     @apply h-screen max-w-full;
     scroll-behavior: smooth;
