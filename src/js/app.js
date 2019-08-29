@@ -320,6 +320,8 @@ class Nav extends React.Component{
     this.contactScroll = this.contactScroll.bind(this);
     this.closeOnEscape.bind(this);
     this.showNav = this.showNav.bind(this);
+    this.body = document.body;
+    this.html = document.documentElement;
   }
   showNav(e){
     var navbar = document.getElementById('nav-linkz');
@@ -351,11 +353,10 @@ class Nav extends React.Component{
         //in case of employer hides nav and resizing browser window
         if(!document.getElementById('prf-cover')){
         //  Get the computed heights of all elements;
-          var body = document.body;
-          var html = document.documentElement;
+
           //get the heighest calculated height!
-          var height = Math.max(body.scrollHeight, body.offsetHeight,
-                   html.clientHeight, html.scrollHeight, html.offsetHeight);
+          var height = Math.max(this.body.scrollHeight, this.body.offsetHeight,
+                   this.html.clientHeight, this.html.scrollHeight, this.html.offsetHeight);
 
           var div = document.createElement('div');
           div.id = 'prf-cover';
@@ -390,7 +391,9 @@ class Nav extends React.Component{
             contact.classList.add('before-card');
             image.classList.add('profile-flash');
           }else{
-            window.scroll({top: document.body.scrollHeight, left: 0, behavior: "smooth"});
+            var max = Math.max(this.body.scrollHeight, this.body.offsetHeight,
+                     this.html.clientHeight, this.html.scrollHeight, this.html.offsetHeight);
+            window.scroll({top: max, left: 0, behavior: "smooth"});
           }
         }else{
           //prevent bad looking rendering when getting other components;
