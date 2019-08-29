@@ -93,9 +93,11 @@ if(process.env.NODE_ENV === 'live'){
     //checking
     var bool;
     app.get('*', (req,res, next) => {
-      let x = req.get('accept-encoding');
-      bool = x.indexOf('gzip');
-      next();
+      if(req.get('accept-encoding')){
+        let x = req.get('accept-encoding');
+        bool = x.indexOf('gzip');
+        next();
+      }
     })
 
     if(bool !== -1 && process.env.NODE_ENV !== 'development'){
