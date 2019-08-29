@@ -157,6 +157,7 @@ module.exports = {
       '9': '2.25rem',
       '7k85': '1.85rem',
       '20pex': '20px',
+      '30pex': '30px',
       '40pex': '40px',
       '50pex': '50px',
       '12k5pex': '12.5px',

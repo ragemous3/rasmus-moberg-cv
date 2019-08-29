@@ -98,7 +98,7 @@ if(process.env.NODE_ENV === 'live'){
       next();
     })
 
-    if(bool !== -1){
+    if(bool !== -1 && process.env.NODE_ENV !== 'development'){
         app.get('*/main-modern.js', (req, res, next) => {
           req.url = req.url + '.gz';
           res.set('Content-Encoding', 'gzip');

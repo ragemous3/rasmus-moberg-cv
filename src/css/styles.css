@@ -554,7 +554,7 @@ button:focus {
   }
 
   .main-card-text {
-    @apply mt-4 mt-0 ml-6 static flex-grow-2;
+    @apply mt-4 mt-0 ml-2 static flex-grow-2;
     color: #878787;
   }
 
@@ -568,16 +568,16 @@ button:focus {
     /* text-shadow: 0 0px 20px rgba(119, 50, 210); */
   }
   .hamburger-placeholder{
-      @apply relative z-50 flex bg-transparent w-full justify-center -mt-50pex;
+      @apply relative z-50 flex bg-transparent w-full justify-center -mt-30pex;
       /* flex-1 is all about size inheritance */
   }
   .bg-ham {
     @apply inline-block block z-50 flex  items-center justify-center self-start;
     vertical-align: top;
     background-color: #1a202c;
-    border-radius: 15px 15px 0px 0px ;
-    height: 50px;
-    width: 60px;
+    border-radius: 25px 25px 0px 0px ;
+    height: 30px;
+    width: 50px;
   }
 
   .bg-ham svg{
@@ -585,7 +585,7 @@ button:focus {
     position: relative;
     transition: all 0.3s ease;
     width: 30px;
-    height:30px;
+    height:20px;
   }
   .bg-ham svg {
     transition: 0.4s ease 0s;

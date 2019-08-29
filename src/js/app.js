@@ -13,6 +13,7 @@
   import ReactDOM from 'react-dom';
   // import { ColorProvider, ColorConsumer} from './components/colorcontext.js';
   import {BrowserRouter, Route, Link, Switch, NavLink} from "react-router-dom";
+  import CacheRoute, { CacheSwitch } from 'react-router-cache-route'
   import { Part } from './components/contact.js';
   import smoothscroll from 'smoothscroll-polyfill';
 
@@ -40,7 +41,7 @@ const calculateNavHeight = () => {
 
   }else if(document.defaultView.innerWidth >= 768 || window.screen.width >= 768){
     //Profile-image scales as the screens get larger. This code puts the height
-    //of the box where the image is located and applies it to the navbar
+    //of the box where the image is located and applies it to the navbar.
     var contactSection = document.getElementById('contact-section').clientHeight;
     navbar.classList.remove('hidden');//if browser window is resizing full while menu is hidden
     navbar.style.height = contactSection + 'px';
@@ -159,6 +160,7 @@ class FrontPage extends React.Component{
         comp: [],
         lazy: 'smooth-loader'
       }
+
       this.middle = [];
       this.aside = [];
       this.mobileResizer = this.mobileResizer.bind(this);
@@ -521,7 +523,10 @@ class Routes extends React.Component{
       contact: []
     }
     this.onContactLoad = this.onContactLoad.bind(this);
+
   }
+
+
 
   onContactLoad(e){
     calculateNavHeight();
@@ -544,14 +549,14 @@ class Routes extends React.Component{
         <BrowserRouter>
           <Nav />
             <section id="main-page-structure" className="main-page-structure border-box align-top">
-              <Switch>
-                <Route exact={true} path="/"  component={AboutMe} />
+              <CacheSwitch>
+                <CacheRoute exact={true} path="/"  component={AboutMe} />
                 <Route exact={true} path="/about"  component={AboutMe} />
                 <Route exact={true} path="/experience" component={Knowledge}/>
                 <Route exact={true} path="/education" component={Education}/>
                 <Route exact={true} path="/projects" component={Projects}/>
                 <Route render={() => {return <LoadAsync chunkname="error" url={'./components/404.js'} />}} />
-              </Switch>
+              </CacheSwitch>
             </section>
             {
 
