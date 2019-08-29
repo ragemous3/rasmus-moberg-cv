@@ -617,11 +617,12 @@ button:focus {
   *****************************NAV********************************
   */
   .nav-bar {
-    @apply text-2xl block fixed bottom-0 left-0 z-20 bg-gray-900 w-full shadow-lg;
+    @apply text-2xl block fixed bottom-0 left-0 z-20 bg-gray-900 w-full;
   }
 
   .nav-linkz {
-    @apply flex flex-initial flex-row  items-center flex-wrap pl-2 pr-2  h-80pex  pb-12k5pex ;
+    @apply flex flex-initial flex-row  items-center flex-wrap h-80pex  pb-12k5pex ;
+    /* pl-2 pr-2  */
     letter-spacing: normal;
     justify-content: space-around;
   }
@@ -654,7 +655,7 @@ button:focus {
   }
 
   .nav-linkz {
-    @apply pl-4;
+    /* @apply pl-4; */
   }
 }
 
@@ -722,7 +723,9 @@ button:focus {
     /*
     Denna bastard jobbar ihop med javascripten jag skrivit. Orkante göra om det!
      */
-    @apply flex-none relative inline-block w-full p-0 fixed pl-2 w-1/4;
+    @apply flex-none relative inline-block w-full p-0 fixed w-1/4;
+    /* pl-2  */
+    
   }
 
   /*
