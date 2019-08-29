@@ -185,6 +185,7 @@ button:focus {
   @apply w-full h-full z-60 absolute top-0 left-0;
   background-color: #0e0e0e;
   opacity:1;
+  overflow: hidden;
   font-family: 'Jura', sans-serif;
   animation: fcaway;
   animation-delay: 5s;
@@ -196,9 +197,8 @@ button:focus {
 .front-page-inner{
   position: absolute;
   /* make the top edge of .inner appear in the vertical center of .outer */
-  top: 15%;
+  top: 10%;
   /* move .inner up by half of its height so that its middle is in the middle of .outer */
-  transform: translateY(-15%);
   width: 100%;
   background-color: #0e0e0e;
 
