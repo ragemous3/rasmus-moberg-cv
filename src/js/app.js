@@ -101,7 +101,7 @@ class FrontPage extends React.Component{
   componentDidUpdate(){
     if(this.fp.current){
 
-      //Making frontpage unscrollable full cover. Dont want to mix with root overflow
+      //Making frontpage unscrollable. Dont want to mix with root overflow
       //because that has different effects on different browsers.
       let height = Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight);
       this.fp.current.style.height = height + 'px';
