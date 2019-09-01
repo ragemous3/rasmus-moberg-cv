@@ -15,6 +15,7 @@
   import {BrowserRouter, Route, Link, Switch, NavLink} from "react-router-dom";
   import { Part } from './components/contact.js';
   import smoothscroll from 'smoothscroll-polyfill';
+  import  { ColorConsumer, ColorProvider, ColorContext } from './components/colorcontext.js';
 
 
 
@@ -86,12 +87,11 @@ class FrontPage extends React.Component{
     this.onTouch = this.onTouch.bind(this);
 
     //disabling scrolling for android and ios, and all browsers
-    // let html = document.documentElement;
-    // let body = document.body;
-    // html.style.overflow = "hidden";
-    // body.style.overflow = "hidden";
-      document.documentElement.addEventListener('touchmove', disableScrolling);
-      document.body.addEventListener('touchmove', disableScrolling);
+    let html = document.documentElement;
+    let body = document.body;
+
+    document.documentElement.addEventListener('touchmove', disableScrolling);
+    document.body.addEventListener('touchmove', disableScrolling);
     }
     onTouch(e){
       e.target.addEventListener('touchstart',  disableScrolling);
@@ -100,23 +100,12 @@ class FrontPage extends React.Component{
     }
   componentDidUpdate(){
     if(this.fp.current){
-
-      //Making frontpage unscrollable. Dont want to mix with root overflow
-      //because that has different effects on different browsers.
-      let height = Math.max(document.body.scrollHeight, document.body.offsetHeight, document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight);
-      this.fp.current.style.height = height + 'px';
-
+      let html = document.documentElement;
+      let body = document.body;
       //activates normal scrolling after page animation
       this.fp.current.addEventListener('animationend', (e) => {
         if(e.target.id == 'frontP-cover'){
           this.fp.current.style.display = 'none';
-          let html = document.documentElement;
-          let body = document.body;
-          //enabling scrolling for both IOS and Android,
-          // html.style.overflow = "auto";
-          // body.style.overflow = "auto";
-          // document.getElementById('root').style.overflowX = "hidden";
-          //Enabling scrolling for IOS and Android
           e.target.removeEventListener('touchmove', disableScrolling);
           body.removeEventListener('touchmove', disableScrolling);
           html.removeEventListener('touchmove', disableScrolling);
@@ -137,7 +126,7 @@ class FrontPage extends React.Component{
       'fill': 'white'
     }
     return(
-      <div id="frontP-cover" className="disable-touch disable-scroll" onTouchEnd={(e) => {this.onTouch(e)}} onTouchMove={(e) => {this.onTouch(e)}} onTouchStart={(e) => {this.onTouch(e)}} className="front-page-cover" ref={this.fp}>
+      <div id="frontP-cover" className="front-page-cover border-box" onTouchEnd={(e) => {this.onTouch(e)}} onTouchMove={(e) => {this.onTouch(e)}} onTouchStart={(e) => {this.onTouch(e)}} ref={this.fp}>
         <div className="front-page-inner" onTouchEnd={(e) => {this.onTouch(e)}} onTouchMove={(e) => {this.onTouch(e)}} onTouchStart={(e) => {this.onTouch(e)}}>
           <h1 className="front-page-name ">
             Rasmus
@@ -315,17 +304,16 @@ class FrontPage extends React.Component{
 
 */
       return(
-        <section id="main-box" className={` responsive-text border-box inline-block` }>
-          {window.location.pathname === '/' &&
-            <FrontPage />
-
-          }
-          {
-            this.state.comp.map((Element, i) => {
-              return <article ref={this.content}   className={`${this.state.lazy} main-text-box text-shadow pb-1333`} key={this.props.chunkname}>{Element}</article>
-            })
-          }
-        </section>
+          <section id="main-box" className={` responsive-text border-box inline-block` }>
+            {window.location.pathname === '/' &&
+              <FrontPage />
+            }
+            {
+              this.state.comp.map((Element, i) => {
+                return <article ref={this.content}   className={`${this.state.lazy} main-text-box text-shadow pb-1333`} key={this.props.chunkname}>{Element}</article>
+              })
+            }
+          </section>
       )
   }
 }
@@ -442,54 +430,53 @@ class Nav extends React.Component{
 
   }
   render(){
-    /*
-    //In case a The first page should be other than "aboutme"-me
-    <div className={`nav-link-box-first bg-transparent`}>
-      <NavLink className={` border-box a-link `} to="/"  onClick={(e) => {this.contactScroll(e)}}>Home</NavLink>
-    </div>
-
-    */
     return (
-      <>
-        <nav id="navbar" className={`nav-bar border-box ${this.state.lazy} `}>
-          <article className="hamburger-placeholder" id="ham-placeholder">
-            <section id="hamburger-id" className="bg-ham" onClick={(e) => {this.showNav(e)}}>
-              <svg viewBox="0 0 100 100">
-                  <path
-                    d="
-                       M 50,16
-                       l 0,72
-                       M 20,60
-                       l 30,28
-                       M 80,60
-                       l -30,28"
-                    stroke="#0096dd"
-                    strokeLinecap="round"
-                    strokeWidth="8"
-                  />
-                </svg>
+      <ColorConsumer>
+        {({color, updateColor}) =>
+          <nav id="navbar" className={`nav-bar border-box ${this.state.lazy}`}>
+            <article className="hamburger-placeholder" id="ham-placeholder">
+              <section id="hamburger-id" className="bg-ham" onClick={(e) => {this.showNav(e)}}>
+                <svg viewBox="0 0 100 100">
+                    <path
+                      d="
+                         M 50,16
+                         l 0,72
+                         M 20,60
+                         l 30,28
+                         M 80,60
+                         l -30,28"
+                      stroke="#0096dd"
+                      strokeLinecap="round"
+                      strokeWidth="8"
+                    />
+                  </svg>
+              </section>
+            </article>
+            <section id="nav-linkz" className="border-box nav-linkz nav-text ">
+              <div className={`nav-link-box bg-transparent`}>
+                <NavLink className={` border-box a-link `} to="/about"  onClick={(e) => {this.contactScroll(e)}}>About Me</NavLink>
+              </div>
+              <div className={`nav-link-box bg-transparent`}>
+                <NavLink className={` border-box a-link `} to="/projects"  onClick={(e) => {this.contactScroll(e)}}>Projects</NavLink>
+              </div>
+              <div className={`nav-link-box bg-transparent`}>
+                <NavLink className={` border-box a-link `} to="/education"  onClick={(e) => {this.contactScroll(e)}}>Education</NavLink>
+              </div>
+              <div className={`nav-link-box bg-transparent`}>
+                <NavLink className={` border-box a-link `} to="/experience"  onClick={(e) => {this.contactScroll(e)}}>Experience</NavLink>
+              </div>
+              <div className={`nav-link-box bg-transparent `}>
+                <button id="contact"  className={` border-box a-link `} onClick={(e) => {this.contactScroll(e)}}>Contact</button>
+              </div>
+              <section>
+                <img className='hint--bottom' aria-label="Need higher contrast?" className="i-flash" onClick={(e) => {updateColor()}} src="../img/flash-light.png" />
+              </section>
             </section>
-          </article>
-          <section id="nav-linkz" className="border-box nav-linkz nav-text ">
-            <div className={`nav-link-box bg-transparent`}>
-              <NavLink className={` border-box a-link `} to="/about"  onClick={(e) => {this.contactScroll(e)}}>About Me</NavLink>
-            </div>
-            <div className={`nav-link-box bg-transparent`}>
-              <NavLink className={` border-box a-link `} to="/projects"  onClick={(e) => {this.contactScroll(e)}}>Projects</NavLink>
-            </div>
-            <div className={`nav-link-box bg-transparent`}>
-              <NavLink className={` border-box a-link `} to="/education"  onClick={(e) => {this.contactScroll(e)}}>Education</NavLink>
-            </div>
-            <div className={`nav-link-box bg-transparent`}>
-              <NavLink className={` border-box a-link `} to="/experience"  onClick={(e) => {this.contactScroll(e)}}>Experience</NavLink>
-            </div>
-            <div className={`nav-link-box bg-transparent `}>
-              <button id="contact"  className={` border-box a-link `} onClick={(e) => {this.contactScroll(e)}}>Contact</button>
-            </div>
-          </section>
-        </nav>
-      </>
+          </nav>
+        }
+      </ColorConsumer>
     )
+
   }
 }
 
@@ -568,6 +555,7 @@ class Routes extends React.Component{
 
   render(){
     return(
+      <ColorProvider>
         <BrowserRouter>
           <Nav />
             <section id="main-page-structure" className="main-page-structure border-box align-top">
@@ -587,6 +575,7 @@ class Routes extends React.Component{
               })
             }
         </BrowserRouter>
+     </ColorProvider>
     )
   }
 }

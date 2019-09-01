@@ -42,9 +42,6 @@ main {
 
 body {
   @apply bg-fixed;
-
-  background-color: #0e0e0e;
-
 }
 .disable-touch{
   touch-action: none;
@@ -54,9 +51,24 @@ body {
   height:100%;
   overflow:hidden;
 }
-.dampcolor{
-  color: #878787;
+/* Background-color and such  */
+.body-bg{
+  background-color: #0e0e0e;
 }
+.body-bg-darker{
+  background-color: black;
+}
+.dampcolor{
+  color: #c7c7c7;
+}
+.brightColor{
+  color: #fff;
+}
+.highContrast{
+  background-color: #000000
+}
+/* Make user Control Text  */
+
 .h3-override-ml-nil {
   @apply ml-0;
 }
@@ -118,7 +130,16 @@ button:focus {
   height: 30px;
   background-repeat: no-repeat;
 }
-
+.i-flash{
+  /* background: url('./../img/flash-light.png'); */
+  background-size: 100% 100%;
+  cursor: pointer;
+  width: 30px;
+  border:none;
+  height: 30px;
+  background-repeat: no-repeat;
+  align-self: middle;
+}
 .i-gmail {
   background: url('./../img/gmail.svg');
   background-size: 100% 100%;
@@ -126,7 +147,13 @@ button:focus {
   height: 30px;
   background-repeat: no-repeat;
 }
-
+.i-git{
+  background: url('./../img/github.png');
+  background-size: 100% 100%;
+  width: 30px;
+  height: 30px;
+  background-repeat: no-repeat;
+}
 .i-cv {
   background: url('./../img/exportpdf.png');
   background-size: 100% 100%;
@@ -183,7 +210,7 @@ button:focus {
   }
 }
 .front-page-cover{
-  @apply w-full z-60 fixed top-0 left-0;
+  @apply w-full fixed top-0 left-0 z-60;
   background-color: #0e0e0e;
   opacity:1;
   overflow: hidden;
@@ -194,17 +221,20 @@ button:focus {
   animation-timing-function: ease-in-out;
   animation-duration: 0.7s;
   animation-fill-mode:forwards;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .front-page-inner{
-  position: fixed;
+  position: relative;
+  display:block;
   overflow: hidden;
-  /* make the top edge of .inner appear in the vertical center of .outer */
-  top: 25%;
-  /* move .inner up by half of its height so that its middle is in the middle of .outer */
   width: 100%;
   background-color: #0e0e0e;
-
 }
 .front-page-name{
   @apply text-white text-6xl text-center align-middle m-0 p-0;
@@ -221,7 +251,6 @@ button:focus {
    stroke-width: 3;
    animation: genomskinlig 3s ease-in;
    animation-fill-mode: forwards;
-
 }
 .front-page-surname{
   @apply text-white text-6xl text-center align-middle m-0  -mt-7 -mr-10;
@@ -385,7 +414,6 @@ button:focus {
 */
 #profile-pic {
   @apply rounded-lg max-w-eighty max-h-eighty mx-auto;
-  filter: brightness(70%);
 }
 
 @screen md {
@@ -535,7 +563,8 @@ button:focus {
     @apply ml-0 flex flex-1 flex-wrap;
   }
   .main-card-bg{
-     @apply bg-black;
+      background-color: #141317eb;
+
   }
   .main-card {
     @apply w-full relative ml-0 align-bottom flex flex-1 items-center justify-center;
@@ -570,7 +599,6 @@ button:focus {
 
   .main-card-text {
     @apply mt-4 mt-0 static flex-grow-2 pb-20;
-    color: #878787;
   }
 
   .contact-info {
@@ -635,7 +663,7 @@ button:focus {
   }
 
   .nav-linkz {
-    @apply flex flex-initial flex-row  items-center flex-wrap pl-2 pr-2  h-80pex  pb-12k5pex ;
+    @apply flex flex-initial flex-row  items-center flex-wrap pl-2 pr-2  h-24 pb-12k5pex ;
     letter-spacing: normal;
     justify-content: space-around;
   }

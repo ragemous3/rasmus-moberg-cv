@@ -1,4 +1,4 @@
-  import React from 'react'
+import React from 'react'
 import { ColorConsumer } from './colorcontext.js';
 
 class Accomplishments extends React.Component{
@@ -72,11 +72,13 @@ class Accomplishments extends React.Component{
       "listStylePosition": "outside",
     };
     return(
-        <>
+        <ColorConsumer>
+          {({ color }) => (
+          <>
           <h1>Experience</h1>
           <article>
             <h2>Languages, frameworks, environments and libraries</h2>
-            <p className="responsive-text dampcolor">Hover boxes to see profiency (1-5)</p>
+            <p className={`${color} responsive-text `}>Hover boxes to see profiency (1-5)</p>
             <section className="flex flex-1 flex-wrap mt-3 pb-4">
               {
                 Array.from({length: this.state.languages.length }, (_, i) =>
@@ -97,7 +99,7 @@ class Accomplishments extends React.Component{
                 </div>
             </article>
           </article>
-          <article className="pt-4 pb-4">
+          <article>
             <h2>Relevant work experience</h2>
               <div className=" responsive-text text-shadow ">
                 <ul className="pl-6" style={listStyle}>
@@ -105,22 +107,22 @@ class Accomplishments extends React.Component{
                     <h3 className="h3-override-ml-nil">Freelance company - 2019</h3>
                   </li>
                 </ul>
-                <p className={"pl-6  responsive-text dampcolor"}>Founded 2019</p>
+                <p className={"pl-6  responsive-text "}>Founded 2019</p>
               </div>
               <div className=" responsive-text">
                 <ul className="pl-6" style={listStyle}>
                   <li>
-                    <h3 className="h3-override-ml-nil text-shadow">Consultant at Regnet Co - 2019</h3>
+                    <h3 className={`${color} h3-override-ml-nil text-shadow`}>Consultant at Regnet Co - 2019</h3>
                   </li>
                 </ul>
-                <p className={" responsive-text pl-6 text-shadow dampcolor"}>
+                <p className={`${color} responsive-text pl-6 text-shadow `}>
                   I've been consulted for programmatic bugs, hands on work with
                   implementing new features to websites
                   and other programmatic expertise.
                 </p>
               </div>
           </article>
-          <article className="pb-4 pt-4">
+          <article className={`${color} pb-4 pt-4`}>
             <h2>Other work experience</h2>
               <div className="responsive-text text-shadow ">
                 <ul className="pl-6" style={listStyle}>
@@ -128,9 +130,9 @@ class Accomplishments extends React.Component{
                     <h3 className="h3-override-ml-nil">Personal assistent - 2018</h3>
                   </li>
                 </ul>
-                  <p className={` responsive-text pl-6 dampcolor`}>
-                  As a personal assistent I learned
-                  the value of building strong relationships.
+                  <p className={`${color} responsive-text pl-6 `}>
+                    As a personal assistent I learned
+                    the value of building strong relationships.
                 </p>
               </div>
               <div className="text-shadow pb-4">
@@ -139,7 +141,7 @@ class Accomplishments extends React.Component{
                     <h3 className="h3-override-ml-nil">Preschool teacher - 2017-2018</h3>
                   </li>
                 </ul>
-                  <p className={` responsive-text pl-6 dampcolor`}>
+                  <p className={`${color} responsive-text pl-6 `}>
                   The work as a preschool teacher has given me
                   leadership skills and trained my ability
                   to lead and plan under pressure.
@@ -151,13 +153,15 @@ class Accomplishments extends React.Component{
                     <h3 className={`h3-override-ml-nil`}>Caretaker - 2015 och 2016</h3>
                   </li>
                 </ul>
-                <p className={" responsive-text pl-6 dampcolor"}>
+                <p className={`${color} responsive-text pl-6 `}>
                   As a caretaker of a community college (folkhögskola), I got use for
                   my attention to detail.
                 </p>
               </div>
           </article>
-       </>
+        </>
+
+        )}</ColorConsumer>
     )
   }
 }

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-// import { ColorConsumer } from './colorcontext.js';
+import { ColorConsumer } from './colorcontext.js';
 
 
 function Main(){
@@ -42,7 +42,9 @@ class Card extends React.Component{
   };
   render(){
     return(
-          <aside id="contact-section" onLoad={(e) => this.onLoading(e)} className={` main-card ${this.state.lazy}`}>
+      <ColorConsumer>
+        {({ color }) => (
+          <aside id="contact-section" onLoad={(e) => this.onLoading(e)} className={` main-card ${color} ${this.state.lazy}`}>
             <div id="close-card" className="close-card general-shadow">
               <img  className="close-image" src="../../img/close32.png"  alt="close card" />
             </div>
@@ -52,7 +54,7 @@ class Card extends React.Component{
                   <img id="profile-pic" src="../../img/profilbild.jpg" className={`general-shadow  `} alt="A picture of Rasmus" />
                 </figure>
               </div>
-              <address className="text-shadow not-italic responsive-text main-card-text ">
+              <address className="text-shadow not-italic responsive-text main-card-text dampcolor ">
                 <h4 className="text-shadow pt-4"><b>Rasmus Moberg</b></h4>
 
                 <p id="phone" className=" contact-text-box">0722724429
@@ -74,10 +76,16 @@ class Card extends React.Component{
                     <svg className="m-1 mb-0 floatAsideClick i-cv PointerCursor">
                     </svg>
                   </a>
+                  <a href="https://github.com/ragemous3/rasmus-moberg-cv" target="_blank" className="hint--top" aria-label="Github page">
+                    <svg className="m-1 mb-0 floatAsideClick i-git PointerCursor">
+                    </svg>
+                  </a>
                 </div>
               </address>
-              </article>
+            </article>
           </aside>
+        )}
+        </ColorConsumer>
     )
     }
   }

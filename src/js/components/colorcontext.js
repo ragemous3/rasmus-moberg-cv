@@ -6,7 +6,8 @@
 
   //Initiala kontexten skapas
   const ColorContext = React.createContext({
-    color: '',
+    color: 'dampcolor',
+    bg: 'body-bg',
     tsize: 'responsive-lbox-text',
     updateTextSize: function(){},
     onHover: function(){}
@@ -26,18 +27,31 @@
     constructor(props){
       super(props)
         this.state = {
-          color: 'greyscale',
+          color: 'dampcolor',
           tsize: 'responsive-text',
-          updateTextSize: this.updateTextSize.bind(this),
+          updateColor: this.updateColor.bind(this),
           onHover: this.onHover.bind(this)
         }
     }
-    updateTextSize() {
+    updateColor() {
+      let body = document.body;
+
+      if(body.classList.contains('body-bg')){
+          body.classList.remove('body-bg');
+          body.classList.add('body-bg-darker');
+      }else{
+        body.classList.remove('body-bg-darker');
+        body.classList.add('body-bg');
+      }
         this.setState((prev) => {
-            if(this.state.tsize === 'text-2xl'){
-              return {tsize: 'responsive-text'};
+            if(this.state.color === 'dampcolor'){
+              return {
+                color: 'brightcolor',
+              };
             }else{
-              return {tsize: 'text-2xl'};
+              return {
+                color: 'dampcolor',
+              };
             }
         });
     }
