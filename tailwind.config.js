@@ -14,6 +14,7 @@ module.exports = {
       '0': '0px',
       xs: '313px',
       s: '340px',
+      flashicon: '414px',
       navbreak: '418px',
       sm: '614px',
       smallmstart: '360px',

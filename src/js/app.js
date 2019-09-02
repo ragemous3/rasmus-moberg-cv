@@ -299,11 +299,7 @@ class FrontPage extends React.Component{
       }
     }
     render(){
-/*
-//
 
-
-*/
       return(
           <section id="main-box" className={` responsive-text border-box inline-block` }>
             {window.location.pathname === '/' &&
@@ -453,7 +449,7 @@ class Nav extends React.Component{
                   </svg>
               </section>
             </article>
-            <section id="nav-linkz" className="border-box nav-linkz nav-text ">
+            <section id="nav-linkz" className="border-box nav-linkz nav-text">
               <div className={`nav-link-box bg-transparent`}>
                 <NavLink className={` border-box a-link `} to="/about"  onClick={(e) => {this.contactScroll(e)}}>About Me</NavLink>
               </div>
@@ -469,10 +465,11 @@ class Nav extends React.Component{
               <div className={`nav-link-box bg-transparent `}>
                 <button id="contact"  className={` border-box a-link `} onClick={(e) => {this.contactScroll(e)}}>Contact</button>
               </div>
-              <section>
+              <section className="nav-link-box">
                 <img className='hint--bottom' aria-label="Need higher contrast?" className="i-flash" onClick={(e) => {updateColor()}} src="../img/flash-light.png" />
               </section>
             </section>
+
           </nav>
         }
       </ColorConsumer>

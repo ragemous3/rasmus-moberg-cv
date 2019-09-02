@@ -655,6 +655,7 @@ button:focus {
     display: none;
   }
 
+
   /*
   *****************************NAV********************************
   */
@@ -667,7 +668,28 @@ button:focus {
     letter-spacing: normal;
     justify-content: space-around;
   }
+  /*
+  *****************************NAV-BUTTONS********************************
+  */
 
+  /* .nav-link-box:nth-child(1){
+    @apply order-last;
+  }
+  .nav-link-box:nth-child(1){
+    @apply order-last;
+  }
+  .nav-link-box:nth-child(2){
+    @apply order-last;
+  }
+  .nav-link-box:nth-child(3){
+    @apply order-last;
+  }
+  .nav-link-box:nth-child(4){
+    @apply order-last;
+  } */
+  .nav-link-box:nth-child(6){
+    @apply hidden;
+  }
   .nav-text {
     @apply text-sm;
   }
@@ -721,7 +743,9 @@ button:focus {
 }
 
 @screen sm {
-
+  .nav-link-box:nth-child(6){
+    @apply block;
+  }
   /*
 *****LANGUAGE BOX*****
 */
@@ -729,7 +753,9 @@ button:focus {
     @apply break-normal;
     @apply w-1/3;
   }
-
+  .i-flash{
+    @apply mt-4;
+  }
   /*
   *****NAV*****
 */
@@ -784,7 +810,9 @@ button:focus {
 }
 
 @screen md {
-
+  .i-flash{
+    @apply mt-0;
+  }
   .main-card-wrapper {
     @apply ml-0;
   }
