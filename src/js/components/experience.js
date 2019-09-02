@@ -107,12 +107,12 @@ class Accomplishments extends React.Component{
                     <h3 className="h3-override-ml-nil">Freelance company - 2019</h3>
                   </li>
                 </ul>
-                <p className={"pl-6  responsive-text "}>Founded 2019</p>
+                <p className={`pl-6 ${color} responsive-text `}>Founded 2019</p>
               </div>
               <div className=" responsive-text">
                 <ul className="pl-6" style={listStyle}>
                   <li>
-                    <h3 className={`${color} h3-override-ml-nil text-shadow`}>Consultant at Regnet Co - 2019</h3>
+                    <h3 className={` h3-override-ml-nil text-shadow`}>Consultant at Regnet Co - 2019</h3>
                   </li>
                 </ul>
                 <p className={`${color} responsive-text pl-6 text-shadow `}>
@@ -122,7 +122,7 @@ class Accomplishments extends React.Component{
                 </p>
               </div>
           </article>
-          <article className={`${color} pb-4 pt-4`}>
+          <article className="pb-4 pt-4">
             <h2>Other work experience</h2>
               <div className="responsive-text text-shadow ">
                 <ul className="pl-6" style={listStyle}>
