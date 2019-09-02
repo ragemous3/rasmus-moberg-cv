@@ -71,7 +71,7 @@ const resetProfile = (e) => {
 }
 const disableScrolling = (e) => {
   try{
-    // e.preventDefault();
+    e.preventDefault();
   }catch(e){
     console.log('A scrolling operation was prevented By your browser')
   }
@@ -105,6 +105,8 @@ class FrontPage extends React.Component{
       //activates normal scrolling after page animation
       this.fp.current.addEventListener('animationend', (e) => {
         if(e.target.id == 'frontP-cover'){
+          document.documentElement.style.overflow = "auto";
+          document.body.style.overflow = "auto";
           this.fp.current.style.display = 'none';
           e.target.removeEventListener('touchmove', disableScrolling);
           body.removeEventListener('touchmove', disableScrolling);
@@ -174,9 +176,8 @@ class FrontPage extends React.Component{
     }
     componentDidMount(){
       if(location.pathname !== '/'){
-        // document.documentElement.style.overflow = "auto";
-        // document.body.style.overflow = "auto";
-        // document.getElementById('root').style.overflowX = "hidden";
+        document.documentElement.style.overflow = "auto";
+        document.body.style.overflow = "auto";
       }
 
       //https://reactjs.org/blog/2015/12/16/ismounted-antipattern.html <---- läs denna och fixa läckan!
